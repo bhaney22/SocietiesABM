@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
+#PBS -m a -M jgsherw@clemson.edu
+
+cd /home/jgsherw/Dahl_Societies_CPP/
+
+./societies -v 1 -s Results/WithoutDevDev/1/WithoutStockpile -p Configs/WithoutDevDev/NoDev_1_machine.conf -r 8 600 1 -z Configs/agentcsv.csv -t 1_mach_nosto_NoDDev | tee runlog_1_machine.txt

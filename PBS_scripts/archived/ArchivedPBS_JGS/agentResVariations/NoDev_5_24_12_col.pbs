@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#PBS -l nodes=1,mem=4g,walltime=10:00:00
+#PBS -m a -M jgsherw@clemson.edu
+
+cd /home/jgsherw/Dahl_Societies_CPP/
+
+./societies -v 1 -s ResultsAR/24/ -p Configs/AgentResVariations/NoDev_5_24_12.conf -r 8 600 1 -z Configs/agentcsv24.csv -t 5_24_12_nosto_NoDDev | tee runlog_5_24_12.txt

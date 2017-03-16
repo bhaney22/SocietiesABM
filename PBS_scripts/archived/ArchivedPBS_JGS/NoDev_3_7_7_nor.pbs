@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#PBS -l nodes=1,mem=4g,walltime=10:00:00
+#PBS -m a -M jgsherw@clemson.edu
+
+cd /home/jgsherw/Dahl_Societies_CPP/
+
+./societies -v 1 -s Resultsmin/7/ -p Configs/agentmin/NoDev_3_7_7.conf -z Configs/agentcsv7.csv -t 3_7_7_unlim_NoDDev | tee runlog_3_7_7.txt

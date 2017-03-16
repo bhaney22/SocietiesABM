@@ -1,0 +1,8 @@
+#!/bin/bash
+
+#PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
+#PBS -m a -M jgsherw@clemson.edu
+
+cd /home/jgsherw/Dahl_Societies_CPP/
+
+./societies -v 1 -s Results/WithDevDev/1 -p Configs/WithDevDev/1_Industry.conf -z Configs/agentcsv.csv -t 1_Indu_unlim_DevDev | tee runlog_1_Industry.txt

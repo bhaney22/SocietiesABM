@@ -1,0 +1,29 @@
+main.o: main.cpp globals.h resource.h utils.h options.h logging.h \
+ statstracker.h marketplace.h
+utils.o: utils.cpp globals.h resource.h utils.h agent.h properties.h \
+ device.h marketplace.h statstracker.h devmarketplace.h logging.h
+options.o: options.cpp globals.h resource.h logging.h
+resource.o: resource.cpp resource.h globals.h
+properties.o: properties.cpp properties.h globals.h resource.h
+device.o: device.cpp device.h globals.h resource.h agent.h properties.h
+marketplace.o: marketplace.cpp marketplace.h globals.h resource.h agent.h \
+ properties.h statstracker.h logging.h
+globals.o: globals.cpp globals.h resource.h agent.h properties.h \
+ marketplace.h ran.h statstracker.h devmarketplace.h utils.h logging.h
+agent.o: agent.cpp globals.h resource.h agent.h properties.h device.h \
+ logging.h
+statstracker.o: statstracker.cpp statstracker.h globals.h resource.h \
+ marketplace.h agent.h properties.h device.h
+devmarketplace.o: devmarketplace.cpp device.h globals.h resource.h \
+ devmarketplace.h utils.h agent.h properties.h logging.h
+globals.o: globals.h resource.h
+utils.o: utils.h globals.h resource.h
+options.o: options.h
+resource.o: resource.h
+properties.o: properties.h
+device.o: device.h globals.h resource.h
+marketplace.o: marketplace.h globals.h resource.h
+agent.o: agent.h properties.h globals.h resource.h
+statstracker.o: statstracker.h globals.h resource.h marketplace.h
+devmarketplace.o: devmarketplace.h globals.h resource.h utils.h
+logging.o: logging.h globals.h resource.h
