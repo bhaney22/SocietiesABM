@@ -1,0 +1,19 @@
+<<<<<<< HEAD:PBS_scripts/archived/Template.pbs
+#!/bin/bash
+
+#PBS -l nodes=1,mem=4g,walltime=10:00:00
+#PBS -m a -M bhaney@calvin.edu
+
+cd /home/brh22/societies2017/
+
+./societies -v 1 -s _Results/Template -p Configs/default.conf -t Template | tee _Results/Template.runlog
+=======
+#!/bin/bash
+
+#PBS -l nodes=1,mem=4g,walltime=10:00:00
+#PBS -m bea -M bhaney@calvin.edu
+
+cd /home/brh22/societies2017/
+
+./societies -v 1 -s _Results/Basic1 -p Configs/default.conf -t Basic | tee runlog.txt
+>>>>>>> cb4a51c95404630fa1403f0e107d3ec5a7a45bba:PBS_scripts/Template.pbs
