@@ -1,0 +1,3 @@
+,steepness,scaling,minResEff,maxResEff,maxResExp,minDevEff,maxDevEff,maxDevExp,lifetime,resTradePower,devTradePower,inventSpeed,patent,num_agents
+type 0,2.5,600,3,9,600,9,27,40,5,1,1,1,0,12
+type 1,2.5,600,3,99,600,9,27,40,5,1,1,1,0,12
