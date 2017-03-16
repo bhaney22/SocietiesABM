@@ -5,4 +5,4 @@
 
 cd /home/brh22/societies2017/
 
-./societies -v 1 -s _Results/Template -p Configs/default.conf -t Template | tee Template.out
+./societies -v 1 -s _Results/Template -p Configs/default.conf -t Template | tee _Results/Template.runlog
