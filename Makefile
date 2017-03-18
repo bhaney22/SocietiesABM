@@ -1,3 +1,8 @@
+#
+# This file is no longer used. Simply type "make" at the command prompt to compile Societies after making a change.
+#
+
+
 # to compile to do program coverage tests, add these to CXXFLAGS:
 # -fprofile-arcs -ftest-coverage
 

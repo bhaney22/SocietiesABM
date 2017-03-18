@@ -69,12 +69,16 @@ public:
     vector< map<pair<int,int>,double> > memoMUs;
     /**
      * Values for command-line options.
+	 * BRH 3.17.2017: added global variables for database.
      */
     string configFilename;          // *** initialized in parse_args()
     string configAgentFilename;     // *** initialized in parse_args()
     string configAgentCSV;          // *** initialized in parse_args()
     bool   saveFileFolderSet;       // *** initialized in parse_args()
     string saveFileFolder;          // *** initialized in parse_args()
+	bool   saveDatabaseKey;         // *** initialized in parse_args()
+	string saveDatabaseKeyFilename; // *** initialized in parse_args()
+	string DatabaseKey;           // *** initialized in parse_args()
     bool   simTitleSet;             // *** initialized in parse_args()
     string simTitle;                // *** initialized in parse_args()
     bool   randomSeedSet;           // *** initialized in parse_args()
