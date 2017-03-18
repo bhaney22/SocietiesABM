@@ -35,6 +35,7 @@ int parse_args(int argc, char **argv)
     vector<int> remAgentArg;
     vector<int> remResArg;
     vector<string> saveInMiddleArg;
+	vector<string> saveDatabaseKeyArg;
     try {
         /* parse the command line args */
         po::options_description cmdLineOpts("Allowed options");
@@ -51,8 +52,9 @@ int parse_args(int argc, char **argv)
             ("resource,r", po::value< vector<int> >(&remResArg)->multitoken(), "remove a resource mid-run (first arg: which resource to remove, second arg: which day to remove the resource, third arg: 1 for removing the holdings of that resource on the given day, 0 for not)")
             ("middle,m", po::value< vector<string> >(&saveInMiddleArg)->multitoken(), "save the simulation mid-run (first arg: destination folder, second arg: day on which to save)")
             ("verbose,v", po::value<int>(), "set level of debugging output from 0 to 3.  0 = nothing; 3 = everything")
-            // NOTE: not adding --parallel now
             ("exchange,e", "store exchange rate data from all trades")
+			 // BRH 3.17.2017: added unique database identifier;
+			("database,d", po::value< vector<string> >(&saveDatabaseKeyArg)->multitoken(), "write unique identifier to BatchKeyFile")	// no default value
             ;
 
         /* parse the config file values */
@@ -123,8 +125,7 @@ int parse_args(int argc, char **argv)
             }
         }
         if (! foundParamFile) {
-//            glob.configFilename = "../../conf/defaultValues.conf";  //!< default value for config file
-            glob.configFilename = "../../conf/trade_test.conf";
+              glob.configFilename = "Configs/default.conf"; 
         }
 
         po::variables_map vm;
@@ -227,7 +228,7 @@ int parse_args(int argc, char **argv)
                 glob.removeAgentId = remAgentArg[0];
                 glob.removeAgentDay = remAgentArg[1];
             } else {
-                cout << "Wrong number of arguments. Should be two." << endl;
+                cout << "Wrong number of arguments for -a. Should be two." << endl;
                 return 0;
             }
         } else {
@@ -244,7 +245,7 @@ int parse_args(int argc, char **argv)
                     glob.removeResHoldings = true;
                 }
             } else {
-                cout << "Wrong number of arguments. Should be three. " << endl;
+                cout << "Wrong number of arguments for -r. Should be three. " << endl;
                 return 0;
             }
         } else {
@@ -256,7 +257,7 @@ int parse_args(int argc, char **argv)
                 glob.saveInMiddleFoldername = saveInMiddleArg[0];
                 glob.saveInMiddleDay = boost::lexical_cast<int>(saveInMiddleArg[1]);
             } else {
-                cout << "Wrong number of arguments. Should be two." << endl;
+                cout << "Wrong number of arguments for -m. Should be two." << endl;
             }
         } else {
             glob.saveInMiddle = false;
@@ -274,7 +275,19 @@ int parse_args(int argc, char **argv)
         } else {
             glob.saveExchangeRateData = false;
         }
-
+		
+		if (vm.count("database")) {
+            glob.saveDatabaseKey = true;
+			if (saveDatabaseKeyArg.size() == 2) {
+				glob.saveDatabaseKeyFilename = saveDatabaseKeyArg[0];
+				glob.DatabaseKey = saveDatabaseKeyArg[1];
+			} else {
+                cout << "Wrong number of arguments for -d. Should be two." << endl;
+				return 0;
+			}
+        } else {
+            glob.saveDatabaseKey = false;
+        }
 
 
         if (vm.count("NUM_AGENTS")) {
@@ -544,5 +557,7 @@ int parse_args(int argc, char **argv)
         cout << "Wrong args: " << e.what() << endl;
         return -1;
     }
+	//Print unique database entry;
+	
     return 0;
 }

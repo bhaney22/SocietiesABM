@@ -97,7 +97,7 @@ void Globals::initGlobalStructures()
     RES_IN_DEV[DEVFACTORY] = RESOURCES_IN_TOOL * NUM_DEVICE_COMPONENTS *
         NUM_DEVICE_COMPONENTS * NUM_DEVICE_COMPONENTS;   
 
-    // inizialize memomUs
+    // inizialize memoMUs
     for (int i = 0; i < NUM_AGENT_GROUPS; i++) {
         memoMUs.push_back(map<pair<int,int>, double>());
     }
