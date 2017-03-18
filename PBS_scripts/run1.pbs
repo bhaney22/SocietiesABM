@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Config File: $1"
+
+#PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
+#PBS -m a -M bhaney@calvin.edu
+
+cd /home/brh22/societies2017/
+
+./societies -v 1 -s _Results/$1 -p Configs/$1.conf -t "$1_r$2"
