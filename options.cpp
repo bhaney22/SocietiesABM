@@ -31,11 +31,9 @@ namespace po = boost::program_options;
  */
 int parse_args(int argc, char **argv)
 {
-    vector<string> batchArg;
     vector<int> remAgentArg;
     vector<int> remResArg;
     vector<string> saveInMiddleArg;
-	vector<string> saveDatabaseKeyArg;
     try {
         /* parse the command line args */
         po::options_description cmdLineOpts("Allowed options");
@@ -43,9 +41,9 @@ int parse_args(int argc, char **argv)
             ("help,h", "produce help message")
             ("parameter,p", po::value<string>(), "use given file for global variable values")
             ("heterogeneous,z", po::value<string>(), "use the given file for agent values. If the file ends with .csv, then an .aconf file will by generated and used for agent values.")
-            ("save,s", po::value<string>(), "write results to folder")	// no default value
+            ("save,s", po::value<string>(), "write results to folder")
             ("seed,S", po::value<int>(), "initialize random number generator to given seed so that output is same for each run")
-            ("title,t", po::value<string>()->default_value("default"), "give the simulation a title")
+            ("title,t", po::value<string>()->default_value("001"), "keeps track of the run number")
             ("graph,g", "allow choice of graphs to generate upon completion")
             ("norun,n", "load and print the current config values, then exit")
             ("agent,a", po::value< vector<int> >(&remAgentArg)->multitoken(), "remove an agent mid-run (first arg: which agent to remove, second arg: which day to remove the agent)")
@@ -54,7 +52,7 @@ int parse_args(int argc, char **argv)
             ("verbose,v", po::value<int>(), "set level of debugging output from 0 to 3.  0 = nothing; 3 = everything")
             ("exchange,e", "store exchange rate data from all trades")
 			 // BRH 3.17.2017: added unique database identifier;
-			("database,d", po::value< vector<string> >(&saveDatabaseKeyArg)->multitoken(), "write unique identifier to BatchKeyFile")	// no default value
+			("database,d", po::value<string>()->default_value("none"), "unique identifier to join output file measures to config file dimensions")
             ;
 
         /* parse the config file values */
@@ -119,7 +117,11 @@ int parse_args(int argc, char **argv)
         bool foundParamFile = false;
         for (int a = 0; a < argc; a++) {
             if (strcmp(argv[a], "--parameter") == 0 || strcmp(argv[a], "-p") == 0) {
-                glob.configFilename = argv[++a];
+				glob.configName = argv[++a];
+                glob.configFilename = "Configs/dbtest1.conf"; 
+//				cout << glob.configName << endl;
+//				cout << glob.configFilename << endl;
+				
                 foundParamFile = true;
                 break;
             }
@@ -277,18 +279,13 @@ int parse_args(int argc, char **argv)
         }
 		
 		if (vm.count("database")) {
-            glob.saveDatabaseKey = true;
-			if (saveDatabaseKeyArg.size() == 2) {
-				glob.saveDatabaseKeyFilename = saveDatabaseKeyArg[0];
-				glob.DatabaseKey = saveDatabaseKeyArg[1];
-			} else {
-                cout << "Wrong number of arguments for -d. Should be two." << endl;
-				return 0;
-			}
+            glob.saveInDatabase = true;
+			glob.UniqueKey = vm["database"].as<string>();
         } else {
-            glob.saveDatabaseKey = false;
+            glob.saveInDatabase = false;
         }
 
+/* Begin parsing the config file parameters. */
 
         if (vm.count("NUM_AGENTS")) {
             glob.NUM_AGENTS = vm["NUM_AGENTS"].as<int>();
@@ -557,7 +554,7 @@ int parse_args(int argc, char **argv)
         cout << "Wrong args: " << e.what() << endl;
         return -1;
     }
-	//Print unique database entry;
+
 	
     return 0;
 }

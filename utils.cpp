@@ -272,7 +272,8 @@ void Utils::endSim()
     if (glob.END_SAVE) {
         saveResults();
         cout << "Your results have been saved in " << glob.SAVE_FOLDER << endl;
-        cout << "The simulation was named " << glob.SIM_NAME << endl;
+        cout << "The UniqueKey for this batch of runs is:" << glob.UniqueKey << endl;
+		cout << "This run number is: " << glob.SIM_NAME << endl;
     } else {
         // TODO: we are not doing this in C++...  remove this else part?
         /*
@@ -381,8 +382,9 @@ vector<vector<double> > Utils::calcQuartiles(vector<vector<double> > data)
 }
 
 /**
- * Print the first line of a csv file with day numbers.
+ * Print the first line of a csv file with day numbers (wide) or with all variables (long).
  */
+
 void Utils::headerByDay(ofstream &file, string filePath)
 {
     if ( !boost::filesystem::exists(filePath)) {
@@ -395,6 +397,18 @@ void Utils::headerByDay(ofstream &file, string filePath)
         file.close();
     }
 }
+
+void Utils::headerByVar(ofstream &file, string filePath)
+{
+    if ( !boost::filesystem::exists(filePath)) {
+        file.open(filePath.c_str());
+  	/* HEADER: print the first line with variable labels (only on first run of a batch). */
+	/* CAUTION: Keep order the same as variables are printed below.	*/
+		file << "Config, " << "UniqueKey, " << "Run, " << "TimeStep, " << "avgUtil, " << "totalUtil" << "\n";
+        file.close();
+    }
+}
+
 
 /**
  * BRH 2013.05.23: This graph shows the gini coefficient.  The formula used is can be found at
@@ -1104,6 +1118,14 @@ void Utils::saveResults()
     /*
      * Save the data into each file.
      */
+	 
+// BRH 3.18.2017: New routine to write all data to one long file
+	
+	saveOutput();
+	saveDeviceComplexity();
+	saveUnitsGathered();
+	 
+/*********    Do not write out these files anymore once database file is set up. 
     saveGini();
     saveHHIQuartiles();
     saveTotalUtility();
@@ -1117,6 +1139,8 @@ void Utils::saveResults()
     saveDevDevice();
     saveDeviceComplexity();
     saveDiscoveredDevices();
+	saveTotalUtility();
+***************/
 }
 
 /**
@@ -1193,3 +1217,53 @@ void Utils::loadDayStatus()
 {
     cout << "loadDayStatus: NOT IMPLEMENTED YET!" << endl;
 }
+
+// BRH: 3.18.2017 New Print routine to print all output to one file in long form  
+// TODO 
+// 1. Get process correct for meanUtility                        
+// 2. Get process correct for each variable 
+// 3. Create subroutines to calculate and print one variable (set) to the same file                      
+//    
+void Utils::saveOutput()
+/**
+ * Save the mean utility by all agents and by each group of each day into a csv file.
+ */
+{
+    ofstream file;     /* Open up a generic "file" to write to */
+    string filePath = glob.SAVE_FOLDER + "/long_output.csv"; /*concatenate the dir and filename */
+	headerByVar(file, filePath); /* write the first row with labels. */
+	
+	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
+	
+	/* ROWS: print output variables one row = one run + one day */
+    vector<double> sumUtil = glob.otherStats->getSumUtil();
+    vector<int> activeAgents = glob.otherStats->getActiveAgents();
+    for (int i = 0; i < glob.NUM_DAYS; i++) {
+		/* ORDER: Config, UniqueKey, Run (SIM_NAME), Day, variables */
+			file << glob.configName << ", " << glob.UniqueKey << ", " << glob.SIM_NAME << ", " << (i + 1) << ", " << (sumUtil[i] / activeAgents[i]) << "," << sumUtil[i] << "\n";  
+    }
+
+/* BRH 3.17.2018 don't do groups yet */
+    /* mean utility per group */
+	/*
+    vector<vector<double> > sumUtilByGroup = glob.otherStats->getSumUtilByGroup();
+    vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
+    for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
+        file << "meanUtilByGroup_" << i << "_" << glob.SIM_NAME << ",";
+        for (int j = 0; j < glob.NUM_DAYS; j++) {
+            file << ( (double)sumUtilByGroup[i][j] / (double)activeGroupAgents[i][j]) << ",";
+        }
+        file << "\n";
+    }
+    file << "\n";
+    file.close();
+	
+	activeGroupAgents.clear();
+    sumUtilByGroup.clear();
+
+*/
+
+    sumUtil.clear();
+    activeAgents.clear();
+}
+

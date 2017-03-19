@@ -69,16 +69,17 @@ public:
     vector< map<pair<int,int>,double> > memoMUs;
     /**
      * Values for command-line options.
-	 * BRH 3.17.2017: added global variables for database.
+	 * BRH 3.17.2017: added global variable, UniqueKey, and switch saveDatabaseKey for database.
      */
-    string configFilename;          // *** initialized in parse_args()
+
+	string configName;          	// *** initialized in parse_args() This just has the name of the config (ex. test1)
+	string configFilename;          // *** initialized in parse_args() This has the path and extenstion of the config, ex. Configs/test1.conf
     string configAgentFilename;     // *** initialized in parse_args()
     string configAgentCSV;          // *** initialized in parse_args()
     bool   saveFileFolderSet;       // *** initialized in parse_args()
     string saveFileFolder;          // *** initialized in parse_args()
-	bool   saveDatabaseKey;         // *** initialized in parse_args()
-	string saveDatabaseKeyFilename; // *** initialized in parse_args()
-	string DatabaseKey;           // *** initialized in parse_args()
+	bool   saveInDatabase; 	        // *** initialized in parse_args()
+	string UniqueKey;         	    // *** initialized in parse_args()
     bool   simTitleSet;             // *** initialized in parse_args()
     string simTitle;                // *** initialized in parse_args()
     bool   randomSeedSet;           // *** initialized in parse_args()

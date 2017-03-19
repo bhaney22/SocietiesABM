@@ -1,10 +1,26 @@
 #!/bin/bash
 
-echo "Config File: $1"
-
 #PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
 #PBS -m a -M bhaney@calvin.edu
 
 cd /home/brh22/societies2017/
 
-./societies -v 1 -s _Results/$1 -p Configs/$1.conf -t "$1_r$2"
+# Command line arguments Naming conventions:
+# 1. -p Name of the configuration (without Configs/ path and without .conf extention) ex. T4_100_100
+#
+# 2. -s Eventually, no need for arguments. Just simply switches on the saving function. 
+#       The folder name can be automatically created as "_Results/configuration name/UniqueID"
+#
+# 3. -t tracks the run number
+
+UniqueKey=$(date +%d%m%Y%H%M%S%N)
+SECONDS=0
+for run_num in $(seq -f "%03g" 1 $2)
+do
+	echo "UniqueKey_run_num: $UniqueKey"_"$run_num"
+	./societies -v 1 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
+done
+
+duration=$SECONDS
+echo "RunDate,StartTime,Config,Num_Runs,ElapsedSeconds,UniqueKey" > /home/brh22/societies2017/PBS_scripts/runlog.csv
+echo "$(date +%D),$(date +%T),$1,$2,$duration,B$UniqueKey" >> /home/brh22/societies2017/PBS_scripts/runlog.csv

@@ -24,7 +24,9 @@ public:
 	void endSim();
 	vector<vector<double> > calcQuartiles(vector<vector<double> > data);
 	void headerByDay(ofstream &file, string filePath);
+	void headerByVar(ofstream &file, string filePath);
 	void saveResults();
+	void saveOutput ();
 	void saveGini();
 	void saveHHIQuartiles();
 	void saveTotalUtility();
