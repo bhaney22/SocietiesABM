@@ -235,10 +235,10 @@ void Globals::setAdvancedOptions()
     }
 
     if (! END_SAVE) {
-        // simTitle has default value of "default" if not set explicitly.
+        // simTitle has default value of "000" if not set explicitly.
         SIM_NAME = simTitle;
     } else {
-        if (simTitle == "default") {	// sim title wasn't explicity set.
+        if (simTitle == "000") {	// sim title (run number) wasn't explicity tracked with -t.
         	/*
         	 * TODO: not sure about the name. python mkdtemp generates a random name with prefix sim_.
         	 * For path spliting, any easier way?

@@ -43,7 +43,7 @@ int parse_args(int argc, char **argv)
             ("heterogeneous,z", po::value<string>(), "use the given file for agent values. If the file ends with .csv, then an .aconf file will by generated and used for agent values.")
             ("save,s", po::value<string>(), "write results to folder")
             ("seed,S", po::value<int>(), "initialize random number generator to given seed so that output is same for each run")
-            ("title,t", po::value<string>()->default_value("001"), "keeps track of the run number")
+            ("title,t", po::value<string>()->default_value("000"), "keeps track of the run number")
             ("graph,g", "allow choice of graphs to generate upon completion")
             ("norun,n", "load and print the current config values, then exit")
             ("agent,a", po::value< vector<int> >(&remAgentArg)->multitoken(), "remove an agent mid-run (first arg: which agent to remove, second arg: which day to remove the agent)")
@@ -118,9 +118,9 @@ int parse_args(int argc, char **argv)
         for (int a = 0; a < argc; a++) {
             if (strcmp(argv[a], "--parameter") == 0 || strcmp(argv[a], "-p") == 0) {
 				glob.configName = argv[++a];
-                glob.configFilename = "Configs/dbtest1.conf"; 
-//				cout << glob.configName << endl;
-//				cout << glob.configFilename << endl;
+                glob.configFilename = "Configs/" + glob.configName + ".conf";
+			cout << glob.configName << endl; // BRH for testing
+			cout << glob.configFilename << endl;
 				
                 foundParamFile = true;
                 break;

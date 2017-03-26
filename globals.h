@@ -69,7 +69,6 @@ public:
     vector< map<pair<int,int>,double> > memoMUs;
     /**
      * Values for command-line options.
-	 * BRH 3.17.2017: added global variable, UniqueKey, and switch saveDatabaseKey for database.
      */
 
 	string configName;          	// *** initialized in parse_args() This just has the name of the config (ex. test1)

@@ -1,0 +1,11 @@
+README
+
+To run batches of the same simulation, set up the runtest.sh shell script. It will call 
+the q.sh script, which calls the run1.pbs script. 
+
+After all of the runs are complete, run the _Results.sh shell script that is in the source
+code directory to gather all of the long_output.csv files from the subdirectories into
+one long file in the _Results top directory.
+
+This file can be merged with the UniqueKey.csv file (and optionally the runlog.csv file) by
+UniqueKey to join the run results with the parameters of the runs.

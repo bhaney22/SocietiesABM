@@ -22,11 +22,10 @@ public:
 	void dayAnalysis(int dayNumber);
 	void removeOrSave(int dayNumber);
 	void endSim();
-	vector<vector<double> > calcQuartiles(vector<vector<double> > data);
 	void headerByDay(ofstream &file, string filePath);
-	void headerByVar(ofstream &file, string filePath);
+	vector<vector<double> > calcQuartiles(vector<vector<double> > data);
+	void firstRunCheck(ofstream &file, string filePath);
 	void saveResults();
-	void saveOutput ();
 	void saveGini();
 	void saveHHIQuartiles();
 	void saveTotalUtility();
@@ -40,7 +39,8 @@ public:
 	void saveDevDevice();
 	void saveDeviceComplexity();
 	void saveDiscoveredDevices();
-
+	void saveUniqueKey();
+	void saveOutput();
 	void saveEndDayData();
 
         void removeAgent(int agentNumber, int day);

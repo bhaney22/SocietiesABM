@@ -381,9 +381,197 @@ vector<vector<double> > Utils::calcQuartiles(vector<vector<double> > data)
     return result;
 }
 
-/**
- * Print the first line of a csv file with day numbers (wide) or with all variables (long).
+void Utils::saveUniqueKey()
+{
+    ofstream file;
+    string filePath = "_Results/UniqueKeyFile.csv";
+
+    file.open(filePath.c_str(), ios::app);
+
+// BRH 3.19.2017 Header row labels. Comment out this section once the file structure is set. Change this if new variables are added. 
+ /*   file <<  "UniqueKey,";
+	file <<  "ConfigName,";
+    file <<  "Group_Num,";  // placeholder for allowing different parameters for different agent or resource groups within one simulation 
+    file <<  "NUM_AGENTS,";                     
+    file <<  "NUM_RESOURCES,";                  
+    file <<  "NUM_AGENT_GROUPS,";
+    file <<  "TRADE_EXISTS,";                  
+    file <<  "DEVICES_EXIST,";                 
+    file <<  "TOOLS_ONLY,";                    
+    file <<  "START_DAY,";                      
+    file <<  "DAY_LENGTH,";                     
+    file <<  "NUM_DAYS,";                       
+    file <<  "RES_TRADE_ROUNDS,";               
+    file <<  "RES_TRADE_ATTEMPTS,";             
+    file <<  "DEVICE_TRADE_ROUNDS,";            
+    file <<  "DEVICE_TRADE_ATTEMPTS,";          
+    file <<  "MENU_SIZE,";                      
+    file <<  "DEVICE_TRADE_MEMORY_LENGTH,";     
+    file <<  "DEVICE_PRODUCTION_MEMORY_LENGTH,";      
+    file <<  "MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION,";    
+    file <<  "MIN_RES_HELD_FOR_DEVICE_CONSIDERATION,";      
+    file <<  "DAILY_EXP_PENALTY,";           
+    file <<  "PRODUCTION_EPSILON,";          
+    file <<  "RESOURCES_IN_TOOL,";              
+    file <<  "MAX_RES_EXPERIENCE,";          
+    file <<  "INVENTOR_DEVICE_EXPERIENCE,";  
+    file <<  "NUM_DEVICE_COMPONENTS,";          
+    file <<  "MAX_DEVICE_EXPERIENCE,";       
+    file <<  "DAILY_DEVICE_DECAY,";          
+    file <<  "MIN_HELD_DEVICE_EXPERIENCE,";  
+    file <<  "MAX_RES_EFFORT,";              
+    file <<  "MIN_RES_EFFORT,";              
+    file <<  "MAX_DEVICE_EFFORT,";           
+    file <<  "MIN_DEVICE_EFFORT,";           
+    file <<  "MIN_RES_UTIL,";                
+    file <<  "TRADE_EPSILON,";               
+    file <<  "TOOL_PROBABILITY_FACTOR,";     
+    file <<  "DEVICE_PROBABILITY_FACTOR,";   
+    file <<  "TOOL_FACTOR,";                 
+    file <<  "TOOL_LIFETIME,";               
+    file <<  "MACHINE_FACTOR,";              
+    file <<  "MACHINE_LIFETIME,";            
+    file <<  "FACTORY_FACTOR,";              
+    file <<  "FACTORY_LIFETIME,";            
+    file <<  "INDUSTRY_FACTOR,";             
+    file <<  "INDUSTRY_LIFETIME,";           
+    file <<  "DEV_MACHINE_FACTOR,";          
+    file <<  "DEV_MACHINE_LIFETIME,";        
+    file <<  "DEV_FACTORY_FACTOR,";          
+    file <<  "DEV_FACTORY_LIFETIME,";        
+    file <<  "DAYS_OF_DEVICE_TO_HOLD,";      
+    file <<  "REMOVE_RES,";             
+    file <<  "RES_TO_REMOVE,";          
+    file <<  "REMOVE_RES_DAY,";         
+    file <<  "ELIMINATE_RESERVES,";    
+    file <<  "REMOVE_AGENT,";           
+    file <<  "AGENT_TO_REMOVE,";        
+    file <<  "REMOVE_AGENT_DAY,";       
+    file <<  "END_SAVE,";               
+    file <<  "SAVE_FOLDER,";         
+    file <<  "SAVE_DAY_STATUS,";           
+    file <<  "DAY_STATUS_SAVE_FOLDER,";  
+    file <<  "DAY_FOR_SAVE,";               
+    file <<  "DAY_STATUS_LOAD_FOLDER,";  
+    file <<  "SIM_NAME,";             
+    file <<  "SIM_SAVE_FOLDER,";      
+    file <<  "SAVE_TRADES,";           
+    file <<  "PARALLEL_TRADES,";  
+    file <<  "\n";
+*/
+// BRH 3.19.2017 End of Header row . Uncomment out the above section to change the
+// file structure such as to add new variables. 
+
+   file << glob.UniqueKey << ",";
+   file << glob.configName << ",";
+   file << "0,";  /* placeholder for allowing different parameters for different agent or resource groups within one simulation */
+   file << glob.NUM_AGENTS <<  ","; 
+   file << glob.NUM_RESOURCES <<  ",";
+   file << glob.NUM_AGENT_GROUPS <<  ",";                 
+   file << glob.TRADE_EXISTS <<  ",";                  
+   file << glob.DEVICES_EXIST <<  ",";                 
+   file << glob.TOOLS_ONLY <<  ",";                    
+   file << glob.NUM_DAYS <<  ",";                       
+   file << glob.START_DAY <<  ",";                      
+   file << glob.DAY_LENGTH <<  ","; 
+   file << glob.RES_TRADE_ROUNDS <<  ",";               
+   file << glob.RES_TRADE_ATTEMPTS <<  ",";             
+   file << glob.DEVICE_TRADE_ROUNDS <<  ",";            
+   file << glob.DEVICE_TRADE_ATTEMPTS <<  ",";          
+   file << glob.MENU_SIZE <<  ",";                      
+   file << glob.DEVICE_TRADE_MEMORY_LENGTH <<  ",";     
+   file << glob.DEVICE_PRODUCTION_MEMORY_LENGTH <<  ",";      
+   file << glob.MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION <<  ",";    
+   file << glob.MIN_RES_HELD_FOR_DEVICE_CONSIDERATION <<  ",";      
+   file << glob.DAILY_EXP_PENALTY <<  ",";           
+   file << glob.PRODUCTION_EPSILON <<  ",";          
+   file << glob.RESOURCES_IN_TOOL <<  ",";              
+   file << glob.MAX_RES_EXPERIENCE <<  ",";          
+   file << glob.INVENTOR_DEVICE_EXPERIENCE <<  ",";  
+   file << glob.NUM_DEVICE_COMPONENTS <<  ",";          
+   file << glob.MAX_DEVICE_EXPERIENCE <<  ",";       
+   file << glob.DAILY_DEVICE_DECAY <<  ",";          
+   file << glob.MIN_HELD_DEVICE_EXPERIENCE <<  ",";  
+   file << glob.MAX_RES_EFFORT <<  ",";              
+   file << glob.MIN_RES_EFFORT <<  ",";              
+   file << glob.MAX_DEVICE_EFFORT <<  ",";           
+   file << glob.MIN_DEVICE_EFFORT <<  ",";           
+   file << glob.MIN_RES_UTIL <<  ",";                
+   file << glob.TRADE_EPSILON <<  ",";               
+   file << glob.TOOL_PROBABILITY_FACTOR <<  ",";     
+   file << glob.DEVICE_PROBABILITY_FACTOR <<  ",";   
+   file << glob.TOOL_FACTOR <<  ",";                 
+   file << glob.TOOL_LIFETIME <<  ",";               
+   file << glob.MACHINE_FACTOR <<  ",";              
+   file << glob.MACHINE_LIFETIME <<  ",";            
+   file << glob.FACTORY_FACTOR <<  ",";              
+   file << glob.FACTORY_LIFETIME <<  ",";            
+   file << glob.INDUSTRY_FACTOR <<  ",";             
+   file << glob.INDUSTRY_LIFETIME <<  ",";           
+   file << glob.DEV_MACHINE_FACTOR <<  ",";          
+   file << glob.DEV_MACHINE_LIFETIME <<  ",";        
+   file << glob.DEV_FACTORY_FACTOR <<  ",";          
+   file << glob.DEV_FACTORY_LIFETIME <<  ",";        
+   file << glob.DAYS_OF_DEVICE_TO_HOLD <<  ",";                          
+   file << glob.REMOVE_RES <<  ",";             
+   file << glob.RES_TO_REMOVE <<  ",";          
+   file << glob.REMOVE_RES_DAY <<  ",";         
+   file << glob.ELIMINATE_RESERVES <<  ",";    
+   file << glob.REMOVE_AGENT <<  ",";           
+   file << glob.AGENT_TO_REMOVE <<  ",";        
+   file << glob.REMOVE_AGENT_DAY <<  ",";       
+   file << glob.END_SAVE <<  ",";               
+   file << glob.SAVE_FOLDER <<  ",";         
+   file << glob.SAVE_DAY_STATUS <<  ",";           
+   file << glob.DAY_STATUS_SAVE_FOLDER <<  ",";  
+   file << glob.DAY_FOR_SAVE <<  ",";               
+   file << glob.DAY_STATUS_LOAD_FOLDER <<  ",";  
+   file << glob.SIM_NAME <<  ",";             
+   file << glob.SIM_SAVE_FOLDER <<  ",";      
+   file << glob.SAVE_TRADES <<  ",";           
+   file << glob.PARALLEL_TRADES <<  ",";  
+   file <<  "\n";  
+   file.close();
+}
+
+/*
+ * Housekeeping for First (or an only) Run: If the output file (long_output.csv) file does not exist, then this is the first run
+ * of a batch of simulations. So: 
+ *   
+ *   (1) save the UniqueKey to the UniqueKey file
+ *   (2) preserve a copy of the configuration files
+ *   (3) print the header containing the names and order of all output variables to the output file 
  */
+ /* CAUTION: Keep the order of the header of the output file the same as how the variables are are printed in saveOutput routine below.	*/
+
+void Utils::firstRunCheck(ofstream &file, string filePath)
+{
+    if ( !boost::filesystem::exists(filePath)) {
+//(1) 	Save the UniqueKey for this batch of runs and all of the parameters to a file	
+		saveUniqueKey();
+
+//(2) 	Save a copy of the config file and the agent config files.	
+		int command;
+		string conf = glob.SAVE_FOLDER + "/configFiles";
+		string commandLine;
+		if (glob.configAgentCSV != "") {
+			commandLine = "cp " + glob.configAgentFilename + " "
+					+ glob.configAgentCSV + " "
+					+ glob.configFilename + " " + conf;
+		} else {
+			commandLine = "cp " + glob.configAgentFilename + " " + glob.configFilename + " " + conf;
+		}
+		command = system(commandLine.c_str());
+
+//(3) Print first row of output file containing all fo the variable names. Check these are in order as in saveOutput()
+	file.open(filePath.c_str());
+	file << "UniqueKey,Config,Run,TimeStep,";
+	file << "avgUtil,avgGathered,avgHeld,gini,complexity,T1_made,T2_made,T3_made,T4_made,T5_made,T6_made,totalUtil";
+	file << "\n";
+	file.close();
+
+    }
+}
 
 void Utils::headerByDay(ofstream &file, string filePath)
 {
@@ -398,18 +586,6 @@ void Utils::headerByDay(ofstream &file, string filePath)
     }
 }
 
-void Utils::headerByVar(ofstream &file, string filePath)
-{
-    if ( !boost::filesystem::exists(filePath)) {
-        file.open(filePath.c_str());
-  	/* HEADER: print the first line with variable labels (only on first run of a batch). */
-	/* CAUTION: Keep order the same as variables are printed below.	*/
-		file << "Config, " << "UniqueKey, " << "Run, " << "TimeStep, " << "avgUtil, " << "totalUtil" << "\n";
-        file.close();
-    }
-}
-
-
 /**
  * BRH 2013.05.23: This graph shows the gini coefficient.  The formula used is can be found at
  * http://en.wikipedia.org/wiki/Gini_coefficient.  The python adaption was corrected to the one in
@@ -419,7 +595,7 @@ void Utils::headerByVar(ofstream &file, string filePath)
  */
 void Utils::saveGini()
 {
-    ofstream file;
+	ofstream file;
     string filePath = glob.SAVE_FOLDER + "/gini.csv";
 
     headerByDay(file, filePath);
@@ -428,7 +604,7 @@ void Utils::saveGini()
     /*
      * Save the gini of all agents into the same file.
      */
-    file << "giniPerAgent_"<< glob.SIM_NAME << ",,";   // Leave the first day blank
+   file << "giniPerAgent_"<< glob.SIM_NAME << ",,";   // Leave the first day blank
     vector<double> orderedUtils;
     vector<double> y;
     vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();
@@ -1094,38 +1270,17 @@ void Utils::saveDiscoveredDevices()
 }
 
 
+
 /**
  * Save results into csv files -- part of graph.py in python.
  * Different from saveResults() in utils.py
  */
 void Utils::saveResults()
 {
-    /*
-     * Save the config files into configFiles folder
-     */
-    int command;
-    string conf = glob.SAVE_FOLDER + "/configFiles";
-    string commandLine;
-    if (glob.configAgentCSV != "") {
-        commandLine = "cp " + glob.configAgentFilename + " "
-                + glob.configAgentCSV + " "
-                + glob.configFilename + " " + conf;
-    } else {
-        commandLine = "cp " + glob.configAgentFilename + " " + glob.configFilename + " " + conf;
-    }
-    command = system(commandLine.c_str());
-
-    /*
-     * Save the data into each file.
-     */
-	 
-// BRH 3.18.2017: New routine to write all data to one long file
-	
 	saveOutput();
-	saveDeviceComplexity();
-	saveUnitsGathered();
+	saveGini(); /* BRH: just for testing. Printing this one old file version to compare results. */
 	 
-/*********    Do not write out these files anymore once database file is set up. 
+/*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
     saveHHIQuartiles();
     saveTotalUtility();
@@ -1226,44 +1381,90 @@ void Utils::loadDayStatus()
 //    
 void Utils::saveOutput()
 /**
- * Save the mean utility by all agents and by each group of each day into a csv file.
+ * Save all variables on one row per day.
  */
 {
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = glob.SAVE_FOLDER + "/long_output.csv"; /*concatenate the dir and filename */
-	headerByVar(file, filePath); /* write the first row with labels. */
-	
+    string filePath = "_Results/" + glob.configName + "/long_output.csv"; /*concatenate the dir and filename */
+	firstRunCheck(file, filePath); /* Check if this is the first run of the batch. If so, write the first row with labels. */ 
 	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
 	
 	/* ROWS: print output variables one row = one run + one day */
-    vector<double> sumUtil = glob.otherStats->getSumUtil();
     vector<int> activeAgents = glob.otherStats->getActiveAgents();
+    vector<double> sumUtil = glob.otherStats->getSumUtil();   
+	vector<int> sumRes = glob.otherStats->getSumRes();
+	vector<int> resGath = glob.productionStats->getResGathered();
+
+/* For Gini calcuation. */;
+    vector<double> orderedUtils;
+    vector<double> y;
+    vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();
+
+/* Begin print line */;
     for (int i = 0; i < glob.NUM_DAYS; i++) {
-		/* ORDER: Config, UniqueKey, Run (SIM_NAME), Day, variables */
-			file << glob.configName << ", " << glob.UniqueKey << ", " << glob.SIM_NAME << ", " << (i + 1) << ", " << (sumUtil[i] / activeAgents[i]) << "," << sumUtil[i] << "\n";  
-    }
-
-/* BRH 3.17.2018 don't do groups yet */
-    /* mean utility per group */
-	/*
-    vector<vector<double> > sumUtilByGroup = glob.otherStats->getSumUtilByGroup();
-    vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
-    for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
-        file << "meanUtilByGroup_" << i << "_" << glob.SIM_NAME << ",";
-        for (int j = 0; j < glob.NUM_DAYS; j++) {
-            file << ( (double)sumUtilByGroup[i][j] / (double)activeGroupAgents[i][j]) << ",";
-        }
-        file << "\n";
-    }
-    file << "\n";
-    file.close();
+		/* ORDER: UniqueKey, Config, Run (SIMNAME for now), Day, ... */
+			file << glob.UniqueKey << ",";
+			file << glob.configName << "," ;
+			file << glob.SIM_NAME << "," ;
+			file << (i + 1) << "," ; //day starts on "0" in the program, but we want it to start at "1" in output file
+			
+	/* Average Utility */;
+			file << (sumUtil[i] / activeAgents[i]) << "," ; 
+			
+	/* Average Units Held */;
+			file << ( (double) sumRes[i] / (double) activeAgents[i] ) << ",";
 	
-	activeGroupAgents.clear();
-    sumUtilByGroup.clear();
-
-*/
+	/* Average Units Gathered */;
+			file << ( (double) resGath[i] / (double) activeAgents[i] ) << ",";
+	
+	 /* Gini */;   
+		int dayNum = i + 1; 
+		if (dayNum == 1 || dayNum==glob.NUM_DAYS) {    	 /* Note: Leave Gini missing for first and last days. */; 
+			file << ".,";
+		} else {
+		orderedUtils.clear();
+        for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {//for every agent
+            if (glob.agent[aId]->inSimulation) {
+                // takes a four-day average (one before, two after) of utility to calculate Gini coefficient
+                orderedUtils.push_back(accumulate(sumUtilByAgent[aId].begin() + dayNum - 1,
+                                                sumUtilByAgent[aId].begin() + dayNum + 2, 0.0));// create vector of utilities per agent
+            }
+        }
+        sort(orderedUtils.begin(), orderedUtils.end());//orders utilities smallest to largest
+        y.clear();
+        for (unsigned int i = 0; i < orderedUtils.size(); i++) {
+            y.push_back(accumulate(orderedUtils.begin(), orderedUtils.begin() + i + 1, 0));// seems to be sum of utilities up to a point, cumulative histogram type thing.
+        }
+        double B = accumulate(y.begin(), y.end(), 0.0) / (y[y.size()-1] * double(orderedUtils.size())); // arbitrary variable used in final calc.
+        file << (1.0 + (1.0 / double(orderedUtils.size())) - (2.0 * B)) << ",";// final calculation. 
+		}
+		
+	/* Complexity */;
+	    vector< vector<double> > percentResGatheredByDevice = glob.productionStats->getPercentResGatheredByDevice();
+		double complexityToday;
+		complexityToday = 0.0;
+        for (int j = 0; j < 4; j++) {
+            complexityToday += percentResGatheredByDevice[j][i] * glob.RES_IN_DEV[j];
+        }
+        file << complexityToday << ",";
+	
+	/* Devices Made */;
+		string devicesStr[] = { "TOOL(T1)", "MACHINE(T2)", "FACTORY(T3)", "INDUSTRY(T4)", "DEVMACHINE(T5)", "DEVFACTORY(T6)" };
+		vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
+		for (int j = 0; j < NUM_DEVICE_TYPES; j++) {
+			file << ( (double) devicesMade[j][i] / (double) activeAgents[i] ) << ",";
+		}
+		
+	/* Total Utility */;
+		file << sumUtil[i] << "," ; 
+		
+	/* End of Print line */;		
+		file <<"\n";  
+    }
+file.close();
 
     sumUtil.clear();
     activeAgents.clear();
 }
+
 
