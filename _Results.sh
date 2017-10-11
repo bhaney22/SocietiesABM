@@ -3,7 +3,8 @@
 # Stata or Tableau.
 #
 # FYI: the head command saves the header row from the first individual long_output file.
-# FYI: the grep command strips out all of the header rows from the individual long_output files.
+# FYI: the grep command strips out all of the header rows (starts with UniueKey)
+#      from the individual long_output files.
 # BRH 3.20.2017
 
 cat _Results/*/long_output.csv | head -n 1 > temp1

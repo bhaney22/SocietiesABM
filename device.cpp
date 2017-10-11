@@ -291,10 +291,17 @@ vector<int> Device::necessaryRes()
 {
     vector<int> necessaryRes(glob.NUM_RESOURCES, 0);
     for (int i = 0; i < (int) components.size(); i++) {
+/* BRH for testing */
+	cerr << "Line 295, components.size= " << components.size() << " num res= " << glob.NUM_RESOURCES <<  " i= " << i << endl;
         for (int j = 0; j < glob.NUM_RESOURCES; j++) {
+/* BRH for testing */
+	cerr << "Line 297, components.size= " << components.size() << " num res= " << glob.NUM_RESOURCES <<  " i= " << i <<  " j= " << j << endl;
             necessaryRes[j] += glob.discoveredDevices[componentType][components[i]]->necessaryResources[j];
+/* BRH for testing */
+	cerr << "Line 301, necessaryRes" << necessaryRes[j] << endl;
         }
     }
+
     return necessaryRes;
 }
 

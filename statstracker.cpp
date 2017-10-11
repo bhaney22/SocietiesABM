@@ -302,6 +302,9 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
      * After all agents have been checked for a given resource, append agentsMakingRes to numAgentsGatheringbyRes
      * For each resource take the total gathered and append that to resGatheredByRes
      */
+	 /* BRH 10.2.2017 testing */
+	bool DEBUG_PRODUCTIONSTATS = false;
+	 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         int numAgentsGatheringRes = 0;
         int totalAmountOfThisResGathered = 0;

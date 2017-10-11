@@ -31,9 +31,9 @@ using namespace std;
  */
 void Utils::printStartConditions()
 {
-    cout << "Num days: " << glob.NUM_DAYS << endl;
-	cout << "Num agents: " << glob.NUM_AGENTS << endl;
-    cout << "Num resources: " << glob.NUM_RESOURCES << endl;
+    cout << "Number of days: " << glob.NUM_DAYS << endl;
+	cout << "Number of agents: " << glob.NUM_AGENTS << endl;
+    cout << "Number of resources: " << glob.NUM_RESOURCES << endl;
 }
 
 /**
@@ -388,79 +388,7 @@ void Utils::saveUniqueKey()
 
     file.open(filePath.c_str(), ios::app);
 
-// BRH 3.19.2017 Header row labels. Comment out this section once the file structure is set. Change this if new variables are added. 
- /*   file <<  "UniqueKey,";
-	file <<  "ConfigName,";
-    file <<  "Group_Num,";  // placeholder for allowing different parameters for different agent or resource groups within one simulation 
-    file <<  "NUM_AGENTS,";                     
-    file <<  "NUM_RESOURCES,";                  
-    file <<  "NUM_AGENT_GROUPS,";
-    file <<  "TRADE_EXISTS,";                  
-    file <<  "DEVICES_EXIST,";                 
-    file <<  "TOOLS_ONLY,";                    
-    file <<  "START_DAY,";                      
-    file <<  "DAY_LENGTH,";                     
-    file <<  "NUM_DAYS,";                       
-    file <<  "RES_TRADE_ROUNDS,";               
-    file <<  "RES_TRADE_ATTEMPTS,";             
-    file <<  "DEVICE_TRADE_ROUNDS,";            
-    file <<  "DEVICE_TRADE_ATTEMPTS,";          
-    file <<  "MENU_SIZE,";                      
-    file <<  "DEVICE_TRADE_MEMORY_LENGTH,";     
-    file <<  "DEVICE_PRODUCTION_MEMORY_LENGTH,";      
-    file <<  "MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION,";    
-    file <<  "MIN_RES_HELD_FOR_DEVICE_CONSIDERATION,";      
-    file <<  "DAILY_EXP_PENALTY,";           
-    file <<  "PRODUCTION_EPSILON,";          
-    file <<  "RESOURCES_IN_TOOL,";              
-    file <<  "MAX_RES_EXPERIENCE,";          
-    file <<  "INVENTOR_DEVICE_EXPERIENCE,";  
-    file <<  "NUM_DEVICE_COMPONENTS,";          
-    file <<  "MAX_DEVICE_EXPERIENCE,";       
-    file <<  "DAILY_DEVICE_DECAY,";          
-    file <<  "MIN_HELD_DEVICE_EXPERIENCE,";  
-    file <<  "MAX_RES_EFFORT,";              
-    file <<  "MIN_RES_EFFORT,";              
-    file <<  "MAX_DEVICE_EFFORT,";           
-    file <<  "MIN_DEVICE_EFFORT,";           
-    file <<  "MIN_RES_UTIL,";                
-    file <<  "TRADE_EPSILON,";               
-    file <<  "TOOL_PROBABILITY_FACTOR,";     
-    file <<  "DEVICE_PROBABILITY_FACTOR,";   
-    file <<  "TOOL_FACTOR,";                 
-    file <<  "TOOL_LIFETIME,";               
-    file <<  "MACHINE_FACTOR,";              
-    file <<  "MACHINE_LIFETIME,";            
-    file <<  "FACTORY_FACTOR,";              
-    file <<  "FACTORY_LIFETIME,";            
-    file <<  "INDUSTRY_FACTOR,";             
-    file <<  "INDUSTRY_LIFETIME,";           
-    file <<  "DEV_MACHINE_FACTOR,";          
-    file <<  "DEV_MACHINE_LIFETIME,";        
-    file <<  "DEV_FACTORY_FACTOR,";          
-    file <<  "DEV_FACTORY_LIFETIME,";        
-    file <<  "DAYS_OF_DEVICE_TO_HOLD,";      
-    file <<  "REMOVE_RES,";             
-    file <<  "RES_TO_REMOVE,";          
-    file <<  "REMOVE_RES_DAY,";         
-    file <<  "ELIMINATE_RESERVES,";    
-    file <<  "REMOVE_AGENT,";           
-    file <<  "AGENT_TO_REMOVE,";        
-    file <<  "REMOVE_AGENT_DAY,";       
-    file <<  "END_SAVE,";               
-    file <<  "SAVE_FOLDER,";         
-    file <<  "SAVE_DAY_STATUS,";           
-    file <<  "DAY_STATUS_SAVE_FOLDER,";  
-    file <<  "DAY_FOR_SAVE,";               
-    file <<  "DAY_STATUS_LOAD_FOLDER,";  
-    file <<  "SIM_NAME,";             
-    file <<  "SIM_SAVE_FOLDER,";      
-    file <<  "SAVE_TRADES,";           
-    file <<  "PARALLEL_TRADES,";  
-    file <<  "\n";
-*/
-// BRH 3.19.2017 End of Header row . Uncomment out the above section to change the
-// file structure such as to add new variables. 
+// BRH 3.19.2017 If there are changes to the format of this file, make sure to change the Header row in the file. 
 
    file << glob.UniqueKey << ",";
    file << glob.configName << ",";
@@ -535,7 +463,7 @@ void Utils::saveUniqueKey()
 }
 
 /*
- * Housekeeping for First (or an only) Run: If the output file (long_output.csv) file does not exist, then this is the first run
+ * BRH: Housekeeping for First (or an only) Run: If the output file (long_output.csv) file does not exist, then this is the first run
  * of a batch of simulations. So: 
  *   
  *   (1) save the UniqueKey to the UniqueKey file
@@ -1244,15 +1172,14 @@ void Utils::saveDeviceComplexity()
 
 
 /**
- * save the number of discovered / invented devices by all agents for each day
+ * BRH: 10.2.2017 Repurposed this routine to save recipes for all devices
  */
 void Utils::saveDiscoveredDevices()
 {
-    ofstream file;
-    string filePath = glob.SAVE_FOLDER + "/deviceDiscovered_.csv";
-
-    headerByDay(file, filePath);
-    file.open(filePath.c_str(), ios::app);
+    ofstream file;     /* Open up a generic "file" to write to */
+    string filePath = "_Results/" + glob.configName + "/deviceDiscovered.csv"; /*concatenate the dir and filename */
+	file.open(filePath.c_str());   /*open that particular file to start writing */
+	
 
     vector< vector<int> > numberOfInventedDevices = glob.otherStats->getNumberOfInventedDevices();
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
@@ -1277,9 +1204,9 @@ void Utils::saveDiscoveredDevices()
  */
 void Utils::saveResults()
 {
-	saveOutput();
-	saveGini(); /* BRH: just for testing. Printing this one old file version to compare results. */
-	 
+	saveOutput(); /* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
+	saveDiscoveredDevices(); /* BRH 10.2.2017 Use this routine to create I0 tables
+	   
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
     saveHHIQuartiles();
@@ -1400,7 +1327,7 @@ void Utils::saveOutput()
     vector<double> y;
     vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();
 
-/* Begin print line */;
+/* Begin print line */; /* BRH: If this changes, the header row must also change. See checkFirstRun routine. */
     for (int i = 0; i < glob.NUM_DAYS; i++) {
 		/* ORDER: UniqueKey, Config, Run (SIMNAME for now), Day, ... */
 			file << glob.UniqueKey << ",";

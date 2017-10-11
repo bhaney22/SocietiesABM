@@ -6,5 +6,5 @@
 # to pass an argument when using qsub, you must use the -F command and put
 # the argument(s) in double quotation marks.
 
-./q T4_4_4 2
+./q dbtest1 2
 

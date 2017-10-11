@@ -24,7 +24,7 @@ public:
         time(&rawtime);
         tim = localtime(&rawtime);
         strftime(t, 100, "%c", tim);
-        std::cout << t << ": " << funcName << "[" << lineNum << "]: ";
+        std::cout << t << ": " << funcName << " [" << lineNum << "] " << "Log(" << level << "): ";
     }
 
     template <class T>
