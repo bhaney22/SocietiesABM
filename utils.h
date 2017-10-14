@@ -38,7 +38,8 @@ public:
 	void saveDevicePercents();
 	void saveDevDevice();
 	void saveDeviceComplexity();
-	void saveDiscoveredDevices();
+	void saveUseMatrix();
+	void saveDeviceRecipes();
 	void saveUniqueKey();
 	void saveOutput();
 	void saveEndDayData();

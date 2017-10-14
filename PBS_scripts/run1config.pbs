@@ -7,8 +7,10 @@
 # Created by: BRH 03.17.2017 
 # Last revised: BRH 03.25.2017
 #
+# BRH 10.13.2017 -- CHANGED walltime to 10 minutes from 10 hours during testing...in case I create endless loop by accident (again).
+#
 
-#PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
+#PBS -l nodes=1:ppn=1,mem=4g,walltime=00:10:00
 #PBS -m a -M bhaney@calvin.edu
 
 cd /home/brh22/societies2017/
@@ -35,7 +37,7 @@ echo "Start Date: $StartDay $StartTime"
 for run_num in $(seq -f "%03g" 1 $2)
 do
 	echo "     UniqueKey_run_num: $UniqueKey"_"$run_num"top
-	./societies -v 4 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
+	./societies -v 1 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
 done
 
 duration=$SECONDS

@@ -314,14 +314,14 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
                 glob.agent[aId]->getUnitsGatheredToday(resId);
             resGatheredByResByAgent[resId][aId].push_back(agentTotalThisResGathered);
             totalAmountOfThisResGathered += agentTotalThisResGathered;
-            if (agentTotalThisResGathered > 0) {
+				if (agentTotalThisResGathered > 0) {
                 numAgentsGatheringRes += 1;
-            }
+				}
             /**
              * DEBUG_PRODUCTIONSTATS: not exist in python version
              */
             if (DEBUG_PRODUCTIONSTATS) {
-                cout << "Resource Id: " << resId << " Agent Id: " << endl;
+                cout << "Resource Id: " << resId << " Agent Id: " << aId << endl;
                 cout << "ResourcesGatheredByAgent: "
                      << agentTotalThisResGathered << endl;
             }
@@ -334,7 +334,7 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
 
         if (DEBUG_PRODUCTIONSTATS) {
             cout << "Total Amount of Res " << resId << " Gathered: "
-                 << numAgentsGatheringRes << endl;
+                 << totalAmountOfThisResGathered << endl;
         }
         resGatheredByRes[resId].push_back(totalAmountOfThisResGathered);
     }
