@@ -462,20 +462,24 @@ void ResourcePair::writeTradeData()
     string filePath = glob.SAVE_FOLDER + "/trades.csv";
     if ( !boost::filesystem::exists(filePath)) {
         file.open(filePath.c_str());
-        string header[] = {"Day", "Round",
-                "Agent A", "Res A", "1.#ResA Sold", "Avg # ResA Held", "2.MU ResA",
+        string header[] = {"UniqueKey","Config","Run","Day", "Round",
+                "Agent A", "Res A", "1.#ResA Bought", "Avg #ResA Held", "2.MU ResA",
                 "Agent B", "ResB", "3.#ResB Bought", "Avg #ResB Held","MU ResB",
                 "5.ActualPrice (1./3.)","6.EquilPrice (2./4.)","Ratio (5./6.)",
                 "MURatioAgentA","MURatioAgentB","MyTradeRatio","TradeRatio"
         };
-        for (int i = 0; i < 19;  i++) {
+        for (int i = 0; i < 22;  i++) {
             file << header[i] << ",";
         }
         file << "\n";
         file.close();
     }
     file.open(filePath.c_str(), ios::app);
-    file << glob.currentDay << "," << currentTradeAttempts << ","
+			/* ORDER: UniqueKey, Config, Run (SIMNAME for now), Day, ... */
+			file << glob.UniqueKey << ",";
+			file << glob.configName << "," ;
+			file << glob.SIM_NAME << "," ;
+			file << glob.currentDay << "," << currentTradeAttempts << ","
             << agentA->name << "," << aPick << "," << numAPicked << "," << avgHeldResA << "," << MUResA << ","
             << agentB->name << "," << bPick << "," << numBPicked << "," << avgHeldResB << "," << MUResB << ","
             << actualPrice << "," << equilPrice << "," << ratio << ","
@@ -522,7 +526,7 @@ void ResourcePair::makeTrade()
     agentB->resProp[aPick].soldEndDay += numAPicked;
     agentB->resProp[bPick].boughtEndDay += numBPicked;
 
-//    writeTradeData();
+    writeTradeData();
 }
 
 /**

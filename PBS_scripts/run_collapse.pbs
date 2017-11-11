@@ -6,7 +6,8 @@
 # on the supercomputer cluster.
 # Created by: BRH 03.17.2017 
 # Last revised: BRH 03.25.2017
-#
+# Command line inputs: $1 configpath&file $2 #runs 
+# Local Variables to set: CollapseRes and CollapseDay
 
 
 #PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
@@ -30,13 +31,19 @@ StartDay=$(date +%D)
 StartTime=$(date +%T)
 SECONDS=0
 
+### SET THESE: #################
+CollpaseDay=300
+CollapseRes=8
+
 echo "Unique Key: $UniqueKey"
 echo "Start Date: $StartDay $StartTime"
+echo "CollapseDay: $CollapseDay"
+echo "CollapseRes: $CollapseRes"
 
 for run_num in $(seq -f "%03g" 1 $2)
 do
 	echo "     UniqueKey_run_num: $UniqueKey"_"$run_num"
-	./societies -v 1 -p $1 -s _Results/$1 -r 8 310 1 -d B$UniqueKey -t $run_num
+	./societies -v 1 -p $1 -s _Results/$1 -r $CollapseRes $CollapseDay 1 -d B$UniqueKey -t $run_num
 done
 
 duration=$SECONDS

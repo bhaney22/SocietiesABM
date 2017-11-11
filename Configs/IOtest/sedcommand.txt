@@ -1,1 +1,0 @@
-sed -i 's/NUM_DAYS = 100/NUM_DAYS = 300/g' *.conf
