@@ -752,7 +752,7 @@ void Utils::saveUnitsGathered()
     /* Print total unitsGathered for each resource on a separate line */
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         file << "unitsGathered_R" << resId  << ",";
-        file << ( (double) resGatheredByRes[resId][glob.currentDay] << ",";
+        file << resGatheredByRes[resId][glob.currentDay] << ",";
     }
     file << "\n";
     file.close();
