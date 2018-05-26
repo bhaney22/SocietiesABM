@@ -1360,7 +1360,7 @@ void Utils::saveResults()
 	saveDeviceRecipes(); 	/* BRH 10.12.2017 Use this routine to print condensed recipes */
 	saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
 	saveOutput(); 			/* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
-	saveTradeFlows(); 		/* BRH 11.11.2017 Print out the daily tradeflows */
+//	saveTradeFlows(); 		/* BRH 05.26.2018 commented out. 11.11.2017 Print out the daily tradeflows */
 	   
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
