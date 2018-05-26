@@ -15,6 +15,6 @@ echo "*** Number of Runs: $2"
 echo "***"
 
 # Remove the old results for this config file.
-rm -r /home/brh22/societies2017/_Results/$1
+rm -r /home/brh22/societiesABM/_Results/$1
 
 qsub -F "$1 $2" run_1.pbs
