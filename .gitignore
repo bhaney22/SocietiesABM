@@ -1,3 +1,2 @@
-PBS_scripts/*.pbs.e*
-PBS_scripts/*.pbs.o*
+SLURM_scripts/*.out*
 *.o 

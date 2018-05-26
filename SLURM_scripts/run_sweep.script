@@ -1,0 +1,23 @@
+#!/bin/bash
+#      Requires 2 command line arguments: $1) how many runs per batch $2) config_name
+#	   Then calls run_societies.slurm to execute the srun command. 
+#      example: "./run_societies.sh 30 T4_24_24 " [will use the Configs/T4_24_24.conf file and submit 30 sruns]
+#
+# 		where T4 = tier 4 (industry) with 24 agents and 24 resources
+
+
+cd 
+# for Res in 3 5 
+for Res in 5
+
+do
+#	for Tier in tool machine factory industry
+	for Tier in industry
+	
+	do
+		sbatch run_societies.slurm  $1 /home/brh22/SocietiesABM/Configs/$2
+	done
+	
+done
+
+

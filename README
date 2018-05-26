@@ -1,9 +1,16 @@
-Societies Agent-based Model is an economic harvesting and trade simulation similar to Sugarscape. 
-However, agents in Societies can also invent and trade labor-saving devices. 
-This repository contains the source code. 
-The directory, Configs, contains default configuration files that store input parameters used in defining the simulation context. 
-The directory, PBS_scripts, contains scripts for running on a supercomputer cluster.
+Societies Agent-based Model is an economic harvesting and 
+trade simulation similar to Sugarscape. However, agents in Societies 
+can also invent and trade labor-saving devices. 
 
-To recompile the program after making changes, type "make societies" at the command prompt.
+This repository contains the source code. 
+
+The sub-directory, Configs, 
+		contains configuration files that 
+		store input parameters used in defining the simulation context. 
+The sub-directory, SLURM_scripts, 
+		contains scripts for running on a supercomputer cluster.
+
+To recompile the program after making changes, 
+		type "make societies" at the command prompt.
 
 
