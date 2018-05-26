@@ -79,6 +79,7 @@ private:
     void makeTrade();
     void tradingStatsUpdate();
     void writeTradeData();
+	void saveAgentTradeData();
 
 public:
     ResourcePair(Agent *agentA, Agent *agentB);

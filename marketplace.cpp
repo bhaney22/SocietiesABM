@@ -420,11 +420,13 @@ void ResourcePair::bMakesCounterOffer()
 }
 
 /**
- * Add a log file to capture trade data -- BRH
+ * Add a log file to capture trade data -- BRH (2015?)
+ * Quit calling this function as soon as the next function (save vector in memory) is working.11.11.2017
  */
+ //***************** SOON TO BE DELETED FUNCTION ************************
 void ResourcePair::writeTradeData()
 {
-    /* calculate the average holdings of resource A & B across all agents. */
+    /* calculate the average holdings of resource A & B across all agents. */ 
     int totalHeldResA = 0;
     int totalHeldResB = 0;
     for (int i = 0; i < glob.NUM_AGENTS; i++) {
@@ -492,17 +494,29 @@ void ResourcePair::writeTradeData()
  */
 void ResourcePair::makeTrade()
 {
-    LOG(4) << "Agent " << agentA->name << " is about to gain " <<
+    LOG(1) << "Agent " << agentA->name << " is about to gain " <<
         agentA->barterUtility(aPick, numAPicked) << " and lose " <<
         agentA->barterUtility(bPick, - numBPicked) << " by selling " <<
         numBPicked << " units of resource " << bPick;
 
-    LOG(4) << "Agent " << agentB->name << " is about to gain " <<
+    LOG(1) << "Agent " << agentB->name << " is about to gain " <<
         agentB->barterUtility(bPick, numBPicked) << " and lose " <<
         agentB->barterUtility(aPick, - numAPicked) << " by selling " <<
         numAPicked << " units of resource " << aPick;
 
-
+	//Write trade to tradeLog in memory
+	vector<int> tradeInfo(11);
+		tradeInfo[0]=agentA->name; //* A sells to B
+		tradeInfo[1]=agentB->name;
+		tradeInfo[2]=bPick;
+		tradeInfo[3]=numBPicked;
+		tradeInfo[4]=agentA->barterUtility(bPick, - numBPicked); //SellerLosesMU
+		tradeInfo[5]=agentB->barterUtility(bPick, - numBPicked); //BuyerGainsMU
+		tradeInfo[6]=aPick;
+		tradeInfo[7]=numAPicked;
+		tradeInfo[8]=agentA->barterUtility(aPick, - numAPicked); //SellerGainsMU
+		tradeInfo[9]=agentB->barterUtility(aPick, - numAPicked); //BuyerLosesMU
+	
     // Agents give up and gain the resources at the decided amounts.
     agentB->sells(aPick, numAPicked);
     agentA->buys(aPick, numAPicked);
@@ -526,7 +540,8 @@ void ResourcePair::makeTrade()
     agentB->resProp[aPick].soldEndDay += numAPicked;
     agentB->resProp[bPick].boughtEndDay += numBPicked;
 
-    writeTradeData();
+//    writeTradeData();  /*BRH 11.11.2017 Instead of writing a file every day, save a matrix and write it all at once at end of sim. */
+
 }
 
 /**

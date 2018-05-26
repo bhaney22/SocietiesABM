@@ -31,9 +31,6 @@ StartDay=$(date +%D)
 StartTime=$(date +%T)
 SECONDS=0
 
-### SET THESE: #################
-CollpaseDay=300
-CollapseRes=8
 
 echo "Unique Key: $UniqueKey"
 echo "Start Date: $StartDay $StartTime"
@@ -43,7 +40,7 @@ echo "CollapseRes: $CollapseRes"
 for run_num in $(seq -f "%03g" 1 $2)
 do
 	echo "     UniqueKey_run_num: $UniqueKey"_"$run_num"
-	./societies -v 1 -p $1 -s _Results/$1 -r $CollapseRes $CollapseDay 1 -d B$UniqueKey -t $run_num
+	./societies -v 1 -p $1 -s _Results/$1 -r 8 300 1 -d B$UniqueKey -t $run_num
 done
 
 duration=$SECONDS

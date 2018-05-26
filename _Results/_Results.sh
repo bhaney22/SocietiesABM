@@ -2,8 +2,10 @@
 # file of Societies runs across all configurations that were run for processing by
 # Stata or Tableau.
 #
+# Run this file after all runs for the IOtest have completed
+#
 # FYI: the head command saves the header row from the first individual long_output file.
-# FYI: the grep command strips out all of the header rows (starts with UniueKey)
+# FYI: the grep -v command strips out all of the header rows (starts with UniueKey)
 #      from the individual long_output files.
 # BRH 3.20.2017
 
@@ -33,8 +35,9 @@ cat temp1 temp2 > ./IOtest/UniqueKeyFile.csv
 rm temp1 temp2
 
 savedate=$(date +%d%m%Y%H%M)
-savename=IOtest.$savedate
 
-mv IOtest IOtest.$savename
-cd IOtest.$savename 
+mv IOtest IOtest.$savedate
+cd IOtest.$savedate
+rm -rf collapse
+rm -rf nocollapse
 ls -l

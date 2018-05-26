@@ -1339,16 +1339,28 @@ void Utils::saveUseMatrix()
     file.close();
     devicesMadeByRes.clear();
 }	// END of saveUseMatrix function.
+//*******************************************************************
+// Begin saveTradeFlows 
+//*******************************************************************
+void Utils::saveTradeFlows()
+{
+   ofstream file;
+   string filePath = glob.SAVE_FOLDER + "/trades.csv";
+        file.open(filePath.c_str());
+        file << "UniqueKey,Config,Run,TimeStep,Round,Seller,Buyer,ResSold,QtySold,ResRtn,QtyRtn,SellerMUSold,BuyerMUSold,SellerMURtn,BuyerMURtn\n";
+  for (int i = 0; i < glob.NUM_DAYS; i++) {
 
-
-
-
+//* TODO
+  }	//Ends writing out of all trades
+	file.close();
+}	//Ends saveTradeFlows
 
 void Utils::saveResults()
 {
-	saveDeviceRecipes(); /* BRH 10.12.2017 Use this routine to print condensed recipes */
-	saveUseMatrix(); /* BRH 10.2.2017 Use this routine to create I0 tables */
-	saveOutput(); /* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
+	saveDeviceRecipes(); 	/* BRH 10.12.2017 Use this routine to print condensed recipes */
+	saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
+	saveOutput(); 			/* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
+	saveTradeFlows(); 		/* BRH 11.11.2017 Print out the daily tradeflows */
 	   
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();

@@ -89,6 +89,8 @@ public:
     TradeStats();
     void dailyUpdate();
     void newExchange(ResourcePair &pair);
+// BRH 11.11.2017 New vectors to save individual trades in memory
+	vector<int> tradeLog(); //!< laundry list of trade info
 
     vector<int> getResTradeVolume() { return resTradeVolume; };
     vector<vector<int> > getResTradeVolumeByGroup() { return resTradeVolumeByGroup; };
