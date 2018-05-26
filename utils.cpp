@@ -749,17 +749,16 @@ void Utils::saveUnitsGathered()
     
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
 
-    /* Print total unitsGathered for each resource on a separate line */
-    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    /* Print total unitsGathered for each resource on one line */
+    
         file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
-        file << glob.currentDay << "," ;
-        file << "unitsGathered_R" << resId  << ",";
-        file << resGatheredByRes[resId][glob.currentDay] << ",";
-        file << "\n";
-    }
-    
+        file << glob.currentDay+1 << "," ;
+        for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+            file << resGatheredByRes[resId][glob.currentDay] << ",";   
+        }
+    file << "\n";
     file.close();
 
     resGatheredByRes.clear();
