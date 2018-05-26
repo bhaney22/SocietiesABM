@@ -737,43 +737,27 @@ void Utils::saveMeanUtility()
 }
 
 /**
- * Save the mean units gathered by all agents and by each group of each day into a csv file.
+ * Save the units gathered of each resource by each device 
+   summed over all agents on last day of last run.
  */
 void Utils::saveUnitsGathered()
 {
     ofstream file;
     string filePath = glob.SAVE_FOLDER + "/unitsGathered.csv";
 
-    headerByDay(file, filePath);
     file.open(filePath.c_str(), ios::app);
+    
+    vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
 
-    vector<int> resGath = glob.productionStats->getResGathered();
-    vector<int> activeAgents = glob.otherStats->getActiveAgents();
-
-    /* unitsGathered per agent */
-    file << "unitsGatheredPerActiveAgent_" << glob.SIM_NAME << ",";
-    for (int i = 0; i < glob.NUM_DAYS; i++) {
-        file << ( (double) resGath[i] / (double) activeAgents[i] ) << ",";
-    }
-    file << "\n";
-
-    /* unitsGathered per group */
-    vector<vector<int> > resGatheredByGroup = glob.productionStats->getResGatheredByGroup();
-    vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
-    for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
-        file << "unitsGatheredByGroup_" << i << "_" << glob.SIM_NAME << ",";
-        for (int j = 0; j < glob.NUM_DAYS; j++) {
-            file << ( (double)resGatheredByGroup[i][j] / (double)activeGroupAgents[i][j]) << ",";
-        }
-        file << "\n";
+    /* Print total unitsGathered for each resource on a separate line */
+    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+        file << "unitsGathered_R" << resId  << ",";
+        file << ( (double) resGatheredByRes[resId][glob.currentDay] << ",";
     }
     file << "\n";
     file.close();
 
-    resGath.clear();
-    activeAgents.clear();
-    activeGroupAgents.clear();
-    resGatheredByGroup.clear();
+    resGatheredByRes.clear();
 }
 
 /**
@@ -1178,7 +1162,7 @@ void Utils::saveDeviceRecipes()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
 
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/DeviceRecipes.csv"; /*concatenate the dir and filename */
+    string filePath = "_Results/" + glob.configName + "/" + glob.SIM_NAME + "/DeviceRecipes.csv"; 
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 	
 
@@ -1361,7 +1345,7 @@ void Utils::saveResults()
 	saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
 	saveOutput(); 			/* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
 //	saveTradeFlows(); 		/* BRH 05.26.2018 commented out. 11.11.2017 Print out the daily tradeflows */
-	   
+    saveUnitsGathered();    /* BRH 05.26.2018 Save total gathered of each resource for last run, last day */
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
     saveHHIQuartiles();
