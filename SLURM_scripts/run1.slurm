@@ -12,7 +12,7 @@
 #PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
 #PBS -m a -M bhaney@calvin.edu
 
-cd /home/brh22/societiesABM/
+cd /home/brh22/SocietiesABM/
 
 # Societies command line arguments Naming conventions:
 # 1. -p Name of the configuration (without Configs/ path and without .conf extention) ex. T4_100_100
@@ -44,5 +44,5 @@ EndDay=$(date +%D)
 EndTime=$(date +%T)
 
 # Uncomment the following line if format of runlog file changes.
-# echo "StartDate,StartTime,EndDate,EndTime, ElapsedSeconds,Config,Num_Runs,UniqueKey" > /home/brh22/societies2017/_Results/runlog.csv
-echo "$StartDay,$StartTime,$EndDay,$EndTime,$duration,$1,$2,B$UniqueKey" >> /home/brh22/societies2017/_Results/runlog.csv
+# echo "StartDate,StartTime,EndDate,EndTime, ElapsedSeconds,Config,Num_Runs,UniqueKey" > /home/brh22/SocietiesABM/_Results/runlog.csv
+echo "$StartDay,$StartTime,$EndDay,$EndTime,$duration,$1,$2,B$UniqueKey" >> /home/brh22/SocietiesABM/_Results/runlog.csv
