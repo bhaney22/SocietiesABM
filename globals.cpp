@@ -207,24 +207,31 @@ void Globals::setAdvancedOptions()
         RES_TO_REMOVE = removeResId;
         REMOVE_RES_DAY = removeResDay;
         ELIMINATE_RESERVES = removeResHoldings;
-    }
+    } else {
+		REMOVE_RES_DAY=-99;
+		ELIMINATE_RESERVES=false;
+		RES_TO_REMOVE=-99;
+	}	
 
     REMOVE_AGENT = false;
     if (removeAgentMidRun) {
         REMOVE_AGENT = true;
         AGENT_TO_REMOVE = removeAgentId;
         REMOVE_AGENT_DAY = removeAgentDay;
-    }
+    } else {
+		AGENT_TO_REMOVE=-99;
+		REMOVE_AGENT_DAY=-99;
+	}
 
     SAVE_DAY_STATUS = false;
     if (saveInMiddle) {
         DAY_STATUS_SAVE_FOLDER = saveInMiddleFoldername;
         DAY_FOR_SAVE = saveInMiddleDay;
-
         createDirectory(DAY_STATUS_SAVE_FOLDER);
-
         SAVE_DAY_STATUS = true;
-    }
+    } else {
+		DAY_FOR_SAVE=-99;
+	}
 
     END_SAVE = false;
     if (saveFileFolderSet) {

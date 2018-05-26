@@ -38,13 +38,15 @@ public:
 	void saveDevicePercents();
 	void saveDevDevice();
 	void saveDeviceComplexity();
-	void saveDiscoveredDevices();
+	void saveUseMatrix();
+	void saveTradeFlows();
+	void saveDeviceRecipes();
 	void saveUniqueKey();
 	void saveOutput();
 	void saveEndDayData();
 
-        void removeAgent(int agentNumber, int day);
-        void removeRes(int resNumber, int day);
+     void removeAgent(int agentNumber, int day);
+     void removeRes(int resNumber, int day);
 
 	void saveDayStatus(int day);		// NOT IMPLEMENtED YET.
 	void loadDayStatus();		// NOT IMPLEMENtED YET.

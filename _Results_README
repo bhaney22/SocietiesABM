@@ -16,8 +16,9 @@ to long_output.csv.
 with all of the parameters in the config file and from the
 command line. 
 
-4. The shellscript _Results.sh will concatenate all of the long_output files
-from the _Results subdirectories into one long long_output file in _Results/.
+4. The shellscript _Results.sh will concatenate all of the output files
+from the _Results subdirectories into one long file for each file in _Results/
+subdirectory named after the config name.
 
 Supplemental information:
 The runlog.csv contains all unique IDs, number of runs and when they 

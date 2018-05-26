@@ -89,6 +89,8 @@ public:
     TradeStats();
     void dailyUpdate();
     void newExchange(ResourcePair &pair);
+// BRH 11.11.2017 New vectors to save individual trades in memory
+	vector<int> tradeLog(); //!< laundry list of trade info
 
     vector<int> getResTradeVolume() { return resTradeVolume; };
     vector<vector<int> > getResTradeVolumeByGroup() { return resTradeVolumeByGroup; };
@@ -192,6 +194,7 @@ public:
     vector<vector<int> > getResGatheredByGroup() { return resGatheredByGroup; };
 
     vector< vector<int> > getDevicesMade() { return devicesMade; };
+	vector< vector< vector<int> > > getDevicesMadeByRes() { return devicesMadeByRes; };     /*BRH 10.11.2017 */
     vector< vector< vector<int> > > getDevicesMadeByGroup() { return devicesMadeByGroup; };
     vector< vector<int> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
     vector< vector<vector<int> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };

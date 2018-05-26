@@ -1,0 +1,3 @@
+PBS_scripts/*.pbs.e*
+PBS_scripts/*.pbs.o*
+*.o 

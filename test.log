@@ -1,0 +1,1208 @@
+configAgentFile: Configs/default_AgentValues.aconf
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 0
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 0
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 1
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 1
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 2
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 2
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 3
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 3
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 4
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 4
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 5
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 5
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 6
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 6
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 7
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 7
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 8
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 8
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 9
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 9
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 10
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 10
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 11
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 11
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 12
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 12
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 13
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 13
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 14
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 14
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 15
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 15
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 16
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 16
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 17
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 17
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 18
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 18
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 19
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 19
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 20
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 20
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 21
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 21
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 22
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 22
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 23
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 23
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 24
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 24
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 25
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 25
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 26
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 26
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 27
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 27
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 28
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 28
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 29
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 29
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 30
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 30
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 31
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 31
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 32
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 32
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 33
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 33
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 34
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 34
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 35
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 35
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 36
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 36
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 37
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 37
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 38
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 38
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 39
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 39
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 40
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 40
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 41
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 41
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 42
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 42
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 43
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 43
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 44
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 44
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 45
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 45
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 46
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 46
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 47
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 47
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 48
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 48
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 49
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 49
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 50
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 50
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 51
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 51
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 52
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 52
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 53
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 53
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 54
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 54
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 55
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 55
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 56
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 56
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 57
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 57
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 58
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 58
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 59
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 59
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 60
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 60
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 61
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 61
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 62
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 62
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 63
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 63
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 64
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 64
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 65
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 65
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 66
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 66
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 67
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 67
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 68
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 68
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 69
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 69
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 70
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 70
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 71
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 71
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 72
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 72
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 73
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 73
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 74
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 74
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 75
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 75
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 76
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 76
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 77
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 77
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 78
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 78
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 79
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 79
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 80
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 80
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 81
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 81
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 82
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 82
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 83
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 83
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 84
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 84
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 85
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 85
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 86
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 86
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 87
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 87
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 88
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 88
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 89
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 89
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 90
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 90
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 91
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 91
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 92
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 92
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 93
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 93
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 94
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 94
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 95
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 95
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 96
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 96
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 97
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 97
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 98
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 98
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[24]: Day 99
+Mon Oct  2 17:35:43 2017: runSimulation[25]: Log 2 Day 99
+Mon Oct  2 17:35:43 2017: agentsTradeDevices[145]: Entering trade devices phase
+Mon Oct  2 17:35:43 2017: agentsProduceDevices[178]: Entering produce devices phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsWork[44]: Entering agents work phase
+Mon Oct  2 17:35:43 2017: agentsTrade[58]: Entering agents trade phase
+Mon Oct  2 17:35:43 2017: agentsInvent[82]: Entering agents invent phase
+Mon Oct  2 17:35:43 2017: endDay[106]: Entering end day checks phase
+Mon Oct  2 17:35:43 2017: dayAnalysis[221]: Entering day analysis phase
+Mon Oct  2 17:35:43 2017: endDayDecay[124]: Entering day decay phase
+Mon Oct  2 17:35:43 2017: removeOrSave[242]: Entering remove or save phase
+Mon Oct  2 17:35:43 2017: runSimulation[44]: Ending simulation
+Number of days: 100
+Number of agents: 4
+Number of resources: 4
+SumUtil:122370
+SumRes:10383
+The total number of seconds is 0

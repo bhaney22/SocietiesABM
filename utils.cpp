@@ -1172,40 +1172,195 @@ void Utils::saveDeviceComplexity()
 
 
 /**
- * BRH: 10.2.2017 Repurposed this routine to save recipes for all devices
+ * BRH: 10.2.2017 Save number of devices and recipes of each type made for each resource 
  */
-void Utils::saveDiscoveredDevices()
-{
+void Utils::saveDeviceRecipes()
+{	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
+
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/deviceDiscovered.csv"; /*concatenate the dir and filename */
+    string filePath = "_Results/" + glob.configName + "/DeviceRecipes.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 	
 
-    vector< vector<int> > numberOfInventedDevices = glob.otherStats->getNumberOfInventedDevices();
-    string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
-    for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
-        file << devicesStr[i] << "Discovered_" << glob.SIM_NAME  << ",";
-        for (int j = 0; j < glob.NUM_DAYS; j++) {
-            file << numberOfInventedDevices[i][j] << ",";
+	file << "UniqueKey,Config,Run,TimeStep,Resource,T1_Rx_made,T2_Rx_made,T3_Rx_made,T4_Rx_made,T1_Rx_comps,T2_Rx_comps,T3_Rx_comps,T4_Rx_comps\n";
+    for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   
+			file << glob.UniqueKey << ",";
+			file << glob.configName << "," ;
+			file << glob.SIM_NAME << "," ;
+			file << glob.currentDay+1 << ",";
+			file << "R" << resId+1 << ",";
+  		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
+			file <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay]) << ",";
         }
-        file << "\n";
-    }
+   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
+			if (glob.discoveredDevices[type][resId]) {
+				file << "[";
+				for (vector<int>::iterator comp = glob.discoveredDevices[type][resId]->components.begin();
+				comp < glob.discoveredDevices[type][resId]->components.end(); comp++) {
+					file << *comp+1 << " " ;
+				}
+				file << "],";
+			}
+			else file << "[.]," ;
+		}
     file << "\n";
+	}
     file.close();
-
-    numberOfInventedDevices.clear();
+    devicesMadeByRes.clear();
 }
 
-
-
 /**
- * Save results into csv files -- part of graph.py in python.
- * Different from saveResults() in utils.py
+ * BRH: 10.12.2017 New routine to save recipes for all devices
+ * example of a one-line matrix: Ulano_ex3=0,16.1,0,74.3,0\0,0,0,0,2.06\0,0,0,0,0\0,0,0,0,7.2\0,0,0,0,0
  */
+void Utils::saveUseMatrix()
+{	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
+	int temp_in_device=0;
+	double num_of_that_device_made;
+    ofstream file;     /* Open up a generic "file" to write to */
+    string filePath = "_Results/" + glob.configName + "/IOMatrix.csv"; /*concatenate the dir and filename */
+	file.open(filePath.c_str());   /*open that particular file to start writing */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// WRITE OUT HEADER.                                                                                 //////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	file << "UniqueKey,Config,Run,TimeStep,product";
+	for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {	
+		file << ",T"  << type+1 << "_R" << resId+1;
+		} //End of loop through Resources. Go to next device tier and loop through Rs again.
+	} //End of loop to write T1_R1...T4_Rn header line. This ends header line.
+	file << "\n";
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// WRITE PRODUCT ROWS for Resources : Fill cells with #products used in each of the n TOOL industries, where n=num of resources    /////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {    //Begin row for Resource products.
+		file << glob.UniqueKey << ",";
+		file << glob.configName << "," ;
+		file << glob.SIM_NAME << "," ;
+		file << glob.currentDay+1 << ",";
+		file << "R" << product+1;
+
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { //Begin loop over all TOOLS.
+				temp_in_device=0;
+				if (glob.discoveredDevices[TOOL][resId]) {	
+					for (vector<int>::iterator comp = glob.discoveredDevices[TOOL][resId]->components.begin();
+						comp < glob.discoveredDevices[TOOL][resId]->components.end(); comp++) {
+						if (product==*comp) temp_in_device=1; 
+						num_of_that_device_made = (double) devicesMadeByRes[TOOL][resId][glob.currentDay];
+					} // End check to see if this current row's product is in this column's device. 
+				file << "," << temp_in_device * num_of_that_device_made ;
+				} // End fill cell of discovered device.
+				else file << ",0" ;	// Fill cell of undiscovered device.
+			} // End loop to fill columns for TOOL industries.
+ 		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T2,T3,T4 industries.
+		file << "\n";  //Last thing to do before starting the next product row.
+	} // End of all rows for R products.
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//// WRITE PRODUCT ROWS for T1 devices : Fill cells with #products used in each of the n MACHINE industries ///
+////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {   // Begin loop over all T1 products.
+		file << glob.UniqueKey << ",";
+		file << glob.configName << "," ;
+		file << glob.SIM_NAME << "," ;
+		file << glob.currentDay+1 << ",";
+		file << "T1_R" << product+1 ;
+		
+		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";} 		// Fill in 0s across row for T1 industries.
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   // Begin loop over all MACHINES.
+				temp_in_device=0;
+				if (glob.discoveredDevices[MACHINE][resId]) {
+					for (vector<int>::iterator comp = glob.discoveredDevices[MACHINE][resId]->components.begin();
+						comp < glob.discoveredDevices[MACHINE][resId]->components.end(); comp++) {   
+						if (product==*comp) temp_in_device=1; 
+						num_of_that_device_made = (double) devicesMadeByRes[MACHINE][resId][glob.currentDay];
+					} // End check to see if this current row's product is in this column's device. 
+				file << "," << temp_in_device * num_of_that_device_made ;
+				} // End fill cell of discovered device.
+				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
+			} // End of loop over all MACHINES.
+		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T3 and T4 industries.
+		file << "\n";  //Last thing to do before starting the next product row.
+	} // End of all rows for T1 products.
+	
+////////////////////////////////////////////////////////////////////////////////////////////////
+//// WRITE PRODUCT ROWS for T2 devices : Fill cells with #products used in each of the n FACTORY industries ///
+////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T2 products. 
+		file << glob.UniqueKey << ",";
+		file << glob.configName << "," ;
+		file << glob.SIM_NAME << "," ;
+		file << glob.currentDay+1 << ",";
+		file << "T2_R" << product+1 ;
+		
+		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for T1,T2 industries.
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
+				temp_in_device=0;
+				if (glob.discoveredDevices[FACTORY][resId]) {
+					for (vector<int>::iterator comp = glob.discoveredDevices[FACTORY][resId]->components.begin();
+						comp < glob.discoveredDevices[FACTORY][resId]->components.end(); comp++) {    /* Loop over all resources, resId*/
+						if (product==*comp) temp_in_device=1; 
+						num_of_that_device_made = (double) devicesMadeByRes[FACTORY][resId][glob.currentDay];
+					} // End check to see if this current row's product is in this column's device. 
+				file << "," << temp_in_device * num_of_that_device_made ;
+				} 					// Cell of discovered device now filled.
+				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
+			} // End of loop over all FACTORIES.
+		for ( int fill=0;fill<((1)*glob.NUM_RESOURCES);fill++) {file<<",0";} 			// Fill in 0s across row for T4 industries.
+		file << "\n";  //Last thing to do before starting the next product row.
+	} // End of all rows for T2 products.
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//// WRITE PRODUCT ROWS for T3 devices : Fill cells with #products used in each of the n INDUSTRY industries ///
+////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T3 products. 
+		file << glob.UniqueKey << ",";
+		file << glob.configName << "," ;
+		file << glob.SIM_NAME << "," ;
+		file << glob.currentDay+1 << ",";
+		file << "T3_R" << product+1 ;
+		
+		for (int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for T1,T2,T3 industries.
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
+				temp_in_device=0;
+				if (glob.discoveredDevices[INDUSTRY][resId]) {							// Device discovered. Check recipe for this product.
+					for (vector<int>::iterator comp = glob.discoveredDevices[INDUSTRY][resId]->components.begin();
+						comp < glob.discoveredDevices[INDUSTRY][resId]->components.end(); comp++) {    
+						if (product==*comp) temp_in_device=1; 
+						num_of_that_device_made = (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay];
+					} 				// End check to see if this current row's product is in this column's device. 
+				file << "," << temp_in_device * num_of_that_device_made ;
+				} 					// Cell of discovered device now filled.
+				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
+			} // End of loop over all INDUSTRY industries. 
+		file << "\n";  //Last thing to do before starting the next product row.
+	} // End of all rows for T3 products.
+
+    file.close();
+    devicesMadeByRes.clear();
+}	// END of saveUseMatrix function.
+//*******************************************************************
+// Begin saveTradeFlows 
+//*******************************************************************
+void Utils::saveTradeFlows()
+{
+   ofstream file;
+   string filePath = glob.SAVE_FOLDER + "/trades.csv";
+        file.open(filePath.c_str());
+        file << "UniqueKey,Config,Run,TimeStep,Round,Seller,Buyer,ResSold,QtySold,ResRtn,QtyRtn,SellerMUSold,BuyerMUSold,SellerMURtn,BuyerMURtn\n";
+  for (int i = 0; i < glob.NUM_DAYS; i++) {
+
+//* TODO
+  }	//Ends writing out of all trades
+	file.close();
+}	//Ends saveTradeFlows
+
 void Utils::saveResults()
 {
-	saveOutput(); /* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
-	saveDiscoveredDevices(); /* BRH 10.2.2017 Use this routine to create I0 tables
+	saveDeviceRecipes(); 	/* BRH 10.12.2017 Use this routine to print condensed recipes */
+	saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
+	saveOutput(); 			/* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
+	saveTradeFlows(); 		/* BRH 11.11.2017 Print out the daily tradeflows */
 	   
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
