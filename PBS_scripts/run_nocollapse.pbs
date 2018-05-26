@@ -12,7 +12,7 @@
 #PBS -l nodes=1:ppn=1,mem=4g,walltime=10:00:00
 #PBS -m a -M bhaney@calvin.edu
 
-cd /home/brh22/societies2017/
+cd /home/brh22/societiesABM/
 
 # Societies command line arguments Naming conventions:
 # 1. -p Name of the configuration (without Configs/ path and without .conf extention) ex. T4_100_100
