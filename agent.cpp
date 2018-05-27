@@ -845,8 +845,13 @@ void Agent::makeDevice(int deviceIndex, device_name_t device)
          comp < glob.discoveredDevices[device][deviceIndex]->components.end(); comp++) {
         if (device == TOOL) {
             resProp[*comp].resSetAside -= 1;
+//BRH testing 05.27.2018
+        cout << "1 unit of R" << *comp << " used to make a TOOL for R" << deviceIndex+1 << endl;
+
         } else if (devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside > 0) {
             devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside -= 1;
+//BRH testing 05.27.2018
+        cout << "Higher order device Production stub" << endl;
         }
     }
     /*
@@ -1674,15 +1679,11 @@ void Agent::deviceProduction()
     /* Then, the agent makes all the devices it has committed to make. */
     for (int idx = 0; idx < 6; idx++) {
         device_name_t device = deviceList[idx];
-//BRH testing 05.27.2018
-        cout << device << endl;
         for (int resNum = 0; resNum < glob.NUM_RESOURCES; resNum++) {
-//BRH testing 05.27.2018
-            cout << "For R" << resNum+1 << endl;
             if (devProp[device][resNum].devicesToMake != 0) {
 //BRH testing 05.27.2018
-                cout << "Making device " << device << " R" << resNum+1 
-                        << " Needs " << devProp[device][resNum].devicesToMake << endl;
+                cout << "Making " << devProp[device][resNum].devicesToMake << " " << deviceList[idx] 
+                << "for R" << resNum+1 << endl;
                 for (int amt = 0; amt < devProp[device][resNum].devicesToMake; amt++) {
                     makeDevice(resNum, device);
                 }
