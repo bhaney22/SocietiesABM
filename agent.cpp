@@ -1650,7 +1650,7 @@ void Agent::personalDevices(device_name_t device)
 
 
 /**
- * Every single device the agent has agreed or decide to make gets
+ * Every single device the agent has agreed or decided to make gets
  * made (starting with the least complex, and going to the most
  * complex, so that the complex devices will already have their
  * components built).
@@ -1674,18 +1674,23 @@ void Agent::deviceProduction()
     /* Then, the agent makes all the devices it has committed to make. */
     for (int idx = 0; idx < 6; idx++) {
         device_name_t device = deviceList[idx];
+//BRH testing 05.27.2018
+        cout << device << endl;
         for (int resNum = 0; resNum < glob.NUM_RESOURCES; resNum++) {
+//BRH testing 05.27.2018
+            cout << "For R" << resNum+1 << endl;
             if (devProp[device][resNum].devicesToMake != 0) {
-                LOG(4) << "for device " << device << " res " << resNum << " devicesToMake " << devProp[device][resNum].devicesToMake;
+//BRH testing 05.27.2018
+                cout << "Making device " << device << " R" << resNum+1 
+                        << " Needs " << devProp[device][resNum].devicesToMake << endl;
+                for (int amt = 0; amt < devProp[device][resNum].devicesToMake; amt++) {
+                    makeDevice(resNum, device);
+                }
+                devProp[device][resNum].devicesToMake = 0;
             }
-            for (int amt = 0; amt < devProp[device][resNum].devicesToMake; amt++) {
-                makeDevice(resNum, device);
-            }
-            devProp[device][resNum].devicesToMake = 0;
         }
     }
 }
-
 
 /**
  * Calculate the total utility that the agent holds.
