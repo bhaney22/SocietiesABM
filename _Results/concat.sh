@@ -12,6 +12,8 @@
 # BRH 05.26.2018 - change this to concat all files from each run into one for the config overall
 # 
 
+cd ~/SocietiesABM/_Results
+
 cat ./$1/001/IOMatrix.csv | head -n 1 > temp1
 cat ./$1/*/IOMatrix.csv  | grep -v UniqueKey >> temp2
 cat temp1  temp2 > ./$1/IOMatrix.csv
