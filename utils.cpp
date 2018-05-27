@@ -1205,7 +1205,7 @@ void Utils::saveUseMatrix()
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = glob.SIM_SAVE_FOLDER "/IOMatrix.csv"; /*concatenate the dir and filename */
+    string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WRITE OUT HEADER.                                                                                 //////////
