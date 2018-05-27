@@ -30,11 +30,11 @@ echo "Unique Key: $UniqueKey"
 echo "Start Date: $StartDay $StartTime"
 
 cd ~/SocietiesABM/
+rm ~/SocietiesABM/_Results/$1 -r
 
 for run_num in $(seq -f "%03g" 1 $2)
 do
 	echo "     UniqueKey_run_num: $UniqueKey"_"$run_num"
-	rm ~/SocietiesABM/_Results/$1 -r
 	srun ./societies -v 1 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
 done
 

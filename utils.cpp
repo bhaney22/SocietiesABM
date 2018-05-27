@@ -468,9 +468,7 @@ void Utils::saveUniqueKey()
  *   
  *   (1) save the UniqueKey to the UniqueKey file
  *   (2) preserve a copy of the configuration files
- *   (3) print the header containing the names and order of all output variables to the output file 
  */
- /* CAUTION: Keep the order of the header of the output file the same as how the variables are are printed in saveOutput routine below.	*/
 
 void Utils::firstRunCheck(ofstream &file, string filePath)
 {
@@ -490,13 +488,6 @@ void Utils::firstRunCheck(ofstream &file, string filePath)
 			commandLine = "cp " + glob.configAgentFilename + " " + glob.configFilename + " " + conf;
 		}
 		command = system(commandLine.c_str());
-
-//(3) Print first row of output file containing all fo the variable names. Check these are in order as in saveOutput()
-	file.open(filePath.c_str());
-	file << "UniqueKey,Config,Run,TimeStep,";
-	file << "avgUtil,avgGathered,avgHeld,gini,complexity,T1_made,T2_made,T3_made,T4_made,T5_made,T6_made,totalUtil";
-	file << "\n";
-	file.close();
 
     }
 }
@@ -737,26 +728,35 @@ void Utils::saveMeanUtility()
 }
 
 /**
- * Save the units gathered of each resource by each device 
+ * BRH 05.26.2018 Save the units gathered of each resource by each device 
    summed over all agents on last day of last run.
  */
 void Utils::saveUnitsGathered()
 {
     ofstream file;
     string filePath = glob.SAVE_FOLDER + "/unitsGathered.csv";
+ // HEADER: Print header if first run */
+     if ( !boost::filesystem::exists(filePath)) {
+        	file.open(filePath.c_str());
+	            file << "UniqueKey,Config,Run,Day";
+                        for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+                            file << ",R" << resID;
+                        }
+	            file << "\n";
+	    file.close();
+    } 
+ // ROWS: Print total unitsGathered for each resource for currentday       
+	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
 
-    file.open(filePath.c_str(), ios::app);
-    
+
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-
-    /* Print total unitsGathered for each resource on one line */
     
         file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
-        file << glob.currentDay+1 << "," ;
+        file << glob.currentDay+1  ;
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-            file << resGatheredByRes[resId][glob.currentDay] << ",";   
+            file << "," << resGatheredByRes[resId][glob.currentDay];   
         }
     file << "\n";
     file.close();
@@ -1450,27 +1450,32 @@ void Utils::loadDayStatus()
 // 3. Create subroutines to calculate and print one variable (set) to the same file                      
 //    
 void Utils::saveOutput()
-/**
- * Save all variables on one row per day.
- */
 {
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/long_output.csv"; /*concatenate the dir and filename */
-	firstRunCheck(file, filePath); /* Check if this is the first run of the batch. If so, write the first row with labels. */ 
-	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
-	
-	/* ROWS: print output variables one row = one run + one day */
+    string filePath = "_Results/" + glob.configName + "/long_output.csv"; 
+// Check if this is the first run of the batch. If so, save unique key and config files.
+    firstRunCheck(file, filePath);
+
+// HEADER: Print first row of output file containing all of the variable names.
+    if ( !boost::filesystem::exists(filePath)) {
+	    file.open(filePath.c_str());
+	        file << "UniqueKey,Config,Run,TimeStep,";
+	        file << "avgUtil,avgGathered,avgHeld,gini,complexity,T1_made,";
+            file << "T2_made,T3_made,T4_made,T5_made,T6_made,totalUtil";
+	        file << "\n";
+	    file.close();
+    }
+//Get information to be written to output file.
     vector<int> activeAgents = glob.otherStats->getActiveAgents();
     vector<double> sumUtil = glob.otherStats->getSumUtil();   
 	vector<int> sumRes = glob.otherStats->getSumRes();
 	vector<int> resGath = glob.productionStats->getResGathered();
+    vector<double> orderedUtils;  // For Gini calcuation.
+    vector<double> y; // For Gini calcuation.
+    vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();   // For Gini calcuation.
 
-/* For Gini calcuation. */;
-    vector<double> orderedUtils;
-    vector<double> y;
-    vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();
-
-/* Begin print line */; /* BRH: If this changes, the header row must also change. See checkFirstRun routine. */
+// ROWS: print output variables one row = one run + one day */	
+	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
     for (int i = 0; i < glob.NUM_DAYS; i++) {
 		/* ORDER: UniqueKey, Config, Run (SIMNAME for now), Day, ... */
 			file << glob.UniqueKey << ",";
