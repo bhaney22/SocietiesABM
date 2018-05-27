@@ -6,7 +6,7 @@
 # Created by: BRH 03.17.2017 
 # Last revised: BRH 05.26.2018
 # to run this script, use the command line: 
-# 			sbatch run_societies.slurm config numruns
+# 			sbatch slurm_societies.sh &config &numruns
 
 #
 
@@ -45,3 +45,5 @@ EndTime=$(date +%T)
 # Uncomment the following line if format of runlog file changes.
 # echo "StartDate,StartTime,EndDate,EndTime, ElapsedSeconds,Config,Num_Runs,UniqueKey" > /home/brh22/societies2017/_Results/runlog.csv
 echo "$StartDay,$StartTime,$EndDay,$EndTime,$duration,$1,$2,B$UniqueKey" >> ~/SocietiesABM/_Results/runlog.csv
+
+./_Results/concat.sh $1
