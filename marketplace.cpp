@@ -494,12 +494,12 @@ void ResourcePair::writeTradeData()
  */
 void ResourcePair::makeTrade()
 {
-    LOG(1) << "Agent " << agentA->name << " is about to gain " <<
+    LOG(3) << "Agent " << agentA->name << " is about to gain " <<
         agentA->barterUtility(aPick, numAPicked) << " and lose " <<
         agentA->barterUtility(bPick, - numBPicked) << " by selling " <<
         numBPicked << " units of resource " << bPick;
 
-    LOG(1) << "Agent " << agentB->name << " is about to gain " <<
+    LOG(3) << "Agent " << agentB->name << " is about to gain " <<
         agentB->barterUtility(bPick, numBPicked) << " and lose " <<
         agentB->barterUtility(aPick, - numAPicked) << " by selling " <<
         numAPicked << " units of resource " << aPick;

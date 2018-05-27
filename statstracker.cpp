@@ -312,32 +312,18 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             int agentTotalThisResGathered =
                 glob.agent[aId]->getUnitsGatheredToday(resId);
-            resGatheredByResByAgent[resId][aId].push_back(agentTotalThisResGathered);
-            totalAmountOfThisResGathered += agentTotalThisResGathered;
+                resGatheredByResByAgent[resId][aId].push_back(agentTotalThisResGathered);
+                totalAmountOfThisResGathered += agentTotalThisResGathered;
 				if (agentTotalThisResGathered > 0) {
-                numAgentsGatheringRes += 1;
+                    numAgentsGatheringRes += 1;
 				}
-            /**
-             * DEBUG_PRODUCTIONSTATS: not exist in python version
-             */
-            if (DEBUG_PRODUCTIONSTATS) {
-                cout << "BRH testing Production Stats" << endl;
-                cout << "Resource Id: " << resId << " Agent Id: " << aId << endl;
-                cout << "ResourcesGatheredByAgent: "
-                     << agentTotalThisResGathered << endl;
-            }
-        }
-        if (DEBUG_PRODUCTIONSTATS) {
-            cout << "Number of Agents Gathering Res " << resId << ": "
-                 << numAgentsGatheringRes << endl;
         }
         numAgentsGatheringByRes[resId].push_back(numAgentsGatheringRes);
-
+        resGatheredByRes[resId].push_back(totalAmountOfThisResGathered);
         if (DEBUG_PRODUCTIONSTATS) {
-            cout << "Total Amount of Res " << resId << " Gathered: "
+            cout << "Day " << glob.currentDay+1 << " Total R" << resId+1 << " Gathered: "
                  << totalAmountOfThisResGathered << endl;
         }
-        resGatheredByRes[resId].push_back(totalAmountOfThisResGathered);
     }
 }
 
@@ -347,7 +333,7 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
 void ProductionStats::calcResGatheredByDevice()
 {
     /*
-     * We want to know the total amount of resources gathered for each device.
+     * We want to know the total amount of resources gathered by each device.
      * For each device set sum=0
      * Go through each agent look if they gathered with that device today.
      * After going through all agents for a given device, add total to resGatheredByDevice
@@ -358,11 +344,6 @@ void ProductionStats::calcResGatheredByDevice()
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 sumGathered += glob.agent[aId]->getUnitsGatheredWithDevice(tempType, resId);
-                if (DEBUG_PRODUCTIONSTATS) {
-                    cout << "deviceType: " << tempType << " agentId: " << aId
-                         << " resourceID: " << resId << endl;
-                    cout << " Sum Resources Gathered With Devices: "
-                         << sumGathered << endl;
                 }
             }
         }
