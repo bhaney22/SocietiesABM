@@ -740,7 +740,7 @@ void Utils::saveUnitsGathered()
         	file.open(filePath.c_str());
 	            file << "UniqueKey,Config,Run,Day";
                         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-                            file << ",R" << resId;
+                            file << ",R" << resId+1;
                         }
 	            file << "\n";
 	    file.close();

@@ -20,7 +20,7 @@ void runSimulation()
     glob.startTimer();
 
     for (int i = glob.START_DAY; i < glob.NUM_DAYS; i++) {
-        LOG(1) << "Day " << i;
+        LOG(1) << "Day " << i+1 << " of " << glob.NUM_DAYS;
         glob.currentDay = i;
         util.agentsTradeDevices();
         util.agentsProduceDevices();
