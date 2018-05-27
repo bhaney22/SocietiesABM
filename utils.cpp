@@ -1181,14 +1181,14 @@ void Utils::saveDeviceRecipes()
         }
    		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
 			if (glob.discoveredDevices[type][resId]) {
-				file << ",[";
+				file << "[";
 				for (vector<int>::iterator comp = glob.discoveredDevices[type][resId]->components.begin();
 				comp < glob.discoveredDevices[type][resId]->components.end(); comp++) {
 					file << *comp+1 << " " ;
 				}
 				file << "],";
 			}
-			else file << "[.]" ;
+			else file << "[.]," ;
 		}
     file << "\n";
 	}
