@@ -846,9 +846,9 @@ void Agent::makeDevice(int deviceIndex, device_name_t device)
         if (device == TOOL) {
             resProp[*comp].resSetAside -= 1;
 //BRH testing 05.27.2018
-        cout << "R" <<  << "set aside = " << resProp[*comp].resSetAside << endl;
+        cout << "R" << *comp << " in set aside stock = " << resProp[*comp].resSetAside << endl;
         cout << "1 unit of R" << *comp << " used to make a TOOL for R" << deviceIndex+1 << endl;
-        cout << "R" <<  << "set aside = " << resProp[*comp].resSetAside << endl;
+        cout << "R" << *comp  << " in set aside stock = " << resProp[*comp].resSetAside << endl;
 
         } else if (devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside > 0) {
             devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside -= 1;
