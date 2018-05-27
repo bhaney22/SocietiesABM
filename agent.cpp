@@ -846,7 +846,9 @@ void Agent::makeDevice(int deviceIndex, device_name_t device)
         if (device == TOOL) {
             resProp[*comp].resSetAside -= 1;
 //BRH testing 05.27.2018
+        cout << "R" <<  << "set aside = " << resProp[*comp].resSetAside << endl;
         cout << "1 unit of R" << *comp << " used to make a TOOL for R" << deviceIndex+1 << endl;
+        cout << "R" <<  << "set aside = " << resProp[*comp].resSetAside << endl;
 
         } else if (devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside > 0) {
             devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside -= 1;
@@ -1682,8 +1684,8 @@ void Agent::deviceProduction()
         for (int resNum = 0; resNum < glob.NUM_RESOURCES; resNum++) {
             if (devProp[device][resNum].devicesToMake != 0) {
 //BRH testing 05.27.2018
-                cout << "Making " << devProp[device][resNum].devicesToMake << " " << deviceList[idx] 
-                << "for R" << resNum+1 << endl;
+                cout << "Agent " << name << " is making " << devProp[device][resNum].devicesToMake << " T" << device 
+                << " for R" << resNum+1 << endl;
                 for (int amt = 0; amt < devProp[device][resNum].devicesToMake; amt++) {
                     makeDevice(resNum, device);
                 }
