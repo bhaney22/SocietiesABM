@@ -1,11 +1,12 @@
-# This programs appends all of the *.csv files from all results subfolders into one
-# file of Societies runs across all configurations that were run for processing by
+# This programs appends all of the *.csv files from all results subfolders 
+# that sweep paramaters for one configuration into one
+# file of runs across all configurations that were run for processing by
 # Stata or Tableau.
 #
-# Run this file after all runs for the IOtest have completed
+# Run this file after all runs for the parameter sweep of a config (eg. IOtest) have completed
 #
 # FYI: the head command saves the header row from the first individual long_output file.
-# FYI: the grep -v command strips out all of the header rows (starts with UniueKey)
+# FYI: the grep -v command strips out all of the header rows (starts with UniqueKey)
 #      from the individual long_output files.
 # BRH 3.20.2017
 

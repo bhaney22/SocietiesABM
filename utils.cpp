@@ -1197,16 +1197,15 @@ void Utils::saveDeviceRecipes()
     devicesMadeByRes.clear();
 }
 
-/**
- * BRH: 10.12.2017 New routine to save recipes for all devices
- * example of a one-line matrix: Ulano_ex3=0,16.1,0,74.3,0\0,0,0,0,2.06\0,0,0,0,0\0,0,0,0,7.2\0,0,0,0,0
- */
+// BRH: 10.12.2017 New routine to save recipes for all devices
+// BRH: 05.26.2018 Print IOMatrix.csv files separately for each run for parallelization
+// example of a one-line matrix: Ulano_ex3=0,16.1,0,74.3,0\0,0,0,0,2.06\0,0,0,0,0\0,0,0,0,7.2\0,0,0,0,0
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/IOMatrix.csv"; /*concatenate the dir and filename */
+    string filePath = "_Results/" + glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WRITE OUT HEADER.                                                                                 //////////
@@ -1328,12 +1327,12 @@ void Utils::saveUseMatrix()
     devicesMadeByRes.clear();
 }	// END of saveUseMatrix function.
 //*******************************************************************
-// Begin saveTradeFlows 
+// BRH 11.11.2017 New saveTradeFlows routine
 //*******************************************************************
 void Utils::saveTradeFlows()
 {
    ofstream file;
-   string filePath = glob.SAVE_FOLDER + "/trades.csv";
+   string filePath = glob.SIM_SAVE_FOLDER + "/trades.csv";
         file.open(filePath.c_str());
         file << "UniqueKey,Config,Run,TimeStep,Round,Seller,Buyer,ResSold,QtySold,ResRtn,QtyRtn,SellerMUSold,BuyerMUSold,SellerMURtn,BuyerMURtn\n";
   for (int i = 0; i < glob.NUM_DAYS; i++) {
@@ -1443,7 +1442,8 @@ void Utils::loadDayStatus()
     cout << "loadDayStatus: NOT IMPLEMENTED YET!" << endl;
 }
 
-// BRH: 3.18.2017 New Print routine to print all output to one file in long form  
+// BRH: 3.18.2017 New Print routine to print all output to one file in long form 
+// BRH: 05.26.2019 Printed long_output separately for each run so that they can be parallelized
 // TODO 
 // 1. Get process correct for meanUtility                        
 // 2. Get process correct for each variable 
@@ -1452,7 +1452,7 @@ void Utils::loadDayStatus()
 void Utils::saveOutput()
 {
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/long_output.csv"; 
+    string filePath = "_Results/" + glob.SIM_SAVE_FOLDER + "/long_output.csv"; 
 // Check if this is the first run of the batch. If so, save unique key and config files.
     firstRunCheck(file, filePath);
 
