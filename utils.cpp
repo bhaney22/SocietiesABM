@@ -1175,7 +1175,7 @@ void Utils::saveDeviceRecipes()
 			file << glob.configName << "," ;
 			file << glob.SIM_NAME << "," ;
 			file << glob.currentDay+1 << ",";
-			file << "R" << resId+1;
+			file << "R" << resId+1 << ",";
   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
 			file <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay]) << ",";
         }
@@ -1530,7 +1530,7 @@ void Utils::saveOutput()
 		}
 		
 	/* Total Utility */;
-		file << sumUtil[i]; 
+		file << sumUtil[i];
 		
 	/* End of Print line */;		
 		file <<"\n";  
