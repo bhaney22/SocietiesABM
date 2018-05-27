@@ -362,8 +362,7 @@ void ProductionStats::calcResGatheredByDeviceByRes()
      *		- We did this because when we need to push_back vectors the correct number of vectors.
      *		- Type gets called first before resId.  The flip flop makes sense.
      */
-    cout << "BRH testing: In calcResGatheredByDeviceByRes" << endl;
-
+    string devicesStr[] = { "T1", "T2", "T3", "T4" };
     for (int type = 0; type < glob.getNumResGatherDev(); type++) {
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
             int sumGathered = 0;
@@ -372,7 +371,7 @@ void ProductionStats::calcResGatheredByDeviceByRes()
             }
             resGatheredByDeviceByRes[type][resId].push_back(sumGathered);
             //if (DEBUG_PRODUCTIONSTATS) {
-                cout << "Device Type " << type << " for R" << resId << " Gathered " << sumGathered << endl;
+                cout <<  devicesStr[type] << " for R" << resId+1 << " Gathered " << sumGathered << endl;
             //}
         }
     }
