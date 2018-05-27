@@ -488,7 +488,7 @@ void ProductionStats::calcDevicesMadeWithDevDevicesByRes()
                 //         << "  resID: " << resId << endl;
                 //    cout << "agentID: " << aId << "  resID: " << resId
                 //         << " type: " << type << endl;
-                }
+               // }
             }
             devicesMadeWithDevDeviceByRes[type][resId].push_back(devMadeWithDeviceByRes);
         }
