@@ -833,10 +833,11 @@ void Agent::makeDevice(int deviceIndex, device_name_t device)
     else {
         timeUse = deviceEffortCalc(deviceIndex, device);
         overtime += timeUse;
-        devProp[device][deviceIndex].setDeviceExperience(devProp[device][deviceIndex].getDeviceExperience() + glob.EXPERIENCE_FOR_MAKING[device]);
+        devProp[device][deviceIndex].setDeviceExperience(devProp[device][deviceIndex].getDeviceExperience() 
+        + glob.EXPERIENCE_FOR_MAKING[device]);
     }
     /*
-     * Since this device was made this turn, it is not considered idle (i.e.
+     * Since this device was made this timestep, it is not considered idle (i.e.
      * the agent will not lose experience in making this device).
      */
     devProp[device][deviceIndex].idleDevice = false;
@@ -845,15 +846,8 @@ void Agent::makeDevice(int deviceIndex, device_name_t device)
          comp < glob.discoveredDevices[device][deviceIndex]->components.end(); comp++) {
         if (device == TOOL) {
             resProp[*comp].resSetAside -= 1;
-//BRH testing 05.27.2018
-        cout << "R" << *comp << " in set aside stock = " << resProp[*comp].resSetAside << endl;
-        cout << "1 unit of R" << *comp << " used to make a TOOL for R" << deviceIndex+1 << endl;
-        cout << "R" << *comp  << " in set aside stock = " << resProp[*comp].resSetAside << endl;
-
         } else if (devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside > 0) {
             devProp[glob.discoveredDevices[device][deviceIndex]->componentType][*comp].devicesSetAside -= 1;
-//BRH testing 05.27.2018
-        cout << "Higher order device Production stub" << endl;
         }
     }
     /*
@@ -1683,9 +1677,6 @@ void Agent::deviceProduction()
         device_name_t device = deviceList[idx];
         for (int resNum = 0; resNum < glob.NUM_RESOURCES; resNum++) {
             if (devProp[device][resNum].devicesToMake != 0) {
-//BRH testing 05.27.2018
-                cout << "Agent " << name << " is making " << devProp[device][resNum].devicesToMake << " T" << device 
-                << " for R" << resNum+1 << endl;
                 for (int amt = 0; amt < devProp[device][resNum].devicesToMake; amt++) {
                     makeDevice(resNum, device);
                 }
