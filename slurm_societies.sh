@@ -46,4 +46,5 @@ EndTime=$(date +%T)
 # echo "StartDate,StartTime,EndDate,EndTime, ElapsedSeconds,Config,Num_Runs,UniqueKey" > /home/brh22/societies2017/_Results/runlog.csv
 echo "$StartDay,$StartTime,$EndDay,$EndTime,$duration,$1,$2,B$UniqueKey" >> ~/SocietiesABM/_Results/runlog.csv
 
-./_Results/concat.sh $1
+cd ~/SocietiesABM/_Results
+./concat.sh $1
