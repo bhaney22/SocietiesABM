@@ -303,7 +303,7 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
      * For each resource take the total gathered and append that to resGatheredByRes
      */
 	 /* BRH 10.2.2017 testing */
-	bool DEBUG_PRODUCTIONSTATS = false;
+	bool DEBUG_PRODUCTIONSTATS = true;
 	 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         int numAgentsGatheringRes = 0;
@@ -321,6 +321,7 @@ void ProductionStats::calcResGatheredByResByAgentAndNumAgentsGetheringByRes()
              * DEBUG_PRODUCTIONSTATS: not exist in python version
              */
             if (DEBUG_PRODUCTIONSTATS) {
+                cout << "BRH testing Production Stats" << endl;
                 cout << "Resource Id: " << resId << " Agent Id: " << aId << endl;
                 cout << "ResourcesGatheredByAgent: "
                      << agentTotalThisResGathered << endl;
@@ -388,11 +389,10 @@ void ProductionStats::calcResGatheredByDeviceByRes()
             for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
                 sumGathered += glob.agent[aId]->getUnitsGatheredWithDevice(type, resId);
             }
-            if (DEBUG_PRODUCTIONSTATS) {
-                cout << "Number Of Resources Gathered With Device Type" << type
-                     << " in order to gain resource " << resId << endl;
-            }
             resGatheredByDeviceByRes[type][resId].push_back(sumGathered);
+            if (DEBUG_PRODUCTIONSTATS) {
+                cout << "Device Type " << type <<" for R" << resId << " Gathered " << sumGathered << endl;
+            }
         }
     }
 }
@@ -443,12 +443,11 @@ void ProductionStats::calcDevicesMadeByRes()
             int tempMade = 0;
             for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
                 tempMade += glob.agent[aId]->getDevicesMadeToday(resId, type);
-                if (DEBUG_PRODUCTIONSTATS) {
-                    cout << "Agent " << aId << " Made device " << type
-                         << " from resource" << resId << endl;
-                }
             }
             devicesMadeByRes[type][resId].push_back(tempMade);
+            if (DEBUG_PRODUCTIONSTATS) {
+                    cout << tempMade << " " << type << "made for R" << resId << endl;
+                }
         }
     }
 }
@@ -480,15 +479,15 @@ void ProductionStats::calcDevicesMadeWithDevDevicesByRes()
                     glob.agent[aId]->devicesMadeWithDevDevicesToday[type][resId];
                 temp[glob.agent[aId]->group][type-4] += glob.agent[aId]->devicesMadeWithDevDevicesToday[type][resId];
 
-                if (DEBUG_PRODUCTIONSTATS) {
-                    cout << "Devices Made With DevDevice:  Type: " << type
-                         << "  resID: " << resId << endl;
-                    cout << "devMadeWithDeviceByRes   Type: " << type
-                         << "  resID: " << resId << endl;
-                    cout << "devMadeWithDevice   Type: " << type
-                         << "  resID: " << resId << endl;
-                    cout << "agentID: " << aId << "  resID: " << resId
-                         << " type: " << type << endl;
+               // BRH testing 05.27.2018  if (DEBUG_PRODUCTIONSTATS) {
+                //    cout << "Devices Made With DevDevice:  Type: " << type
+                //         << "  resID: " << resId << endl;
+                //    cout << "devMadeWithDeviceByRes   Type: " << type
+                //         << "  resID: " << resId << endl;
+                //    cout << "devMadeWithDevice   Type: " << type
+                //         << "  resID: " << resId << endl;
+                //    cout << "agentID: " << aId << "  resID: " << resId
+                //         << " type: " << type << endl;
                 }
             }
             devicesMadeWithDevDeviceByRes[type][resId].push_back(devMadeWithDeviceByRes);
