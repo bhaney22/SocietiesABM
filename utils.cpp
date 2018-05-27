@@ -734,7 +734,7 @@ void Utils::saveMeanUtility()
 void Utils::saveUnitsGathered()
 {
     ofstream file;
-    string filePath = "_Results/" + glob.configName + "/" + glob.SIM_NAME +  "/unitsGathered.csv";
+    string filePath = glob.SIM_SAVE_FOLDER +  "/unitsGathered.csv";
  // HEADER: Print header if first run */
      if ( !boost::filesystem::exists(filePath)) {
         	file.open(filePath.c_str());
@@ -1166,7 +1166,7 @@ void Utils::saveDeviceRecipes()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
 
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/" + glob.SIM_NAME + "/DeviceRecipes.csv"; 
+    string filePath = glob.SIM_SAVE_FOLDER + "/DeviceRecipes.csv"; 
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 	
 
@@ -1205,7 +1205,7 @@ void Utils::saveUseMatrix()
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/" + glob.SIM_NAME +  "/IOMatrix.csv"; /*concatenate the dir and filename */
+    string filePath = glob.SIM_SAVE_FOLDER "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WRITE OUT HEADER.                                                                                 //////////
@@ -1452,7 +1452,7 @@ void Utils::loadDayStatus()
 void Utils::saveOutput()
 {
     ofstream file;     /* Open up a generic "file" to write to */
-    string filePath = "_Results/" + glob.configName + "/" + glob.SIM_NAME +  "/long_output.csv"; 
+    string filePath = glob.SIM_SAVE_FOLDER +  "/long_output.csv"; 
 // Check if this is the first run of the batch. If so, save unique key and config files.
     firstRunCheck(file, filePath);
 

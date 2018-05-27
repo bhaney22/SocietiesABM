@@ -14,33 +14,25 @@
 
 cat ./$1/001/IOMatrix.csv | head -n 1 > temp1
 cat ./$1/*/IOMatrix.csv  | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./IOtest/IOMatrixAll.csv
+cat temp1  temp2 > ./$1/IOMatrix.csv
 rm temp1 temp2
 
 cat ./$1/001/DeviceRecipes.csv | head -n 1 > temp1
 cat ./$1/*/DeviceRecipes.csv  | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./IOtest/DeviceRecipes.csv
+cat temp1  temp2 > ./$1/DeviceRecipes.csv
 rm temp1 temp2
 
 cat ./$1/001/long_output.csv | head -n 1 > temp1
 cat ./$1/*/long_output.csv | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./IOtest/long_output_all.csv
+cat temp1  temp2 > ./$1/long_output.csv
 rm temp1 temp2
 
 cat ./$1/001/unitsGathered.csv | head -n 1 > temp1
 cat ./$1/*/unitsGathered.csv | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./IOtest/trades_all.csv
-rm temp1 temp2
-
-head UniqueKeyFile.csv -n 1 > temp1
-grep IOtest\/ UniqueKeyFile.csv > temp2
-cat temp1 temp2 > ./IOtest/UniqueKeyFile.csv
+cat temp1  temp2 > ./$1/unitsGathered.csv
 rm temp1 temp2
 
 savedate=$(date +%d%m%Y%H%M)
 
-mv IOtest IOtest.$savedate
-cd IOtest.$savedate
-rm -rf collapse
-rm -rf nocollapse
+mv $1 $1.$savedate
 ls -l
