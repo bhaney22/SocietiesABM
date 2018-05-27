@@ -1168,6 +1168,7 @@ void Utils::saveDeviceRecipes()
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/DeviceRecipes.csv"; 
 	file.open(filePath.c_str());   /*open that particular file to start writing */
+    cout << "BRH testing 05.27.2018 glob.SIM_SAVE_FOLDER = " << glob.SIM_SAVE_FOLDER << "\n";
 	
 
 	file << "UniqueKey,Config,Run,TimeStep,Resource,T1_Rx_made,T2_Rx_made,T3_Rx_made,T4_Rx_made,T1_Rx_comps,T2_Rx_comps,T3_Rx_comps,T4_Rx_comps\n";
@@ -1205,6 +1206,7 @@ void Utils::saveUseMatrix()
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
+        cout << "BRH testing 05.27.2018 glob.SIM_SAVE_FOLDER = " << glob.SIM_SAVE_FOLDER << "\n";
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
