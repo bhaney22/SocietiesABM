@@ -344,7 +344,6 @@ void ProductionStats::calcResGatheredByDevice()
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 sumGathered += glob.agent[aId]->getUnitsGatheredWithDevice(tempType, resId);
-                }
             }
         }
         resGatheredByDevice[tempType].push_back(sumGathered);
