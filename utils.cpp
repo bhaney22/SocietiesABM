@@ -1168,8 +1168,6 @@ void Utils::saveDeviceRecipes()
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/DeviceRecipes.csv"; 
 	file.open(filePath.c_str());   /*open that particular file to start writing */
-    cout << "BRH testing 05.27.2018 glob.SIM_SAVE_FOLDER = " << glob.SIM_SAVE_FOLDER << "\n";
-	
 
 	file << "UniqueKey,Config,Run,TimeStep,Resource,T1_Rx_made,T2_Rx_made,T3_Rx_made,T4_Rx_made,T1_Rx_comps,T2_Rx_comps,T3_Rx_comps,T4_Rx_comps\n";
     for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   
@@ -1177,20 +1175,20 @@ void Utils::saveDeviceRecipes()
 			file << glob.configName << "," ;
 			file << glob.SIM_NAME << "," ;
 			file << glob.currentDay+1 << ",";
-			file << "R" << resId+1 << ",";
+			file << "R" << resId+1;
   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
 			file <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay]) << ",";
         }
    		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
 			if (glob.discoveredDevices[type][resId]) {
-				file << "[";
+				file << ",[";
 				for (vector<int>::iterator comp = glob.discoveredDevices[type][resId]->components.begin();
 				comp < glob.discoveredDevices[type][resId]->components.end(); comp++) {
 					file << *comp+1 << " " ;
 				}
 				file << "],";
 			}
-			else file << "[.]," ;
+			else file << "[.]" ;
 		}
     file << "\n";
 	}
@@ -1206,7 +1204,6 @@ void Utils::saveUseMatrix()
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
-        cout << "BRH testing 05.27.2018 glob.SIM_SAVE_FOLDER = " << glob.SIM_SAVE_FOLDER << "\n";
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1533,7 +1530,7 @@ void Utils::saveOutput()
 		}
 		
 	/* Total Utility */;
-		file << sumUtil[i] << "," ; 
+		file << sumUtil[i]; 
 		
 	/* End of Print line */;		
 		file <<"\n";  
