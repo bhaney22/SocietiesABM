@@ -1330,7 +1330,8 @@ cout << "BRH wrote T2 rows to IOMatrix" << endl;
     cout << "BRH wrote rest of T_ rows to IOMatrix" << endl;
 // 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
-// 
+// I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
+// types then resources. 
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
@@ -1339,15 +1340,22 @@ cout << "BRH wrote T2 rows to IOMatrix" << endl;
              for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                     file  << "," << resGatheredByRes[resId][glob.currentDay]; 
              }     
-  		     for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
-                  for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
-// BRH for testing 05.2.2018
- cout << "glob.discoveredDevices[type][resId] " << glob.discoveredDevices[type][resId] << endl;
- cout << "glob.discoveredDevices[type][resId] lifetime" << glob.discoveredDevices[type][resId]->lifetime << endl;
-			            file  << "," 
-                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] ); 
-
-                  }
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+		            file  << "," 
+                        <<  ( (double) devicesMadeByRes[TOOL][resId][glob.currentDay] * glob.TOOL_LIFETIME ); 
+            }
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+		            file  << "," 
+                        <<  ( (double) devicesMadeByRes[MACHINE][resId][glob.currentDay] * glob.MACHINE_LIFETIME ); 
+            }
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+		            file  << "," 
+                        <<  ( (double) devicesMadeByRes[FACTORY][resId][glob.currentDay] * glob.FACTORY_LIFETIME ); 
+            }
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+		            file  << "," 
+                        <<  ( (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay] * glob.INDUSTRY_LIFETIME ); 
+            }
             file << "\n";
              }
     file.close();
