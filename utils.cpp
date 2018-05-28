@@ -1341,17 +1341,19 @@ cout << "BRH wrote T2 rows to IOMatrix" << endl;
              }     
   		     for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
                   for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+// BRH for testing 05.2.2018
+ cout << "glob.discoveredDevices[type][resId] " << glob.discoveredDevices[type][resId] << endl;
+ cout << "glob.discoveredDevices[type][resId] lifetime" << glob.discoveredDevices[type][resId]->lifetime << endl;
 			            file  << "," 
-                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] ; 
+                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] ); 
 
                   }
             file << "\n";
              }
     file.close();
     devicesMadeByRes.clear();
-// BRH for testing 05.2.2018
- cout << "glob.discoveredDevices[type][resId]" << glob.discoveredDevices[type][resId] << endl;
- cout << "glob.discoveredDevices[type][resId] lifetime" << glob.discoveredDevices[type][resId]->lifetime << endl;
+
+
 }	// END of saveUseMatrix function.
 //*******************************************************************
 // BRH 11.11.2017 New saveTradeFlows routine
