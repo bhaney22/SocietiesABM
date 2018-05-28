@@ -1242,7 +1242,6 @@ void Utils::saveUseMatrix()
  		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T2,T3,T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for R products.
-cout << "BRH wrote resources to IOMatrix" << endl;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
@@ -1272,7 +1271,7 @@ cout << "BRH wrote resources to IOMatrix" << endl;
 		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T3 and T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T1 products.
-cout << "BRH wrote T2 rows to IOMatrix" << endl;	
+
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //// WRITE ROWS for T2 (MACHINES) devices : Fill cells with number of minutes of MACHINES
 //// used in making FACTORIES instead of for extraction. 
@@ -1327,8 +1326,7 @@ cout << "BRH wrote T2 rows to IOMatrix" << endl;
 			} // End of loop over all INDUSTRY industries. 
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
-    cout << "BRH wrote rest of T_ rows to IOMatrix" << endl;
-// 
+ 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
 // types then resources. 
@@ -1356,12 +1354,9 @@ cout << "BRH wrote T2 rows to IOMatrix" << endl;
 		            file  << "," 
                         <<  ( (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay] * glob.INDUSTRY_LIFETIME ); 
             }
-            file << "\n";
-             }
+    file << "\n";
     file.close();
     devicesMadeByRes.clear();
-
-
 }	// END of saveUseMatrix function.
 //*******************************************************************
 // BRH 11.11.2017 New saveTradeFlows routine
