@@ -1201,6 +1201,7 @@ void Utils::saveDeviceRecipes()
 // example of a one-line matrix: Ulano_ex3=0,16.1,0,74.3,0\0,0,0,0,2.06\0,0,0,0,0\0,0,0,0,7.2\0,0,0,0,0
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
+    vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
 	int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
@@ -1328,7 +1329,7 @@ void Utils::saveUseMatrix()
 // 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // 
-    vector <double> Lifetime = (glob.TOOL_LIFETIME,glob.MACHINE_LIFETIME,glob.FACTORY_LIFETIME,glob.INDUSTRY_LIFETIME)
+    vector <double> Lifetime  (glob.TOOL_LIFETIME,glob.MACHINE_LIFETIME,glob.FACTORY_LIFETIME,glob.INDUSTRY_LIFETIME);
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
