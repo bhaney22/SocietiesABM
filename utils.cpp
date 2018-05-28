@@ -1210,7 +1210,10 @@ void Utils::saveUseMatrix()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // WRITE OUT HEADER.                                                                                 //////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-	file << "UniqueKey,Config,Run,TimeStep,product";
+	file << "UniqueKey,Config,Run,TimeStep,commodity";
+    for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {	
+		file << ",R"  << resId+1;
+		}
 	for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {	
 		file << ",T"  << type+1 << "_R" << resId+1;
@@ -1218,7 +1221,7 @@ void Utils::saveUseMatrix()
 	} //End of loop to write T1_R1...T4_Rn header line. This ends header line.
 	file << "\n";
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//// WRITE PRODUCT ROWS for Resources : Fill cells with #products used in each of the n TOOL industries, where n=num of resources    /////
+//// WRITE a ROW for each Resource : Fill cells with #Resources used in each of the n TOOL industries, where n=num of resources    /////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {    //Begin row for Resource products.
 		file << glob.UniqueKey << ",";
@@ -1226,7 +1229,8 @@ void Utils::saveUseMatrix()
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "R" << product+1;
-
+   		// Fill in 0s across row for all resources.
+        for (int fill=0;fill<(glob.NUM_RESOURCES);fill++) {file<<",0";} 
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { //Begin loop over all TOOLS.
 				temp_in_device=0;
 				if (glob.discoveredDevices[TOOL][resId]) {	
@@ -1255,7 +1259,7 @@ void Utils::saveUseMatrix()
 		file << glob.currentDay+1 << ",";
 		file << "T1_R" << product+1 ;
 		
-		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";} 		// Fill in 0s across row for T1 industries.
+		for ( int fill=0;fill<(2*glob.NUM_RESOURCES);fill++) {file << ",0";} 		// Fill in 0s across row for R & T1 industries.
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   // Begin loop over all MACHINES.
 				temp_in_device=0;
 				if (glob.discoveredDevices[MACHINE][resId]) {
@@ -1283,7 +1287,7 @@ void Utils::saveUseMatrix()
 		file << glob.currentDay+1 << ",";
 		file << "T2_R" << product+1 ;
 		
-		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for T1,T2 industries.
+		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for R,T1,T2 industries.
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
 				temp_in_device=0;
 				if (glob.discoveredDevices[FACTORY][resId]) {
@@ -1310,11 +1314,12 @@ void Utils::saveUseMatrix()
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T3_R" << product+1 ;
-		
-		for (int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for T1,T2,T3 industries.
+		// Fill in 0s across row for R,T1,T2,T3 industries.
+		for (int fill=0;fill<((4)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
 				temp_in_device=0;
-				if (glob.discoveredDevices[INDUSTRY][resId]) {							// Device discovered. Check recipe for this product.
+				if (glob.discoveredDevices[INDUSTRY][resId]) {
+                    // Device discovered. Check recipe for this product.							
 					for (vector<int>::iterator comp = glob.discoveredDevices[INDUSTRY][resId]->components.begin();
 						comp < glob.discoveredDevices[INDUSTRY][resId]->components.end(); comp++) {    
 						if (product==*comp) temp_in_device=1; 
@@ -1334,7 +1339,7 @@ void Utils::saveUseMatrix()
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
-		file << "Total,";
+		file << "Total";
              for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                     file  << "," << resGatheredByRes[resId][glob.currentDay]; 
              }     
