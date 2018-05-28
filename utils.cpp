@@ -1262,7 +1262,7 @@ void Utils::saveUseMatrix()
 		file << "T1_R" << product+1 ;
 // BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        if (product ! = resID) {
+        if (product != resID) {
             file << ",0";
         } else {
             double totTimeGathering = 0.0;
