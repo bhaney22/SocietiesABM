@@ -1267,11 +1267,9 @@ void Utils::saveUseMatrix()
         } else {
             double tempTimeGatheringByToolForRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    DevProperties &devPr = glob.agent[aId]->devProp[0][resId];
-                    cout << "Agent " << aId << " minutes for R" << resId << " = " << devPr.deviceMinutesUsedTotal << endl;
-                    tempTimeGatheringByToolForRes += devPr.deviceMinutesUsedTotal;
+                    ResProperties &resPr = glob.agent[aId]->resProp[0][resId];
+                    tempTimeGatheringByToolForRes += resPr.timeSpentGatheringWithDeviceTodaybyRes;
                 }
-                cout << "Total TOOL minutes for R" << resId << " = " << tempTimeGatheringByToolForRes << endl;
                 file << "," << tempTimeGatheringByToolForRes;
         }
     }		

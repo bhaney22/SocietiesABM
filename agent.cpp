@@ -66,11 +66,15 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
-    timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
-    // BRH 05.27.2018 Adding ability to track device usage by Resource
-    // timeSpentGatheringWithDeviceTodaybyRes = vector< vector<double> > (NUM_DEVICE_TYPES, 0.0);
 
+    timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithoutDeviceToday = 0.0;
+
+    // BRH 05.27.2018 Initialize new vectors that track extraction time by device or hand by Resource
+    timeSpentGatheringWithDeviceTodaybyRes = vector< vector<double> > (NUM_DEVICE_TYPES,0.0);
+    timeSpentGatheringWithoutDeviceTodaybyRes = vector<double> (NUM_RESOURCES,0.0);
+
+
 
     utilityToday = 0.0;
 
@@ -901,16 +905,15 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
 {
     resProp[resIndex].unitsGatheredToday++;
     if (bestDevice != NO_DEVICE) {
-        // BRH testing comments.
-        cout << "Day " << glob.currentDay+1 << " Agent" << name;
-        cout << " R" << resIndex << " T" << bestDevice << " minutes = " << workTime << endl; 
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
-        // BRH Adding tracking of device use for gathering by R
-        // timeSpentGatheringWithDeviceTodaybyRes[bestDevice][resId] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
+// BRH 05.28.2018 Adding tracking of device use for gathering by R
+        timeSpentGatheringWithDeviceTodaybyRes[bestDevice][resId] += workTime;
     } else {
+// BRH 05.28.2018 Adding tracking of gathering by hand by each R
         timeSpentGatheringWithoutDeviceToday += workTime;
+        timeSpentGatheringWithoutDeviceTodaybyRes[resId] += workTime;
     }
 }
 
