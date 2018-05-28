@@ -370,9 +370,9 @@ void ProductionStats::calcResGatheredByDeviceByRes()
                 sumGathered += glob.agent[aId]->getUnitsGatheredWithDevice(type, resId);
             }
             resGatheredByDeviceByRes[type][resId].push_back(sumGathered);
-            //if (DEBUG_PRODUCTIONSTATS) {
+            if (DEBUG_PRODUCTIONSTATS) {
                 cout <<  devicesStr[type] << " for R" << resId+1 << " Gathered " << sumGathered << endl;
-            //}
+            }
         }
     }
 }
