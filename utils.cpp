@@ -1265,15 +1265,14 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-            double totTimeGathering = 0.0;
+            double tempTimeGatheringByToolForRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    cout << "BRH Computing TOOL minutes for R" << resId << endl;
                     DevProperties &devPr = glob.agent[aId]->devProp[0][resId];
-                    cout << "Agent " << aId << " minutes = " << devPr.deviceMinutesUsedTotal << endl;
-                    totTimeGathering += devPr.deviceMinutesUsedTotal;
-                    cout << "Total TOOL minutes for R" << resId << " = " << totTimeGathering << endl;
+                    cout << "Agent " << aId << " minutes for R" << resId << " = " << devPr.deviceMinutesUsedTotal << endl;
+                    tempTimeGatheringByToolForRes += devPr.deviceMinutesUsedTotal;
                 }
-                file << "," << totTimeGathering;
+                cout << "Total TOOL minutes for R" << resId << " = " << tempTimeGatheringByToolForRes << endl;
+                file << "," << tempTimeGatheringByToolForRes;
         }
     }		
  
