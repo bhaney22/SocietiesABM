@@ -1242,6 +1242,7 @@ void Utils::saveUseMatrix()
  		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T2,T3,T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for R products.
+cout << "BRH wrote resources to IOMatrix" << endl;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
@@ -1271,7 +1272,7 @@ void Utils::saveUseMatrix()
 		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T3 and T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T1 products.
-	
+cout << "BRH wrote T2 rows to IOMatrix" << endl;	
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //// WRITE ROWS for T2 (MACHINES) devices : Fill cells with number of minutes of MACHINES
 //// used in making FACTORIES instead of for extraction. 
@@ -1326,6 +1327,7 @@ void Utils::saveUseMatrix()
 			} // End of loop over all INDUSTRY industries. 
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
+    cout << "BRH wrote rest of T_ rows to IOMatrix" << endl;
 // 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // 
@@ -1340,13 +1342,16 @@ void Utils::saveUseMatrix()
   		     for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
                   for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
 			            file  << "," 
-                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] * 
-                                (double) glob.discoveredDevices[type][resId]->lifetime);
+                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] ; 
+
                   }
             file << "\n";
              }
     file.close();
     devicesMadeByRes.clear();
+// BRH for testing 05.2.2018
+ cout << "glob.discoveredDevices[type][resId]" << glob.discoveredDevices[type][resId] << endl;
+ cout << "glob.discoveredDevices[type][resId] lifetime" << glob.discoveredDevices[type][resId]->lifetime << endl;
 }	// END of saveUseMatrix function.
 //*******************************************************************
 // BRH 11.11.2017 New saveTradeFlows routine
@@ -1365,12 +1370,12 @@ void Utils::saveTradeFlows()
 }	//Ends saveTradeFlows
 
 void Utils::saveResults()
-{
+{   saveUnitsGathered();    /* BRH 05.26.2018 Save total gathered of each resource for last run, last day */
 	saveDeviceRecipes(); 	/* BRH 10.12.2017 Use this routine to print condensed recipes */
-	saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
 	saveOutput(); 			/* BRH 3.15.2017: this is the new routine that prints out the long_output file format. */
+    saveUseMatrix(); 		/* BRH 10.2.2017 Use this routine to create I0 tables */
 //	saveTradeFlows(); 		/* BRH 05.26.2018 commented out. 11.11.2017 Print out the daily tradeflows */
-    saveUnitsGathered();    /* BRH 05.26.2018 Save total gathered of each resource for last run, last day */
+
 /*********    Do not write out these files anymore once long_output file is fully functioning. 
     saveGini();
     saveHHIQuartiles();
