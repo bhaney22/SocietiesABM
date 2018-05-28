@@ -1329,7 +1329,6 @@ void Utils::saveUseMatrix()
 // 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // 
-    vector <double> Lifetime  (glob.TOOL_LIFETIME,glob.MACHINE_LIFETIME,glob.FACTORY_LIFETIME,glob.INDUSTRY_LIFETIME);
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
@@ -1341,7 +1340,8 @@ void Utils::saveUseMatrix()
   		     for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
                   for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
 			            file  << "," 
-                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] * Lifetime[type]);
+                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] * 
+                                (double) glob.discoveredDevices[type][resId]->lifetime);
                   }
             file << "\n";
              }
