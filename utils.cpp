@@ -1243,7 +1243,9 @@ void Utils::saveUseMatrix()
 	} // End of all rows for R products.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//// WRITE PRODUCT ROWS for T1 devices : Fill cells with #products used in each of the n MACHINE industries ///
+//// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
+/////WRITE ROWS for T1 devices (TOOLS): If used in a T2 (MACHINE) multiply number T2 made * TOOL_LIFETIME
+//// to compute the number of minutes of that tool that was used in a machine rather than extracting. ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {   // Begin loop over all T1 products.
 		file << glob.UniqueKey << ",";
@@ -1261,7 +1263,7 @@ void Utils::saveUseMatrix()
 						if (product==*comp) temp_in_device=1; 
 						num_of_that_device_made = (double) devicesMadeByRes[MACHINE][resId][glob.currentDay];
 					} // End check to see if this current row's product is in this column's device. 
-				file << "," << temp_in_device * num_of_that_device_made ;
+				file << "," << temp_in_device * num_of_that_device_made * glob.TOOL_LIFETIME;
 				} // End fill cell of discovered device.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
 			} // End of loop over all MACHINES.
@@ -1270,7 +1272,8 @@ void Utils::saveUseMatrix()
 	} // End of all rows for T1 products.
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//// WRITE PRODUCT ROWS for T2 devices : Fill cells with #products used in each of the n FACTORY industries ///
+//// WRITE ROWS for T2 (MACHINES) devices : Fill cells with number of minutes of MACHINES
+//// used in making FACTORIES instead of for extraction. 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T2 products. 
 		file << glob.UniqueKey << ",";
@@ -1288,7 +1291,7 @@ void Utils::saveUseMatrix()
 						if (product==*comp) temp_in_device=1; 
 						num_of_that_device_made = (double) devicesMadeByRes[FACTORY][resId][glob.currentDay];
 					} // End check to see if this current row's product is in this column's device. 
-				file << "," << temp_in_device * num_of_that_device_made ;
+				file << "," << temp_in_device * num_of_that_device_made * glob.MACHINE_LIFETIME ;
 				} 					// Cell of discovered device now filled.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
 			} // End of loop over all FACTORIES.
@@ -1297,7 +1300,8 @@ void Utils::saveUseMatrix()
 	} // End of all rows for T2 products.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//// WRITE PRODUCT ROWS for T3 devices : Fill cells with #products used in each of the n INDUSTRY industries ///
+//// WRITE PRODUCT ROWS for T3 (MACHINES) : Fill cells with minutes of MACHINES used to make
+//// INDUSTRIES instead of for extraction. ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T3 products. 
 		file << glob.UniqueKey << ",";
@@ -1315,13 +1319,31 @@ void Utils::saveUseMatrix()
 						if (product==*comp) temp_in_device=1; 
 						num_of_that_device_made = (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay];
 					} 				// End check to see if this current row's product is in this column's device. 
-				file << "," << temp_in_device * num_of_that_device_made ;
+				file << "," << temp_in_device * num_of_that_device_made * glob.FACTORY_LIFETIME ;
 				} 					// Cell of discovered device now filled.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
 			} // End of loop over all INDUSTRY industries. 
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
-
+// 
+// BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
+// 
+    vector <double> Lifetime = (glob.TOOL_LIFETIME,glob.MACHINE_LIFETIME,glob.FACTORY_LIFETIME,glob.INDUSTRY_LIFETIME)
+		file << glob.UniqueKey << ",";
+		file << glob.configName << "," ;
+		file << glob.SIM_NAME << "," ;
+		file << glob.currentDay+1 << ",";
+		file << "Total,";
+             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+                    file  << "," << resGatheredByRes[resId][glob.currentDay]; 
+             }     
+  		     for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
+                  for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
+			            file  << "," 
+                        <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay] * Lifetime[type]);
+                  }
+            file << "\n";
+             }
     file.close();
     devicesMadeByRes.clear();
 }	// END of saveUseMatrix function.
