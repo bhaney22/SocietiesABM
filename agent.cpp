@@ -943,7 +943,7 @@ void Agent::workDayEnd()
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         ResProperties &resPr = resProp[resId];
         /*
-         * If the agent did not extraction this resource today, it loses
+         * If the agent did not extract this resource today, it loses
          * penalty experience.
          */
         if (resPr.idleResource) {

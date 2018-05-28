@@ -1223,7 +1223,9 @@ void Utils::saveUseMatrix()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// WRITE a ROW for each Resource : Fill cells with #Resources used in each of the n TOOL industries, where n=num of resources    /////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {    //Begin row for Resource products.
+   
+    
+    for (int product = 0; product < glob.NUM_RESOURCES ; product++) {    //Begin row for Resource products.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
@@ -1258,9 +1260,28 @@ void Utils::saveUseMatrix()
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T1_R" << product+1 ;
-		
-		for ( int fill=0;fill<(2*glob.NUM_RESOURCES);fill++) {file << ",0";} 		// Fill in 0s across row for R & T1 industries.
-		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   // Begin loop over all MACHINES.
+// BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
+    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+        if product ! = resID {
+            file << ",0";
+        } else {
+            double totTimeGathering = 0.0;
+                for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
+                    cout << "BRH Computing TOOL minutes for R" << resId << endl;
+                    DevProperties &devPr = glob.agent[aId]->devProp[0][resId];
+                    cout << "Agent " << aId << " minutes = " << devPr.deviceMinutesUsedTotal << endl;
+                    totTimeGathering += devPr.deviceMinutesUsedTotal;
+                    cout << "Total TOOL minutes for R" << resId << " = " << totTimeGathering << endl;
+                }
+                file << "," << totTimeGathering;
+        }
+    }		
+ 
+ // Now, fill in 0s across row for T1 industries since T1 devices are not used in making T1 devices.       
+ 		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";}        
+
+// Next: loop over all T2 devices and record number of minutes of each T1 device used in making T2 rather than gathering.      
+        for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   
 				temp_in_device=0;
 				if (glob.discoveredDevices[MACHINE][resId]) {
 					for (vector<int>::iterator comp = glob.discoveredDevices[MACHINE][resId]->components.begin();
