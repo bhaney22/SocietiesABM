@@ -67,6 +67,8 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
 
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    // BRH 05.27.2018 Adding ability to track device usage by Resource
+    // timeSpentGatheringWithDeviceTodaybyRes = vector< vector<double> > (NUM_DEVICE_TYPES, 0.0);
 
     timeSpentGatheringWithoutDeviceToday = 0.0;
 
@@ -900,11 +902,13 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
     resProp[resIndex].unitsGatheredToday++;
     if (bestDevice != NO_DEVICE) {
         // BRH testing comments.
-        cout << "Work Stats Update for R" << resIndex << " T" << bestDevice << " minutes = " << workTime << endl; 
+        cout << "Day " << glob.currentDay+1 << " Agent" << glob.agent[*this]->name;
+        cout << " R" << resIndex << " T" << bestDevice << " minutes = " << workTime << endl; 
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
+        // BRH Adding tracking of device use for gathering by R
+        // timeSpentGatheringWithDeviceTodaybyRes[bestDevice][resId] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
-        cout << "devProp.deviceMinutesUsedTotal = " << devProp[bestDevice][resIndex].deviceMinutesUsedTotal << endl;
     } else {
         timeSpentGatheringWithoutDeviceToday += workTime;
     }
