@@ -902,7 +902,7 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
     resProp[resIndex].unitsGatheredToday++;
     if (bestDevice != NO_DEVICE) {
         // BRH testing comments.
-        cout << "Day " << glob.currentDay+1 << " Agent" << glob.agent(*this)->name;
+        cout << "Day " << glob.currentDay+1 << " Agent" << name(*this);
         cout << " R" << resIndex << " T" << bestDevice << " minutes = " << workTime << endl; 
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
