@@ -1267,7 +1267,7 @@ void Utils::saveUseMatrix()
         } else {
             double tempTimeGatheringByToolForRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    ResProperties &resPr = glob.agent[aId]->resProp[0][resId];
+                    ResProperties &resPr = glob.agent[aId]->resProp[0];
                     tempTimeGatheringByToolForRes += resPr.timeSpentGatheringWithDeviceTodaybyRes;
                 }
                 file << "," << tempTimeGatheringByToolForRes;
