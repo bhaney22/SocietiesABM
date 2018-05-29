@@ -1271,7 +1271,7 @@ void Utils::saveUseMatrix()
                 double sumTimeSpentGatheringWithDevicebyRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
                 vector<int> timeSpentGatheringWithDevicebyAgent 
-                        = timeSpentGatheringWithDevice[TOOL][aId][glob.currentDay];  //TOOL=0 device type
+                        = timeSpentGatheringWithDevice[0][aId][glob.currentDay];  //TOOL=0 device type
                   //temp  sumTimeSpentGatheringWithDevicebyRes += timeSpentGatheringWithDevicebyAgent[resId];
                 }
        //temp         file << "," << sumTimeSpentGatheringWithDevicebyRes;
