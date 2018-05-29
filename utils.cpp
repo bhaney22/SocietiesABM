@@ -1202,11 +1202,10 @@ void Utils::saveDeviceRecipes()
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    vector< vector<int> > timeSpentGatheringWithDevice 
-                = glob.productionStats->getTimeSpentGatheringWithDevice();
-
+    double tempTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
     int temp_in_device=0;
 	double num_of_that_device_made;
+   
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
 	file.open(filePath.c_str());   /*open that particular file to start writing */
@@ -1268,7 +1267,8 @@ void Utils::saveUseMatrix()
         } else {
                 double sumTimeSpentGatheringWithDeviceByRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                (double) tempTimeSpentGatheringWithDeviceByRes   //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
+                tempTimeSpentGatheringWithDeviceByRes   
+//BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
                         = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDevicebyRes;
                 }
