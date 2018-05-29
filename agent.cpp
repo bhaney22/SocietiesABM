@@ -68,6 +68,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithoutDeviceToday = 0.0;
 
     utilityToday = 0.0;
@@ -900,11 +901,12 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
     resProp[resIndex].unitsGatheredToday++;
     if (bestDevice != NO_DEVICE) {
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
- //       timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
- // BRH 05.26.2018 I believe the above var should also be indexed by resIndex.
-          timeSpentGatheringWithDeviceToday[bestDevice][resIndex] += workTime;
+        timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
+ // BRH 05.26.2018 Added an additional statsTracker that is indexed by resIndex.
+        timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
     } else {
+        resProp[resIndex].timeSpentGatheringWithoutDeviceToday += worktime;
         timeSpentGatheringWithoutDeviceToday += workTime;
     }
 }
@@ -1744,11 +1746,13 @@ void Agent::resetTodayStats()
 {
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         resProp[resId].unitsGatheredToday = 0;
+        resProp[resId].timeSpentGatheringWithoutDeviceToday = 0;    //BRH NEW resProp 05.29.2018
         for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
             devicesMadeWithDevDevicesToday[type][resId] = 0;
         }
         for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
+            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
         }
         for (int type = 0; type < NUM_DEVICE_TYPES; type++) {
             devProp[type][resId].devicesMadeToday = 0;
@@ -1764,7 +1768,7 @@ void Agent::resetTodayStats()
     unitsSoldCrossGroupToday = 0;
     unitsSoldForDevicesToday = 0;
     unitsSoldCrossGroupForDevicesToday = 0;
-    for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
+    for (int i = 0; i < NUM_DEVICE_TYPES; i++) {   
         timeSpentGatheringWithDeviceToday[i] = 0;
     }
     for (int i = 0; i < NUM_DEVICE_TYPES; i++) {

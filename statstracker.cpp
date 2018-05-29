@@ -531,16 +531,17 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
-            int timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
-            int timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
+            double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
+            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
+
 
             // add this agents time spent with the previous agents
             totalTimeWithDevice += timeWithDeviceByAgent;
             totalTimeSpentMakingDevices += timeMakingDevicesByAgent;
 
             // save this individual agent's time data in a vector.
-            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeWithDeviceByAgent);
             timeSpentMakingDevicesByAgent[type][aId].push_back(timeMakingDevicesByAgent);
+            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeWithDeviceByAgent);
             tempTimeSpentGathering[glob.agent[aId]->group][type] += timeWithDeviceByAgent;
             tempTimeSpentMaking[glob.agent[aId]->group][type] += timeMakingDevicesByAgent;
         }

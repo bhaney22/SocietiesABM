@@ -1204,9 +1204,7 @@ void Utils::saveUseMatrix()
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     vector< vector<int> > timeSpentGatheringWithDevice 
                 = glob.productionStats->getTimeSpentGatheringWithDevice();
-                // BRH temp printout
-                // cout << timeSpentGatheringWithDevice[0][0][0][0] << endl;
-	
+
     int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
@@ -1268,13 +1266,13 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-                double sumTimeSpentGatheringWithDevicebyRes = 0.0;
+                double sumTimeSpentGatheringWithDeviceByRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                vector<int> timeSpentGatheringWithDevicebyAgent 
-                        = timeSpentGatheringWithDevice[0][aId][glob.currentDay];  //TOOL=0 device type
-                  //temp  sumTimeSpentGatheringWithDevicebyRes += timeSpentGatheringWithDevicebyAgent[resId];
+                (double) tempTimeSpentGatheringWithDeviceByRes   //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
+                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
+                        sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDevicebyRes;
                 }
-       //temp         file << "," << sumTimeSpentGatheringWithDevicebyRes;
+                file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
     }		
  

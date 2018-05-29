@@ -148,12 +148,14 @@ public:
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
-     * size is [glob.NUM_DEVICE_TYPES]
-     * timeSpentGatheringWithDeviceToday is indexed by TOOL through INDUSTRY.
+     * size is [glob.NUM_DEVICE_TYPES] 
+     * BRH 05.29.2018: Added a second one (added "ByRes" and added second index:[glob.NUM_RESOURCES] )
+     * timeSpentGatheringWithDeviceToday is indexed by TOOL through INDUSTRY, then resId.
      * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
      * those for the first 4.
      */
-    vector<double> timeSpentGatheringWithDeviceToday; 
+    vector<double> timeSpentGatheringWithDeviceToday;
+    vector< vector<double> > timeSpentGatheringWithDeviceTodayByRes; 
     /**
      * The number of minutes used to gather resources without using devices.
      */
