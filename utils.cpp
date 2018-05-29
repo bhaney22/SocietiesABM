@@ -1265,12 +1265,18 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-            double tempTimeGatheringByToolForRes = 0.0;
+                vector< vector<int> > timeSpentGatheringWithDevice 
+                                    = glob.productionStats->getTimeSpentGatheringWithDevice();
+//    for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) 
+//        for (int j = 0; j < glob.NUM_DAYS; j++) {
+//            file << ( (double) timeSpentGatheringWithDevice[i][j] / (double) activeAgents[j] ) << ",";
+        }
+            double sumTimeGatheringByToolForRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    ResProperties &resPr = glob.agent[aId]->resProp[0];
-                    tempTimeGatheringByToolForRes += resPr.timeSpentGatheringWithDeviceToday[TOOL];
+                    ResProperties &resPr = glob.agent[aId]->resProp[resId];
+                    sumTimeGatheringByToolForRes += resPr.timeSpentGatheringWithDevice[0][glob.currentDay];  //TOOL=0 device type
                 }
-                file << "," << tempTimeGatheringByToolForRes;
+                file << "," << sumTimeGatheringByToolForRes;
         }
     }		
  
