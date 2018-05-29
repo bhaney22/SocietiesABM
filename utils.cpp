@@ -1203,6 +1203,7 @@ void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     double tempTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
+        
     int temp_in_device=0;
 	double num_of_that_device_made;
    
@@ -1270,7 +1271,7 @@ void Utils::saveUseMatrix()
                 tempTimeSpentGatheringWithDeviceByRes   
 //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
                         = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
-                        sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDevicebyRes;
+                        sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
                 }
                 file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
