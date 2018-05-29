@@ -900,7 +900,9 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
     resProp[resIndex].unitsGatheredToday++;
     if (bestDevice != NO_DEVICE) {
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
-        timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
+ //       timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
+ // BRH 05.26.2018 I believe the above var should also be indexed by resIndex.
+          timeSpentGatheringWithDeviceToday[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
     } else {
         timeSpentGatheringWithoutDeviceToday += workTime;
