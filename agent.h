@@ -154,24 +154,10 @@ public:
      * those for the first 4.
      */
     vector<double> timeSpentGatheringWithDeviceToday; 
-     /**
-     * BRH 05.28.2018 NEW array to track device use by Resource.
-     * Each element in this list is the number of minutes used of the
-     * device of the corresponding resource. 
-     * size is [glob.NUM_DEVICE_TYPES by glob.NUM_RESOURCE]
-     * timeSpentGatheringWithDeviceToday is indexed by TOOL through INDUSTRY.
-     */
-    vector< vector<double> > timeSpentGatheringWithDeviceTodaybyRes; 
     /**
      * The number of minutes used to gather resources without using devices.
      */
     double timeSpentGatheringWithoutDeviceToday;
-    /**
-     * BRH NEW 05.28.2018
-     * The number of minutes used to gather resources without using devices
-     * by RESOURCE.
-     */
-    vector<double> timeSpentGatheringWithoutDeviceTodayByRes;
     /**
      * The sum of the utilities of all units of all resources held by
      * this agent in a given day.

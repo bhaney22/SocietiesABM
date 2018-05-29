@@ -70,12 +70,6 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithoutDeviceToday = 0.0;
 
-    // BRH 05.27.2018 Initialize new vectors that track extraction time by device or hand by Resource
-    timeSpentGatheringWithDeviceTodaybyRes = vector< vector<double> > (NUM_DEVICE_TYPES,0.0);
-    timeSpentGatheringWithoutDeviceTodaybyRes = vector<double> (NUM_RESOURCES,0.0);
-
-
-
     utilityToday = 0.0;
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
@@ -908,12 +902,8 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         unitsGatheredWithDeviceToday[bestDevice][resIndex]++;
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
-// BRH 05.28.2018 Adding tracking of device use for gathering by R
-        timeSpentGatheringWithDeviceTodaybyRes[bestDevice][resId] += workTime;
     } else {
-// BRH 05.28.2018 Adding tracking of gathering by hand by each R
         timeSpentGatheringWithoutDeviceToday += workTime;
-        timeSpentGatheringWithoutDeviceTodaybyRes[resId] += workTime;
     }
 }
 
