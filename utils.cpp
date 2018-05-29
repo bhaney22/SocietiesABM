@@ -1204,6 +1204,8 @@ void Utils::saveUseMatrix()
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     vector< vector<int> > timeSpentGatheringWithDevice 
                 = glob.productionStats->getTimeSpentGatheringWithDevice();
+                // BRH temp printout
+                // cout << timeSpentGatheringWithDevice[0][0][0][0] << endl;
 	
     int temp_in_device=0;
 	double num_of_that_device_made;
@@ -1268,10 +1270,11 @@ void Utils::saveUseMatrix()
         } else {
                 double sumTimeSpentGatheringWithDevicebyRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    vector<int> timeSpentGatheringWithDevicebyAgent = timeSpentGatheringWithDevice[TOOL][aId];  //TOOL=0 device type
-                    sumTimeSpentGatheringWithDevicebyRes += timeSpentGatheringWithDevicebyAgent[resId];
+                vector<int> timeSpentGatheringWithDevicebyAgent 
+                        = timeSpentGatheringWithDevice[TOOL][aId][glob.currentDay];  //TOOL=0 device type
+                  //temp  sumTimeSpentGatheringWithDevicebyRes += timeSpentGatheringWithDevicebyAgent[resId];
                 }
-                file << "," << sumTimeSpentGatheringWithDevicebyRes;
+       //temp         file << "," << sumTimeSpentGatheringWithDevicebyRes;
         }
     }		
  
