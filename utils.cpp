@@ -1266,12 +1266,12 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-                double sumTimeSpentGatheringWithDeviceForRes = 0.0;
+                double sumTimeSpentGatheringWithDevicebyRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    vector<double> timeSpentGatheringWithDevicebyAgent = timeSpentGatheringWithDevice[0][aId];  //TOOL=0 device type
-                    sumTimeGatheringByToolForRes += timeSpentGatheringWithDevicebyAgent[resId];
+                    vector<double> timeSpentGatheringWithDevicebyAgent = timeSpentGatheringWithDevice[TOOL][aId];  //TOOL=0 device type
+                    sumTimeSpentGatheringWithDevicebyRes += timeSpentGatheringWithDevicebyAgent[resId];
                 }
-                file << "," << sumTimeSpentGatheringWithDeviceForRes;
+                file << "," << sumTimeSpentGatheringWithDevicebyRes;
         }
     }		
  
