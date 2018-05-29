@@ -1202,7 +1202,10 @@ void Utils::saveDeviceRecipes()
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-	int temp_in_device=0;
+    vector< vector<int> > timeSpentGatheringWithDevice 
+                = glob.productionStats->getTimeSpentGatheringWithDevice();
+	
+    int temp_in_device=0;
 	double num_of_that_device_made;
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
@@ -1223,8 +1226,6 @@ void Utils::saveUseMatrix()
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //// WRITE a ROW for each Resource : Fill cells with #Resources used in each of the n TOOL industries, where n=num of resources    /////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   
-    
     for (int product = 0; product < glob.NUM_RESOURCES ; product++) {    //Begin row for Resource products.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
@@ -1265,15 +1266,12 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-                vector< vector<int> > tempSpentGatheringWithDevice 
-                                    = glob.productionStats->calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesByAgent();
-        }
-            double sumTimeGatheringByToolForRes = 0.0;
+                double sumTimeSpentGatheringWithDeviceForRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    vector<double> tempTimeGatheringWithDevicebyAgent = tempSpentGatheringWithDevice[0][aId];  //TOOL=0 device type
-                    sumTimeGatheringByToolForRes += tempTimeGatheringWithDevicebyAgent[resId]
+                    vector<double> timeSpentGatheringWithDevicebyAgent = timeSpentGatheringWithDevice[0][aId];  //TOOL=0 device type
+                    sumTimeGatheringByToolForRes += timeSpentGatheringWithDevicebyAgent[resId];
                 }
-                file << "," << sumTimeGatheringByToolForRes;
+                file << "," << sumTimeSpentGatheringWithDeviceForRes;
         }
     }		
  
