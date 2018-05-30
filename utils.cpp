@@ -1206,6 +1206,7 @@ void Utils::saveUseMatrix()
     vector< vector<vector<int> > > TimeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
 	double num_of_that_device_made;
+    double tempTimeSpentGatheringWithDeviceByRes;
    
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
