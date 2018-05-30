@@ -906,7 +906,7 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
     } else {
-        resProp[resIndex].timeSpentGatheringWithoutDeviceToday += worktime;
+        resProp[resIndex].timeSpentGatheringWithoutDeviceToday += workTime;
         timeSpentGatheringWithoutDeviceToday += workTime;
     }
 }
