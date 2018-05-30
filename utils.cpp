@@ -1270,8 +1270,9 @@ void Utils::saveUseMatrix()
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
                 tempTimeSpentGatheringWithDeviceByRes   
 //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
-                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
+                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId];
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] << endl;
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] << endl;                    
                     cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
                          << " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
                     cout << "sumTime BEFORE = " << sumTimeSpentGatheringWithDeviceByRes << endl;
