@@ -205,10 +205,10 @@ public:
 	vector< vector< vector<int> > > getDevicesMadeByRes() { return devicesMadeByRes; };     /*BRH 10.11.2017 */
     vector< vector< vector<int> > > getDevicesMadeByGroup() { return devicesMadeByGroup; };
     vector< vector<int> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
-    vector<vector< vector<int> > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByAgentByRes; };
+    vector< vector<vector< vector<int> > > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByAgentByRes; };
     vector< vector<vector<int> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };
     vector< int > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
-    vector<vector<int> > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByAgentByRes; };
+    vector< vector<vector<int> > > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByAgentByRes; };
     vector<vector<int> > getTimeSpentGatheringWithoutDeviceByGroup() { return timeSpentGatheringWithoutDeviceByGroup; };
     vector< vector<int> > getTimeSpentMakingDevices() { return timeSpentMakingDevices; };
     vector<vector<vector<int> > > getTimeSpentMakingDevicesByGroup() { return timeSpentMakingDevicesByGroup; };
