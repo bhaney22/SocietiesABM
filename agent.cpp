@@ -68,7 +68,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
-    timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(0.0);
+    timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES);
     timeSpentGatheringWithoutDeviceToday = 0.0;
 
     utilityToday = 0.0;
@@ -79,6 +79,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
         }
         for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type].push_back(0);
+            timeSpentGatheringWithDeviceTodayByRes[type].push_back(0);
         }
     }
 }
