@@ -1263,20 +1263,20 @@ void Utils::saveUseMatrix()
 		file << "T1_R" << product+1 ;
 // BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        cout << "BRH product = " << product <<" resId = " << resId << endl;
-
         if (product != resId) {
-            cout << "BRH in not equal part" << endl;
             file << ",0";
         } else {
-            // BRH temp comment
-                cout << "In Product = ResId In T1_Rx minutes used for Rx part" << endl;
                 double sumTimeSpentGatheringWithDeviceByRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
                 tempTimeSpentGatheringWithDeviceByRes   
 //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
                         = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
+                    cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
+                            " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
+                    cout << "sumTime BEFORE = " << sumTimeSpentGatheringWithDeviceByRes << endl;
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
+                    cout << "sumTime AFTER  = " << sumTimeSpentGatheringWithDeviceByRes << endl;
                 }
                 file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
