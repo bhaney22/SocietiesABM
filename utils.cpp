@@ -1273,7 +1273,7 @@ void Utils::saveUseMatrix()
                         = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
                     cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
-                            " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
+                         << " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
                     cout << "sumTime BEFORE = " << sumTimeSpentGatheringWithDeviceByRes << endl;
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
                     cout << "sumTime AFTER  = " << sumTimeSpentGatheringWithDeviceByRes << endl;
