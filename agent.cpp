@@ -159,6 +159,22 @@ int Agent::getUnitsGatheredWithDevice(int device, int resId) const
 }
 
 /**
+ * \return the time gathering resource with each device separately 
+ */
+int Agent::getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const
+{
+    return timeSpentGatheringWithDeviceTodayByRes[device][resId];
+}
+
+/**
+ * \return the time gathering resource by hand
+ */
+int Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
+{
+    return timeSpentGatheringWithoutDeviceTodayByRes[resId];
+}
+
+/**
  * \return the number of deviceIndex of deviceType made today.
  */
 int Agent::getDevicesMadeToday(int deviceIndex, int deviceType) const

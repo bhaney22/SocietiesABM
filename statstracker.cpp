@@ -165,6 +165,9 @@ ProductionStats::ProductionStats()
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
         resGatheredByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
         timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+            timeSpentGatheringWithoutDeviceByAgentByRes[resId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+        }
     }
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
@@ -214,6 +217,9 @@ ProductionStats::ProductionStats()
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
             timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+                timeSpentGatheringWithDeviceByAgentByRes[type][ResId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            }
         }
 
         // for each resource ID
@@ -495,6 +501,9 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
         withoutDeviceTotal += withoutDeviceEachAgent;
         timeSpentGatheringWithoutDeviceByAgent[aId].push_back(withoutDeviceEachAgent);
         temp[glob.agent[aId]->group] += withoutDeviceEachAgent;
+        for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+            timeSpentGatheringWithoutDeviceByAgentByRes[resId][aId].push_back(timeWithoutDeviceByAgentByRes)
+        }
     }
     timeSpentGatheringWithoutDevice.push_back(withoutDeviceTotal);
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
@@ -533,6 +542,8 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             // with/making devices for this type. 
             double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
             double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
+            double timeWithoutDeviceByAgentByRes = glob.agent[aId]->timeSpentGatheringWithoutDeviceTodayByRes;
+            vector<double> timeWithDeviceByAgentByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type];
 
 
             // add this agents time spent with the previous agents
@@ -542,6 +553,10 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             // save this individual agent's time data in a vector.
             timeSpentMakingDevicesByAgent[type][aId].push_back(timeMakingDevicesByAgent);
             timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeWithDeviceByAgent);
+
+            for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+                timeSpentGatheringWithDeviceByAgentByRes[type][resId][aId].push_back(timeWithDeviceByAgentByRes);
+            }
             tempTimeSpentGathering[glob.agent[aId]->group][type] += timeWithDeviceByAgent;
             tempTimeSpentMaking[glob.agent[aId]->group][type] += timeMakingDevicesByAgent;
         }

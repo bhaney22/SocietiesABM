@@ -1202,8 +1202,8 @@ void Utils::saveDeviceRecipes()
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    double tempTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
-        
+    vector<vector<vector<int> > > TimeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
+    vector<vector<int> > TimeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
 	double num_of_that_device_made;
    
@@ -1268,16 +1268,7 @@ void Utils::saveUseMatrix()
         } else {
                 double sumTimeSpentGatheringWithDeviceByRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                tempTimeSpentGatheringWithDeviceByRes   
-//BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
-                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
-                    cout << "BRH" << " aID=" << aId << " resId= " << resId << endl;
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] << endl;
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] << endl;
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] << endl;                    
-                    cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
-                         << " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
+                    tempTimeSpentGatheringWithDeviceByRes = TimeSpentGatheringWithDeviceByRes[TOOL][resId][aId][glob.currentDay]  
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
                 }
                 file << "," << sumTimeSpentGatheringWithDeviceByRes;

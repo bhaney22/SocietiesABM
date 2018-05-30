@@ -179,7 +179,8 @@ public:
     int getHeld (int resId) const;
     int getUnitsGatheredToday(int resId) const;
     int getUnitsGatheredWithDevice(int device, int resId) const;
-    int getDevicesMadeToday(int deviceIndex, int deviceType) const;
+    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
+    int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;
     void workDay();
