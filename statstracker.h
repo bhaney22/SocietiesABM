@@ -203,7 +203,7 @@ public:
     vector< vector<int> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
     vector< vector<vector< vector<double> > > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByAgentByRes; };
     vector< vector<vector<int> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };
-    vector< vector< vector< int > > > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
+    vector< vector< int > > > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
     vector< vector<vector<double> > > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByAgentByRes; };
     vector<vector<int> > getTimeSpentGatheringWithoutDeviceByGroup() { return timeSpentGatheringWithoutDeviceByGroup; };
     vector< vector<int> > getTimeSpentMakingDevices() { return timeSpentMakingDevices; };
