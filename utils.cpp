@@ -1270,14 +1270,15 @@ void Utils::saveUseMatrix()
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
                 tempTimeSpentGatheringWithDeviceByRes   
 //BRH NEW 05.29.2018 "ByRes" variable in agent.cpp being used below
-                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId];
+                        = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
+                    cout << "BRH" << " aID=" << aId << " resId= " << resId << endl;
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHNE][resId] << endl;
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] << endl;
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] << endl;                    
                     cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
                          << " is = " << tempTimeSpentGatheringWithDeviceByRes << endl;
-                    cout << "sumTime BEFORE = " << sumTimeSpentGatheringWithDeviceByRes << endl;
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
-                    cout << "sumTime AFTER  = " << sumTimeSpentGatheringWithDeviceByRes << endl;
                 }
                 file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
