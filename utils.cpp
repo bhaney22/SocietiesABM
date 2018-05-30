@@ -1273,7 +1273,7 @@ void Utils::saveUseMatrix()
                         = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId];
                     cout << "BRH" << " aID=" << aId << " resId= " << resId << endl;
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[TOOL][resId] << endl;
-                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHNE][resId] << endl;
+                    cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[MACHINE][resId] << endl;
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[FACTORY][resId] << endl;
                     cout << "BRH glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] is = " << glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[INDUSTRY][resId] << endl;                    
                     cout << "BRH tempTimeSpentGathering for agent = " << aId << "resId = " << resId 
