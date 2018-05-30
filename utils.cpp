@@ -1251,9 +1251,9 @@ void Utils::saveUseMatrix()
 	} // End of all rows for R products.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
-//// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
 /////WRITE ROWS for T1 devices (TOOLS): If used in a T2 (MACHINE) multiply number T2 made * TOOL_LIFETIME
 //// to compute the number of minutes of that tool that was used in a machine rather than extracting. ///
+//// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
 ////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {   // Begin loop over all T1 products.
 		file << glob.UniqueKey << ",";
@@ -1263,9 +1263,14 @@ void Utils::saveUseMatrix()
 		file << "T1_R" << product+1 ;
 // BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+        cout << "BRH product = " << product <<" resId = " << resId << endl;
+
         if (product != resId) {
+            cout << "BRH in not equal part" << endl;
             file << ",0";
         } else {
+            // BRH temp comment
+                cout << "In Product = ResId In T1_Rx minutes used for Rx part" << endl;
                 double sumTimeSpentGatheringWithDeviceByRes = 0.0;
                 for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
                 tempTimeSpentGatheringWithDeviceByRes   
