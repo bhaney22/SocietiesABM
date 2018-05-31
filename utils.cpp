@@ -1202,8 +1202,8 @@ void Utils::saveDeviceRecipes()
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    vector<vector<int> > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
-    vector<int> timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
+    // BRH temp comment vector<vector<int> > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
+    // BRH temp comment vector<int> timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
 	double num_of_that_device_made;
     int tempTimeSpentGatheringWithDeviceByRes;
@@ -1267,10 +1267,11 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-                double sumTimeSpentGatheringWithDeviceByRes = 0.0; 
-                tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
-                        sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
-                file << "," << sumTimeSpentGatheringWithDeviceByRes;
+                file << ",0"; //BRH for testing only. //Delete this line after the problem is fixed.
+                //BRH temp comment // double sumTimeSpentGatheringWithDeviceByRes = 0.0; 
+               //BRH temp comment // tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
+                // BRH temp comment //       sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
+                //BRH temp comment // file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
     }		
  
