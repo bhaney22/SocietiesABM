@@ -209,8 +209,7 @@ ProductionStats::ProductionStats()
         timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
         timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
         timeSpentGatheringWithDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-
+        
         // for each agent ID
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
@@ -231,6 +230,7 @@ ProductionStats::ProductionStats()
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 percentResGatheredByDeviceByRes[type].push_back(vector<double>());
                 resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
             }
         }
         // only types 4-5 (DEVMACHINE, DEVFACTORY)
