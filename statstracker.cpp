@@ -497,10 +497,11 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
         timeSpentGatheringWithoutDeviceByAgent[aId].push_back(withoutDeviceEachAgent);
         temp[glob.agent[aId]->group] += withoutDeviceEachAgent;
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+            int withoutDeviceResTotal = 0;
             int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes[resId];
-            withoutDeviceResTotal += timeWithoutDeviceByResEachAgent
+            withoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
         }
-        timeSpentGatheringWithoutDeviceByRes.push_back(withoutDeviceResTotal)
+        timeSpentGatheringWithoutDeviceByRes.push_back(withoutDeviceResTotal);
     }
     timeSpentGatheringWithoutDevice.push_back(withoutDeviceTotal);
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
