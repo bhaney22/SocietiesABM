@@ -171,7 +171,7 @@ int Agent::getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) cons
  */
 int Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
 {
-    return timeSpentGatheringWithoutDeviceTodayByRes[resId];
+    return resProp[resIndex].timeSpentGatheringWithoutDeviceToday;
 }
 
 /**
