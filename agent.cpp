@@ -67,7 +67,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
 
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
-    timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    timeSpentGatheringWithDeviceToday = vector<int>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithDeviceTodayByRes = vector< vector<int> >(NUM_DEVICE_TYPES);
     timeSpentGatheringWithoutDeviceToday = 0.0;
 
