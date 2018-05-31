@@ -1202,11 +1202,11 @@ void Utils::saveDeviceRecipes()
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    vector< vector<vector<vector<double> > > > TimeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
-    vector< vector<vector<double> > > TimeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
+    vector< vector<vector<vector<int> > > > TimeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
+    vector< vector<vector<int> > > TimeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
 	double num_of_that_device_made;
-    double tempTimeSpentGatheringWithDeviceByRes;
+    int tempTimeSpentGatheringWithDeviceByRes;
    
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */

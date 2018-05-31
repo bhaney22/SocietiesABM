@@ -154,8 +154,8 @@ public:
      * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
      * those for the first 4.
      */
-    vector<double> timeSpentGatheringWithDeviceToday;
-    vector< vector<double> > timeSpentGatheringWithDeviceTodayByRes; 
+    vector<int> timeSpentGatheringWithDeviceToday;
+    vector< vector<int> > timeSpentGatheringWithDeviceTodayByRes; 
     /**
      * The number of minutes used to gather resources without using devices.
      */
@@ -179,7 +179,7 @@ public:
     int getHeld (int resId) const;
     int getUnitsGatheredToday(int resId) const;
     int getUnitsGatheredWithDevice(int device, int resId) const;
-    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
+    int getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
     int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;
