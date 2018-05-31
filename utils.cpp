@@ -1267,11 +1267,9 @@ void Utils::saveUseMatrix()
         if (product != resId) {
             file << ",0";
         } else {
-                double sumTimeSpentGatheringWithDeviceByRes = 0.0;
-                for (int aId = 0; aId < glob.NUM_AGENTS; aId++) { 
-                    tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
+                double sumTimeSpentGatheringWithDeviceByRes = 0.0; 
+                tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
                         sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
-                }
                 file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
     }		
