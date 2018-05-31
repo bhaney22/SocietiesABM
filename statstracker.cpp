@@ -165,9 +165,6 @@ ProductionStats::ProductionStats()
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
         resGatheredByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
         timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-            timeSpentGatheringWithoutDeviceByAgentByRes[aId][resId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-        }
     }
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
@@ -176,6 +173,7 @@ ProductionStats::ProductionStats()
         resGatheredByResByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             resGatheredByResByAgent[resId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            timeSpentGatheringWithoutDeviceByAgentByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
         }
     }
 
@@ -218,7 +216,7 @@ ProductionStats::ProductionStats()
             timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
             timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-                timeSpentGatheringWithDeviceByAgentByRes[type][ResId][aId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+                timeSpentGatheringWithDeviceByAgentByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
             }
         }
 
