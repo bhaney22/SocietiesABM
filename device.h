@@ -29,7 +29,7 @@ public:
      * any of the components and doesn't own any of the
      * components
      */
-    vector<int> necessaryResources;
+    vector<double> necessaryResources;
     device_name_t type;     
     /**
      * The type of device that this device is able to make
@@ -45,12 +45,12 @@ public:
 
     Device(device_name_t componentType, device_name_t type,
            device_name_t canMake, device_name_t devDevice, device_name_t componentOf,
-           vector<int> &components, int use, double deviceFactor, double lifetime);
+           vector<int> &components, double use, double deviceFactor, double lifetime);
     int agentsKnown();
     virtual double costs(Agent &agent);
     virtual double expectedConstructionTime(Agent &agent);
-    pair<double, vector<int> > worstCaseConstruction(Agent &agent);
-    virtual vector<int> necessaryRes();
+    pair<double, vector<double> > worstCaseConstruction(Agent &agent);
+    virtual vector<double> necessaryRes();
     virtual double gainOverLifetime(Agent &agent) = 0;
 
     string componentsAsString();
@@ -62,7 +62,7 @@ class DevDevice : public Device
 public:
     DevDevice(device_name_t componentType, device_name_t type,
               device_name_t canMake, device_name_t devDevice, device_name_t componentOf,
-              vector<int> &components, int use, double deviceFactor, double lifetime);
+              vector<int> &components, double use, double deviceFactor, double lifetime);
     bool wantsToConsiderDevDevice(Agent &agent);
     double gainOverLifetime(Agent &agent);
 };
@@ -71,32 +71,32 @@ public:
 class DevMachine : public DevDevice
 {
 public:
-    DevMachine(vector<int> &components, int use);
+    DevMachine(vector<int> &components, double use);
 };
 
 
 class DevFactory : public DevDevice
 {
 public:
-    DevFactory(vector<int> &components, int use);
+    DevFactory(vector<int> &components, double use);
 };
 
 
 class Tool : public Device
 {
 public:
-    Tool(vector<int> &components, int use);
+    Tool(vector<int> &components, double use);
     double costs(Agent &agent);
     double expectedConstructionTime(Agent &agent);
     double gainOverLifetime(Agent &agent);
-    vector<int> necessaryRes();	
+    vector<double> necessaryRes();
 };
 
 
 class Machine : public Device
 {
 public:
-    Machine(vector<int> &components, int use);
+    Machine(vector<int> &components, double use);
     double gainOverLifetime(Agent &agent);
 };
 
@@ -104,7 +104,7 @@ public:
 class Factory : public Device
 {
 public:
-    Factory(vector<int> &components, int use);
+    Factory(vector<int> &components, double use);
     double gainOverLifetime(Agent &agent);
 };
 
@@ -112,7 +112,7 @@ public:
 class Industry : public Device
 {
 public:
-    Industry(vector<int> &components, int use);
+    Industry(vector<int> &components, double use);
     double gainOverLifetime(Agent &agent);
 };
 

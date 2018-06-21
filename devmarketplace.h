@@ -31,8 +31,8 @@ private:
 
     int currentTradeAttempts;
 
-    vector<int> deviceBuyerSelling;     //!< the menu of the MENU_SIZE resources that the deviceBuyer values the least
-    vector<int> deviceSellerSelling;    //!< the list of devices that the device seller is able to make.
+    vector<double> deviceBuyerSelling;     //!< the menu of the MENU_SIZE resources that the deviceBuyer values the least
+    vector<double> deviceSellerSelling;    //!< the list of devices that the device seller is able to make.
 
     int deviceBuyerPick;    //!< the ID of the device that will be bought
 
@@ -42,7 +42,7 @@ private:
      * length NUM_RESOURCES, and each element is the amount of the resource
      * with the corresponding ID that will be bought/sold.
      */
-    vector<int> finalOffer;
+    vector<double> finalOffer;
 
     /**
      * Util gains and losses are tracked to make sure that both agents
@@ -51,12 +51,12 @@ private:
      */
     double deviceSellerUtilGain, deviceSellerUtilLoss, deviceBuyerUtilGain, deviceBuyerUtilLoss;
 
-    vector<int> deviceBuyerAvailableRes();
-    vector<int> deviceSellerAvailableDevices();
+    vector<double> deviceBuyerAvailableRes();
+    vector<double> deviceSellerAvailableDevices();
     void makePicks();
     void calcOffers();
-    vector<int> calcDeviceSellerOffers();
-    vector<int> calcDeviceBuyerOffers();
+    vector<double> calcDeviceSellerOffers();
+    vector<double> calcDeviceBuyerOffers();
     void checkGains();
     void makeTrade();
     void switchAndTryAgain();

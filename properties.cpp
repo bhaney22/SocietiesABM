@@ -78,7 +78,7 @@ void ResProperties::calcResEfforts()
 {
     assert(resEfforts.empty());
     resEfforts.clear();
-    for (int potentialExp = 0; potentialExp < int(maxResExperience); potentialExp++) {
+    for (double potentialExp = 0; potentialExp < double(maxResExperience); potentialExp++) {
         resEfforts.push_back(maxResEffort -
                 (maxResEffort - minResEffort)
                 * exp(- sqrt(maxResEffort) * 2
@@ -144,7 +144,7 @@ DevProperties::DevProperties()
     gainOverDeviceLifeMemoryValid = false;
     costOfDeviceMemory = 0.0;
     costOfDeviceMemoryValid = false;
-    worstCaseConstructionMemory = make_pair(0.0, vector<int>(glob.NUM_RESOURCES, 0));
+    worstCaseConstructionMemory = make_pair(0.0, vector<double>(glob.NUM_RESOURCES, 0));
     worstCaseConstructionMemoryValid = false;
 
     devicesMadeToday = 0;
@@ -156,14 +156,14 @@ DevProperties::DevProperties()
     deviceMinutesDecayTotal = 0;
 
     devicePrices = vector<double>(glob.DEVICE_TRADE_MEMORY_LENGTH, 0.0);
-    devicesRecentlyMade = vector<int>(glob.DEVICE_PRODUCTION_MEMORY_LENGTH, 0);
+    devicesRecentlyMade = vector<double>(glob.DEVICE_PRODUCTION_MEMORY_LENGTH, 0);																											//JYC: changed to type double
 }
 
 void DevProperties::calcDeviceEfforts()
 {
     assert(deviceEfforts.empty());
     deviceEfforts.clear();
-    for (int potentialExp = 0; potentialExp < int(maxDeviceExperience); potentialExp++) {
+    for (int potentialExp = 0; potentialExp < int(maxDeviceExperience); potentialExp++) {																														//JYC: changed to type double
         deviceEfforts.push_back( maxDeviceEffort -
                 (maxDeviceEffort - minDeviceEffort)
                 * exp(-maxDeviceEffort * 2

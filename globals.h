@@ -48,7 +48,7 @@ struct ResValues {
 class Agent;
 class Device;
 class ResourceMarketplace;
-//class Statstracker;
+class Statstracker;
 class ProductionStats;
 class TradeStats;
 class OtherStats;
@@ -90,7 +90,7 @@ public:
     int    removeResId;             // *** initialized in parse_args()
     int    removeResDay;            // *** initialized in parse_args()
     bool   removeResHoldings;       // *** initialized in parse_args()
-    bool   saveInMiddle;            // *** initialized in parse_args()
+    int   saveInMiddle;            // *** initialized in parse_args()
     string saveInMiddleFoldername;  // *** initialized in parse_args()
     int    saveInMiddleDay;         // *** initialized in parse_args()
     int    verboseLevel;            // *** initialized in parse_args()
@@ -122,13 +122,13 @@ public:
     int DEVICE_TRADE_ROUNDS;            // *** initialized in parse_args()
     int DEVICE_TRADE_ATTEMPTS;          // *** initialized in parse_args()
     int MENU_SIZE;                      // *** initialized in parse_args()
-    int DEVICE_TRADE_MEMORY_LENGTH;     // *** initialized in parse_args()
-    int DEVICE_PRODUCTION_MEMORY_LENGTH;      // *** initialized in parse_args()
-    int MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION;    // *** initialized in parse_args()
-    int MIN_RES_HELD_FOR_DEVICE_CONSIDERATION;      // *** initialized in parse_args()
+    double DEVICE_TRADE_MEMORY_LENGTH;     // *** initialized in parse_args()																											//JYC: changed to type double
+    double DEVICE_PRODUCTION_MEMORY_LENGTH;      // *** initialized in parse_args()																								//JYC: changed to type double
+    double MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION;    // *** initialized in parse_args()																					//JYC: changed to type double
+    double MIN_RES_HELD_FOR_DEVICE_CONSIDERATION;      // *** initialized in parse_args()																						//JYC: changed to type double
     double DAILY_EXP_PENALTY;           // *** initialized in parse_args()
     double PRODUCTION_EPSILON;          // *** initialized in parse_args()
-    int RESOURCES_IN_TOOL;              // *** initialized in parse_args()
+    double RESOURCES_IN_TOOL;              // *** initialized in parse_args()																															//JYC: changed to type double
     double MAX_RES_EXPERIENCE;          // *** initialized in parse_args()
     double INVENTOR_DEVICE_EXPERIENCE;  // *** initialized in parse_args()
     int NUM_DEVICE_COMPONENTS;          // *** initialized in parse_args()
@@ -224,8 +224,8 @@ public:
 
     time_t	startTime, endTime; // *** initialized in startTimer() and endTimer()
 //	this is used throughout the program, primarily in statstracker to serve as a place holder that will get filled eventually.
-    vector<int> EMPTY_VECTOR_OF_INTS;
-    vector<vector<int> > EMPTY_VECTOR_OF_VECTORS_OF_INTS;
+    vector<double> EMPTY_VECTOR_OF_DOUBLES;																																//JYC: changed to type double
+    vector<vector<double> > EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES;																						//JYC: changed to type double
 
     /*
      * To record day, month, year.

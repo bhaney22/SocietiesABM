@@ -108,7 +108,7 @@ void Utils::endDay()
         if (glob.agent[aId]->inSimulation) {
             glob.agent[aId]->endDayChecks();
 
-            glob.agent[aId]->logAgentData();
+//            glob.agent[aId]->logAgentData();			//JYC: temporarily commented out for begugging
             //if (aId == 0) {
             //    saveEndDayData();
             //}
@@ -591,8 +591,8 @@ void Utils::saveHHIQuartiles()
     file.open(filePath.c_str(), ios::app);
 
     string quartileNames[] = { "min", "q1", "median", "q3", "max" };
-    vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    vector<vector<vector<int> > > resGatheredByResByAgent = glob.productionStats->getResGatheredByResByAgent();
+    vector<vector<double> > resGatheredByRes = glob.productionStats->getResGatheredByRes();																//JYC: changed to type double
+    vector<vector<vector<double> > > resGatheredByResByAgent = glob.productionStats->getResGatheredByResByAgent();				//JYC: changed to type double
 
     /*
      * Save HHI for all agents
@@ -749,7 +749,7 @@ void Utils::saveUnitsGathered()
 	file.open(filePath.c_str(), ios::app);   /*open that particular file in append mode */
 
 
-    vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
+    vector<vector<double> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     
         file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
@@ -777,7 +777,7 @@ void Utils::saveUnitsHeld()
 
     /* unitsHeld per agent */
     file << "unitsHeldPerActiveAgent_" << glob.SIM_NAME << ",";
-    vector<int> sumRes = glob.otherStats->getSumRes();
+    vector<double> sumRes = glob.otherStats->getSumRes();																														//JYC: changed to type double
     vector<int> activeAgents = glob.otherStats->getActiveAgents();
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) sumRes[i] / (double) activeAgents[i] ) << ",";
@@ -785,7 +785,7 @@ void Utils::saveUnitsHeld()
     file << "\n";
 
     /* unitsHeld per group */
-    vector<vector<int> > resHeldByGroup = glob.otherStats->getSumResByGroup();
+    vector<vector<double> > resHeldByGroup = glob.otherStats->getSumResByGroup();																		//JYC: changed to type double
     vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
     for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
         file << "unitsHeldByGroup_" << i << "_" << glob.SIM_NAME << ",";
@@ -818,7 +818,7 @@ void Utils::saveUnitsTraded()
     vector<int> activeAgents = glob.otherStats->getActiveAgents();
 
     /* unitsTradedForDevice per agent */
-    vector<int> resTradeForDeviceVolume = glob.tradeStats->getResTradeForDeviceVolume();
+    vector<double> resTradeForDeviceVolume = glob.tradeStats->getResTradeForDeviceVolume();																//JYC: changed to type double
     file << "unitsTradedForDevicePerActiveAgent_" << glob.SIM_NAME << ",";
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) resTradeForDeviceVolume[i] / (double) activeAgents[i] ) << ",";
@@ -826,7 +826,7 @@ void Utils::saveUnitsTraded()
     file << "\n";
 
     /* unitsTradedForDevice per group */
-    vector<vector<int> > resTradedForDeviceVolumeByGroup = glob.tradeStats->getResTradeForDeviceVolumeByGroup();
+    vector<vector<double> > resTradedForDeviceVolumeByGroup = glob.tradeStats->getResTradeForDeviceVolumeByGroup();					//JYC: changed to type double
     vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
     for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
         file << "unitsTradedForDeviceByGroup_" << i << "_" << glob.SIM_NAME << ",";
@@ -837,7 +837,7 @@ void Utils::saveUnitsTraded()
     }
 
     /* unitsTradedForDevice in total when trading agents are from different groups */
-    vector<int> resTradeForDeviceVolumeCrossGroup = glob.tradeStats->getResTradeForDeviceVolumeCrossGroup();
+    vector<double> resTradeForDeviceVolumeCrossGroup = glob.tradeStats->getResTradeForDeviceVolumeCrossGroup();								//JYC: changed to type double
     file << "unitsTradedForDeviceCrossGroup_" << glob.SIM_NAME << ",";
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) resTradeForDeviceVolumeCrossGroup[i] / (double) activeAgents[i] ) << ",";
@@ -845,7 +845,7 @@ void Utils::saveUnitsTraded()
     file << "\n";
 
     /* unitsTradedForDevice when trading agents are from the same groups */
-    vector<vector<int> > resTradedForDeviceVolumeWithinGroup = glob.tradeStats->getResTradeForDeviceVolumeWithinGroup();
+    vector<vector<double> > resTradedForDeviceVolumeWithinGroup = glob.tradeStats->getResTradeForDeviceVolumeWithinGroup();		//JYC: changed to type double
     for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
         file << "unitsTradedForDeviceWithinGroup " << i << "_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -856,14 +856,14 @@ void Utils::saveUnitsTraded()
 
     /* unitsTradedForRes per agent */
     file << "unitsTradedForResPerActiveAgent_" << glob.SIM_NAME << ",";
-    vector<int> resTradeVolume = glob.tradeStats->getResTradeVolume();
+    vector<double> resTradeVolume = glob.tradeStats->getResTradeVolume();																											//JYC: changed to type double
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) resTradeVolume[i] / (double) activeAgents[i] ) << ",";
     }
     file << "\n";
 
     /* unitsTradedForRes per group */
-    vector<vector<int> > resTradeVolumeByGroup = glob.tradeStats->getResTradeVolumeByGroup();
+    vector<vector<double> > resTradeVolumeByGroup = glob.tradeStats->getResTradeVolumeByGroup();															//JYC: changed to type double
     for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
         file << "unitsTradedForResByGroup_" << i << "_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -874,14 +874,14 @@ void Utils::saveUnitsTraded()
 
     /* unitsTradedForRes when trading agents are from different groups */
     file << "unitsTradedForResCrossGroup_" << glob.SIM_NAME << ",";
-    vector<int> resTradeVolumeCrossGroup = glob.tradeStats->getResTradeVolumeCrossGroup();
+    vector<double> resTradeVolumeCrossGroup = glob.tradeStats->getResTradeVolumeCrossGroup();																//JYC: changed to type double
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) resTradeVolumeCrossGroup[i] / (double) activeAgents[i] ) << ",";
     }
     file << "\n";
 
     /* unitsTradedForRes when trading agents are from the same group */
-    vector<vector<int> > resTradeVolumeWithinGroup = glob.tradeStats->getResTradeVolumeWithinGroup();
+    vector<vector<double> > resTradeVolumeWithinGroup = glob.tradeStats->getResTradeVolumeWithinGroup();											//JYC: changed to type double
     for (int i = 0; i < glob.NUM_AGENT_GROUPS; i++) {
         file << "unitsTradedForResWithinGroup " << i << "_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -918,7 +918,7 @@ void Utils::saveDeviceMade()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* device made per agent */
-    vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
+    vector< vector<double> > devicesMade = glob.productionStats->getDevicesMade();																						//JYC: changed to type double
     for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << "MadePerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -928,7 +928,7 @@ void Utils::saveDeviceMade()
     }
 
     /* device made per goup */
-    vector< vector< vector <int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
+    vector< vector< vector <double> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();											//JYC: changed to type double
     vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
@@ -966,7 +966,7 @@ void Utils::saveTotalTimeUsage()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* timeSpentGatheringWithDevice per agent */
-    vector< vector<int> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
+    vector< vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();								//JYC: changed to type double
     for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
         file << devicesStr[i] << "_timeGatheringWithDevicePerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -976,7 +976,7 @@ void Utils::saveTotalTimeUsage()
     }
 
     /* timeSpentGatheringWithDevice per group */
-    vector< vector<vector<int> > > timeSpentGatheringWithDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithDeviceByGroup();
+    vector< vector<vector<double> > > timeSpentGatheringWithDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithDeviceByGroup();	//JYC: changed to type double
     vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
@@ -990,7 +990,7 @@ void Utils::saveTotalTimeUsage()
     file << "\n";       // add an extra line so more readable.
 
     /* timeMakingDevices per agent */
-    vector< vector<int> > timeSpentMakingDevices = glob.productionStats->getTimeSpentMakingDevices();
+    vector< vector<double> > timeSpentMakingDevices = glob.productionStats->getTimeSpentMakingDevices();
     for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << " timeMakingDevicesPerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1000,7 +1000,7 @@ void Utils::saveTotalTimeUsage()
     }
 
     /* timeMakingDevices per group */
-    vector< vector<vector<int> > > timeSpentMakingDevicesByGroup = glob.productionStats->getTimeSpentMakingDevicesByGroup();
+    vector< vector<vector<double> > > timeSpentMakingDevicesByGroup = glob.productionStats->getTimeSpentMakingDevicesByGroup();						//JYC: changed to type double
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
             file << devicesStr[i] << " timeMakingDevicesByGroup " << gId << "_" << glob.SIM_NAME << ",";
@@ -1014,14 +1014,14 @@ void Utils::saveTotalTimeUsage()
 
     /* timeGatheringWithoutDevice per agent */
     file << "timeGatheringWithoutDevicePerActiveAgent_" << glob.SIM_NAME << ",";
-    vector<int> timeSpentGatheringWithoutDevice = glob.productionStats->getTimeSpentGatheringWithoutDevice();
+    vector<double> timeSpentGatheringWithoutDevice = glob.productionStats->getTimeSpentGatheringWithoutDevice();														//JYC: changed to type double
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) timeSpentGatheringWithoutDevice[i] / (double) activeAgents[i] ) << ",";
     }
     file << "\n";
 
     /* timeGatheringWithoutDevice per group */
-    vector<vector<int> > timeSpentGatheringWithoutDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithoutDeviceByGroup();
+    vector<vector<double> > timeSpentGatheringWithoutDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithoutDeviceByGroup();				//JYC: changed to type double
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         file << "timeGatheringWithoutDeviceByGroup " << gId << "_" << glob.SIM_NAME << ",";
         for (int i = 0; i < glob.NUM_DAYS; i++) {
@@ -1082,8 +1082,8 @@ void Utils::saveDevDevice()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* devices made with devDevice by total agents */
-    vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
-    vector< vector<int> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();
+    vector< vector<double> > devicesMade = glob.productionStats->getDevicesMade();																												//JYC: changed to type double
+    vector< vector<double> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();														//JYC: changed to type double
     for (int i = 4; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << "Use_" << glob.SIM_NAME  << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1102,8 +1102,8 @@ void Utils::saveDevDevice()
     }
 
     /* devices made with devDevice by each group */
-    vector< vector< vector <int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
-    vector<vector<vector<int> > > devicesMadeWithDevDeviceByGroup = glob.productionStats->getDevicesMadeWithDevDeviceByGroup();
+    vector< vector< vector <double> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();																//JYC: changed to type double
+    vector<vector<vector<double> > > devicesMadeWithDevDeviceByGroup = glob.productionStats->getDevicesMadeWithDevDeviceByGroup();				//JYC: changed to type double
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 4; i < NUM_DEVICE_TYPES; i++) {
             file << "Group " << gId << "_" << devicesStr[i] << " Use_" << glob.SIM_NAME  << ",";
@@ -1163,7 +1163,7 @@ void Utils::saveDeviceComplexity()
  * BRH: 10.2.2017 Save number of devices and recipes of each type made for each resource 
  */
 void Utils::saveDeviceRecipes()
-{	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
+{	vector< vector< vector<double> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();																			//JYC: changed to type double
 
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/DeviceRecipes.csv"; 
@@ -1200,13 +1200,13 @@ void Utils::saveDeviceRecipes()
 // BRH: 05.26.2018 Print IOMatrix.csv files separately for each run for parallelization
 // example of a one-line matrix: Ulano_ex3=0,16.1,0,74.3,0\0,0,0,0,2.06\0,0,0,0,0\0,0,0,0,7.2\0,0,0,0,0
 void Utils::saveUseMatrix()
-{	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
-    vector<vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
-    // BRH temp comment vector<vector<int> > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
-    // BRH temp comment vector<int> timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
-    int temp_in_device=0;
-	double num_of_that_device_made;
-    int tempTimeSpentGatheringWithDeviceByRes;
+{	vector< vector< vector<double> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
+    vector<vector<double> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
+    vector< vector< vector <double> > > timeSpentGatheringWithDeviceByRes = glob.productionStats -> getTimeSpentGatheringWithDeviceByRes();  //BRH NEW variable 05.29.2018	//JYC: changed to type double  //changed code from vector<vector<double> > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;
+    vector< vector<double> > timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes();																		//JYC: changed to type double  //changed code from   vector< double > timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;
+    double temp_in_device=0;																																																														//JYC: changed to type double
+	double num_of_that_device_made;																																																										//JYC: changed to type double
+    double tempTimeSpentGatheringWithDeviceByRes;																																																			//JYC: changed to type double
    
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
@@ -1268,10 +1268,10 @@ void Utils::saveUseMatrix()
             file << ",0";
         } else {
                 file << ",0"; //BRH for testing only. //Delete this line after the problem is fixed.
-                //BRH temp comment // double sumTimeSpentGatheringWithDeviceByRes = 0.0; 
-               //BRH temp comment // tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
-                // BRH temp comment //       sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
-                //BRH temp comment // file << "," << sumTimeSpentGatheringWithDeviceByRes;
+                double sumTimeSpentGatheringWithDeviceByRes = 0.0;
+                tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
+                sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
+               file << "," << sumTimeSpentGatheringWithDeviceByRes;
         }
     }		
  
@@ -1524,8 +1524,8 @@ void Utils::saveOutput()
 //Get information to be written to output file.
     vector<int> activeAgents = glob.otherStats->getActiveAgents();
     vector<double> sumUtil = glob.otherStats->getSumUtil();   
-	vector<int> sumRes = glob.otherStats->getSumRes();
-	vector<int> resGath = glob.productionStats->getResGathered();
+	vector<double> sumRes = glob.otherStats->getSumRes();
+	vector<double> resGath = glob.productionStats->getResGathered();
     vector<double> orderedUtils;  // For Gini calcuation.
     vector<double> y; // For Gini calcuation.
     vector<vector<double> > sumUtilByAgent = glob.otherStats->getSumUtilByAgent();   // For Gini calcuation.
@@ -1581,7 +1581,7 @@ void Utils::saveOutput()
 	
 	/* Devices Made */;
 		string devicesStr[] = { "TOOL(T1)", "MACHINE(T2)", "FACTORY(T3)", "INDUSTRY(T4)", "DEVMACHINE(T5)", "DEVFACTORY(T6)" };
-		vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
+		vector< vector<double> > devicesMade = glob.productionStats->getDevicesMade();
 		for (int j = 0; j < NUM_DEVICE_TYPES; j++) {
 			file << ( (double) devicesMade[j][i] / (double) activeAgents[i] ) << ",";
 		}

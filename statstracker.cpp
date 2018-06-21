@@ -31,12 +31,12 @@ using namespace std;
  */
 DayExchangeStats::DayExchangeStats()
 {
-    soldExchanges = vector<int>(glob.NUM_RESOURCES, 0);
-    boughtExchanges = vector<int>(glob.NUM_RESOURCES, 0);
+    soldExchanges = vector<double>(glob.NUM_RESOURCES, 0);
+    boughtExchanges = vector<double>(glob.NUM_RESOURCES, 0);
     for (int i = 0; i < NUM_DEVICE_TYPES; i++){
         deviceExchange deviceEx;
         deviceEx.sold = 0;
-        deviceEx.bought = vector<int>(glob.NUM_RESOURCES, 0);
+        deviceEx.bought = vector<double>(glob.NUM_RESOURCES, 0);
         deviceExchanges.push_back(deviceEx);
     }
 }
@@ -57,10 +57,10 @@ TradeStats::TradeStats()
     resTradeForDeviceVolumeWithinGroup.clear();
 
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        resTradeVolumeByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        resTradeVolumeWithinGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        resTradeForDeviceVolumeByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        resTradeForDeviceVolumeWithinGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        resTradeVolumeByGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        resTradeVolumeWithinGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        resTradeForDeviceVolumeByGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        resTradeForDeviceVolumeWithinGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
     }
     if (glob.SAVE_TRADES) {
         dayResExchanges.clear();
@@ -123,8 +123,8 @@ void TradeStats::dailyUpdate()
     }
 
     if (glob.SAVE_TRADES) {
-        vector <vector <vector<int> > > newResExchanges;
-        vector <vector <int> > dayResExchTmp(2);	// 2 vectors of ints.
+        vector <vector <vector<double> > > newResExchanges;																					//JYC: changed to type double
+        vector <vector <double> > dayResExchTmp(2);	// 2 vectors of ints.																//JYC: changed to type double
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
             // push on two vectors of integers
             dayResExchTmp[0] = dayResExchanges[resId].getSoldExchanges();
@@ -141,7 +141,7 @@ void TradeStats::dailyUpdate()
  */
 void TradeStats::newExchange(ResourcePair &pair)
 {
-    int resA = pair.getAPick();
+    double resA = pair.getAPick();
     int resB = pair.getBPick();
     int numA = pair.getNumAPicked();
     int numB = pair.getNumBPicked();
@@ -163,38 +163,38 @@ void TradeStats::newExchange(ResourcePair &pair)
 ProductionStats::ProductionStats()
 {
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-        resGatheredByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        resGatheredByAgent.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
     }
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        numAgentsGatheringByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        resGatheredByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        resGatheredByResByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithoutDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        numAgentsGatheringByRes.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        resGatheredByRes.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        resGatheredByResByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithoutDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-            resGatheredByResByAgent[resId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            resGatheredByResByAgent[resId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         }
     }
 
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        resGatheredByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        devicesMadeByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentMakingDevicesByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithoutDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        devicesMadeWithDevDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+        resGatheredByGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        devicesMadeByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentMakingDevicesByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithoutDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        devicesMadeWithDevDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
         for (int type = TOOL; type < glob.getNumDeviceTypes(); type++) {
-            devicesMadeByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentGatheringWithDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentMakingDevicesByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            devicesMadeWithDevDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            devicesMadeByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            timeSpentGatheringWithDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            timeSpentMakingDevicesByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            devicesMadeWithDevDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         }
     }
 
     for (int type = TOOL; type < glob.getNumDeviceTypes(); type++) {
-        devicesMade.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        devicesMadeByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+        devicesMade.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        devicesMadeByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
         /*
          * For devicesMadeWithDevDevice & devicesMadeWithDevDeviceByRes:
          * Put in place holder vectors.  At this point it is making 6 but we really only need two.
@@ -202,41 +202,41 @@ ProductionStats::ProductionStats()
          * to waste the four empty vectors at the beginning instead of needing to do offsets
          * elsewhere to access the data correctly.
          */
-        devicesMadeWithDevDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        devicesMadeWithDevDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+        devicesMadeWithDevDevice.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        devicesMadeWithDevDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
 
-        timeSpentMakingDevices.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentGatheringWithDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+        timeSpentMakingDevices.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        timeSpentGatheringWithDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
         
         // for each agent ID
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-            timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         }
 
         // for each resource ID
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-            devicesMadeByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            devicesMadeByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         }
 
         // only types 0-3 (TOOL, MACHINE, FACTORY, INDUSTRY)
         if (type <= INDUSTRY) {
-            resGatheredByDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
+            resGatheredByDevice.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
             percentResGatheredByDevice.push_back(vector<double>());
             percentResGatheredByDeviceByRes.push_back(vector<vector<double> >());
-            resGatheredByDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+            resGatheredByDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 percentResGatheredByDeviceByRes[type].push_back(vector<double>());
-                resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
-                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+                resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
             }
         }
         // only types 4-5 (DEVMACHINE, DEVFACTORY)
         else if (type == DEVMACHINE || type == DEVFACTORY) {
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-                devicesMadeWithDevDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+                devicesMadeWithDevDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
             }
         }
     }
@@ -388,10 +388,10 @@ void ProductionStats::calcResGatheredByDeviceByRes()
  */
 void ProductionStats::calcDevicesMade()
 {
-    vector<vector<int> > temp;  //*< indexed by agent type, then device type */
+    vector<vector<double> > temp;  //*< indexed by agent type, then device type */
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        temp.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        temp[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
+        temp.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        temp[gId] = vector<double>(glob.getNumDeviceTypes(), 0);
     }
 
     for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
@@ -440,10 +440,10 @@ void ProductionStats::calcDevicesMadeByRes()
  */
 void ProductionStats::calcDevicesMadeWithDevDevicesByRes()
 {
-    vector<vector<int> > temp;  //*< indexed by agent type, then device type */
+    vector<vector<double> > temp;  //*< indexed by agent type, then device type */
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        temp.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        temp[gId] = vector<int>(2, 0);  // only DEVMACHINE and DEVFACTORY;
+        temp.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        temp[gId] = vector<double>(2, 0);  // only DEVMACHINE and DEVFACTORY;
     }
     for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
         int devMadeWithDevice = 0;
@@ -498,11 +498,12 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
         temp[glob.agent[aId]->group] += withoutDeviceEachAgent;
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
             int withoutDeviceResTotal = 0;
-            int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes[resId];
+            int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes(resId); //JC changed from [] to ()
             withoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
-        }
-        timeSpentGatheringWithoutDeviceByRes.push_back(withoutDeviceResTotal);
-    }
+            																																																			//JC moved "}" from here
+            timeSpentGatheringWithoutDeviceByRes[resId].push_back(withoutDeviceResTotal); 															//JC added [resId]
+        }																																																				//JC moved "}" to here
+	}
     timeSpentGatheringWithoutDevice.push_back(withoutDeviceTotal);
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         timeSpentGatheringWithoutDeviceByGroup[gId].push_back(temp[gId]);
@@ -523,13 +524,13 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
      * -> INDUSTRY, not the last two.  This code does not make that
      * distinction. So be careful when using it in save data.
      */
-    vector<vector<int> > tempTimeSpentGathering, tempTimeSpentMaking;  //*< indexed by agent type, then device type */
+    vector<vector<double> > tempTimeSpentGathering, tempTimeSpentMaking;  //*< indexed by agent type, then device type */
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        tempTimeSpentGathering.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        tempTimeSpentGathering[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
+        tempTimeSpentGathering.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        tempTimeSpentGathering[gId] = vector<double>(glob.getNumDeviceTypes(), 0);
 
-        tempTimeSpentMaking.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        tempTimeSpentMaking[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
+        tempTimeSpentMaking.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        tempTimeSpentMaking[gId] = vector<double>(glob.getNumDeviceTypes(), 0);
     }
 
     for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
@@ -557,19 +558,20 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
                 int totalTimeWithDeviceByRes = 0;
                 double timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];
                 totalTimeWithDeviceByRes += timeWithDeviceByRes;
-            }
+
             timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);            }
 
         }
         // save the time data of the population as a whole.
         timeSpentGatheringWithDevice[type].push_back(totalTimeWithDevice);
         timeSpentMakingDevices[type].push_back(totalTimeSpentMakingDevices);
-    }
+
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
             timeSpentGatheringWithDeviceByGroup[gId][type].push_back(tempTimeSpentGathering[gId][type]);
             timeSpentMakingDevicesByGroup[gId][type].push_back(tempTimeSpentMaking[gId][type]);
         }
+    }
     }
 }
 
@@ -641,12 +643,12 @@ void ProductionStats::calcPercentResGatheredByDeviceByRes()
 OtherStats::OtherStats()
 {
     activeAgents = vector<int>();
-    sumRes = vector<int>();
+    sumRes = vector<double>();
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-        sumResByAgent.push_back(vector<int>());
+        sumResByAgent.push_back(vector<double>());
     }
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        sumResByGroup.push_back(vector<int>());
+        sumResByGroup.push_back(vector<double>());
         activeGroupAgents.push_back(vector<int>());
     }
 
@@ -659,7 +661,7 @@ OtherStats::OtherStats()
     }
 
     for (int i = 0; i < glob.getNumDeviceTypes(); i++) {
-        numberOfInventedDevices.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        numberOfInventedDevices.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
     }
 }
 
@@ -687,10 +689,10 @@ void OtherStats::calcSumResourcesByAgentByGroup()
         cout << "[statsTracker.cpp] OtherStats() - Enter" << endl;
     }
 
-    int sumResources = 0;
-    vector<int> temp = vector<int>(glob.NUM_AGENT_GROUPS, 0);
+    double sumResources = 0;
+    vector<double> temp = vector<double>(glob.NUM_AGENT_GROUPS, 0);
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-        int totalHeldByThisAgent = 0;
+        double totalHeldByThisAgent = 0;
         for (int resP = 0; resP < glob.NUM_RESOURCES; resP++) {
             if (DEBUG_OTHERSTATS) {
                 cout << "[statsTracker.cpp] OtherStats() - getting NumResources, aId = "
@@ -721,7 +723,7 @@ void OtherStats::calcSumUtility()
     double sumUtility = 0;
     vector<double> sumUtilityByGroup = vector<double>(glob.NUM_AGENT_GROUPS, 0.0);
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-        int agentUtility = 0;
+        double agentUtility = 0;
         agentUtility = glob.agent[aId]->utilityToday;
         sumUtilByAgent[aId].push_back(agentUtility);
         sumUtilityByGroup[glob.agent[aId]->group] += agentUtility;
@@ -739,7 +741,7 @@ void OtherStats::calcSumUtility()
 void OtherStats::calcNumDevicesInvented()
 {
     for (int i = 0; i < glob.getNumDeviceTypes(); i++) {
-        int knownDevices = 0;
+        double knownDevices = 0;
         for (int j = 0; j < glob.NUM_RESOURCES; j++) {
             if ((glob.discoveredDevices[i][j] != 0)
                 && (glob.discoveredDevices[i][j]->agentsKnown() != 0)) {
@@ -770,8 +772,8 @@ void OtherStats::getSumResByAgent()
 
     // We have a "2D" vector vvi (vector of vector of int's) that we need to iterate through.  We
     // need to set the iterator for each vector.
-    vector<int>::iterator dayIT;
-    vector<vector<int> >::iterator agentIT;
+    vector<double>::iterator dayIT;
+    vector<vector<double> >::iterator agentIT;
 
     //	For every agent reset the day number equal to 0
     for (agentIT = sumResByAgent.begin(); agentIT != sumResByAgent.end(); agentIT++) {

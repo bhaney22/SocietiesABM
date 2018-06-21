@@ -53,7 +53,7 @@ private:
      * The number of units of their picked
      * resource that the agents are going to get in the trade.
      */
-    int numAPicked, numBPicked;
+    double numAPicked, numBPicked;																												//JC: changed to type double
 
     /**
      * The 'price' of aPick in terms of bPick (i.e. the number
@@ -85,8 +85,8 @@ public:
     ResourcePair(Agent *agentA, Agent *agentB);
     int getAPick() { return aPick; }
     int getBPick() { return bPick; }
-    int getNumAPicked() { return numAPicked; }
-    int getNumBPicked() { return numBPicked; }
+    double getNumAPicked() { return numAPicked; }																						//JC: changed to type double
+    double getNumBPicked() { return numBPicked; }																						//JC: changed to type double
     void pairTrade();
 };
 #endif

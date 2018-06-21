@@ -90,7 +90,7 @@ public:
      *  the devices bought in a given round that the agent checks to
      *  prevent constant trade back and forth.
      */
-    vector<int> deviceBoughtThisRound;
+    vector<double> deviceBoughtThisRound;
 
     /**
      * Tracks which agents this agent has traded devices with in the
@@ -101,20 +101,20 @@ public:
      * Keeps track of the number of units of all resources this agent
      * has sold.
      */
-    int unitsSoldToday;
-    int unitsSoldForDevicesToday; //!< the number of units of all resources sold for devices today.
+    double unitsSoldToday;																																			//JC: changed to type double
+    double unitsSoldForDevicesToday; //!< the number of units of all resources sold for devices today.			//JC: changed to type double
     /**
      * Keeps track of the number of units of all resources this agent has sold
      * if its partner is from another group.
      * unitsSoldWinthinGroupToday = unitsSoldToday - unitsSoldCrossGroupToday;
      * Don't need another variable for that.
      */
-    int unitsSoldCrossGroupToday;
+    double unitsSoldCrossGroupToday;																														//JC: changed to type double
     /**
      * Keeps track of the number of units of all resources this agent has sold for devices
      * if its partner is from another group.
      */
-    int unitsSoldCrossGroupForDevicesToday;
+    double unitsSoldCrossGroupForDevicesToday;																									//JC: changed to type double
 
     /**
      * Keeps track of the number of units of all resources this agent
@@ -123,13 +123,13 @@ public:
      * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
      * those for the first 4.
      */
-    vector<vector<int> > unitsGatheredWithDeviceToday;
+    vector<vector<double> > unitsGatheredWithDeviceToday;																			//JC: changed to type double
     /**
      * unitsExtractedWithDeviceTodayByRes is indexed by TOOL through INDUSTRY.
      * and NUM_RESOURCES
      * sizes of the vectors are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
-    vector< vector<int> > unitsExtractedWithDeviceTodayByRes;
+    vector< vector<double> > unitsExtractedWithDeviceTodayByRes;																	//JC: changed to type double
     /**
      * Each element in these lists is the number of devices made of the
      * corresponding resource.
@@ -138,7 +138,7 @@ public:
      * the 2 vectors inside of those for DEVMACHINE and DEVFACTORY.
      * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
-    vector< vector<int> > devicesMadeWithDevDevicesToday;
+    vector< vector<double> > devicesMadeWithDevDevicesToday;																		//JC: changed to type double
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
@@ -154,8 +154,8 @@ public:
      * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
      * those for the first 4.
      */
-    vector<int> timeSpentGatheringWithDeviceToday;
-    vector< vector<int> > timeSpentGatheringWithDeviceTodayByRes; 
+    vector<double> timeSpentGatheringWithDeviceToday;																															//JC: changed to type double
+    vector< vector<double> > timeSpentGatheringWithDeviceTodayByRes; 																								//JC: changed to type double
     /**
      * The number of minutes used to gather resources without using devices.
      */
@@ -174,20 +174,20 @@ public:
     Agent(int number, vector< vector<double> > agentValues);
     double utilCalc(int resIndex) const;
     double tempUtilCalc(int resIndex, int change) const;
-    int resHeld(int resIndex) const; 
+    double resHeld(int resIndex) const; 																																							//JC: changed to type double
     double utilPerEffort(int resIndex) const;
-    int getHeld (int resId) const;
-    int getUnitsGatheredToday(int resId) const;
-    int getUnitsGatheredWithDevice(int device, int resId) const;
-    int getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
-    int getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
-    int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
+    double getHeld (int resId) const;																																									//JC: changed to type double
+    double getUnitsGatheredToday(int resId) const;																																		//JC: changed to type double
+    double getUnitsGatheredWithDevice(int device, int resId) const;																										//JC: changed to type double
+    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018	//JC: changed to type double
+    double getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
+    double getDevicesMadeToday(int deviceIndex, int deviceType) const;  																								//JC: changed to type double
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;
     void workDay();
     // vtn2: note: A better name would probably be extractWithDevice.
     void deviceUse(device_name_t device, int deviceIndex, double timeChange);
-    bool resBundleHeldCheck(vector<int> bundle) const;
+    bool resBundleHeldCheck(vector<double> bundle) const;																													//JC: changed to type double
     void toolInvention();
     void deviceInvention(device_name_t device, device_name_t componentType);
     void makeDevice(int deviceIndex, device_name_t device);
@@ -209,8 +209,8 @@ public:
     double sellerDeviceValue(int resIndex, device_name_t device);
     double buyerDeviceValue(int resIndex, device_name_t device);
     vector<int> preferredDeviceTraders(device_name_t device);
-    void buys(int resIndex, int amount);
-    void sells(int resIndex, int amount);
+    void buys(int resIndex, double amount);																																						//JC: changed to type double
+    void sells(int resIndex, double amount);																																						//JC: changed to type double
     void getBackRes(int toolIndex, device_name_t bestDevDevice);
     void getBackDeviceComponents(device_name_t device, int deviceIndex);
     void setAsideRes(int toolIndex, device_name_t bestDevDevice);
@@ -219,8 +219,8 @@ public:
     void buysDevice(int deviceIndex, device_name_t device);
     void sellsDevice(int deviceIndex, device_name_t device);
     double utilityHeld(int resIndex);
-    double costOfResourceBundle(vector<int> &resourceBundle) const;
-    double gainOfResourceBundle(vector<int> &resourceBundle) const;
+    double costOfResourceBundle(vector<double> &resourceBundle) const;
+    double gainOfResourceBundle(vector<double> &resourceBundle) const;
     double myAccumulate(int resIndex, int change) const;
     double barterUtility(int resIndex, int change) const;
     double deviceCurrentlyHeldForResource(int resIndex, device_name_t device) const;
@@ -241,7 +241,7 @@ public:
 /**
  * \return the number of units an agent holds of a given resource.
  */
-inline int Agent::resHeld(int resIndex) const
+inline double Agent::resHeld(int resIndex) const
 {
     return resProp[resIndex].getHeld();
 }
@@ -266,7 +266,7 @@ inline double Agent::devDeviceHeldForRes(device_name_t type, int resIndex) const
  * When an agent gets a resource from a trade it is considered
  * "bought", the unit is added to its "held".
  */
-inline void Agent::buys(int resIndex, int amount)
+inline void Agent::buys(int resIndex, double amount)
 {
     resProp[resIndex].setHeld(resProp[resIndex].getHeld() + amount);
 }
@@ -274,7 +274,7 @@ inline void Agent::buys(int resIndex, int amount)
 /**
  * When an agent gives up a unit from trade, it is considered "sold".
  */
-inline void Agent::sells(int resIndex, int amount)
+inline void Agent::sells(int resIndex, double amount)
 {
     resProp[resIndex].setHeld(resProp[resIndex].getHeld() - amount);
 }
