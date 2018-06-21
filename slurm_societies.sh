@@ -8,7 +8,6 @@
 # to run this script, use the command line: 
 # 			sbatch slurm_societies.sh &config &numruns
 
-
 #
 
 # Societies command line arguments Naming conventions:
@@ -21,9 +20,6 @@
 # 4. -d provides a unique batch ID that will be used to join the output measures
 #       with the config file dimensions (*New* as of v1.5 of SocietiesABM)
 # BRH 2017.10.02 changed the verbose level to 3 for testing purposes.
-
-#SBATCH -N 1
-#SBATCH -p gpus
 
 UniqueKey=$(date +%d%m%Y%H%M%S%N)
 StartDay=$(date +%D)
@@ -39,8 +35,7 @@ rm ~/SocietiesABM/_Results/$1 -r
 for run_num in $(seq -f "%03g" 1 $2)
 do
 	echo "     UniqueKey_run_num: $UniqueKey"_"$run_num"
-#	srun ./societies -v 1 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
-    ./societies -v 2 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
+	srun ./societies -v 1 -p $1 -s _Results/$1  -d B$UniqueKey -t $run_num
 done
 
 duration=$SECONDS
