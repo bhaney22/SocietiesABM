@@ -159,7 +159,7 @@ public:
     /**
      * The number of minutes used to gather resources without using devices.
      */
-    double timeSpentGatheringWithoutDeviceToday;
+    int timeSpentGatheringWithoutDeviceToday;		//JYC: changed from type double to int
     /**
      * The sum of the utilities of all units of all resources held by
      * this agent in a given day.

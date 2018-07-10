@@ -498,10 +498,11 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
         temp[glob.agent[aId]->group] += withoutDeviceEachAgent;
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
             int withoutDeviceResTotal = 0;
-            int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes[resId];
+            int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes(resId); //JYC: changed from [resId] to (resId)
             withoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
-        }
-        timeSpentGatheringWithoutDeviceByRes.push_back(withoutDeviceResTotal);
+            		//JYC: remove '}' here
+        timeSpentGatheringWithoutDeviceByRes[resId].push_back(withoutDeviceResTotal);		//JYC: added [resId]
+        }   //JYC: add '}' here
     }
     timeSpentGatheringWithoutDevice.push_back(withoutDeviceTotal);
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
@@ -538,8 +539,8 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
-            double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
-            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
+            int timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];			//JYC: changed from type double to int
+            int timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];		//JYC: changed from type double to int
             
             // add this agents time spent with the previous agents
             totalTimeWithDevice += timeWithDeviceByAgent;
@@ -557,7 +558,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
                 int totalTimeWithDeviceByRes = 0;
                 double timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];
                 totalTimeWithDeviceByRes += timeWithDeviceByRes;
-            }
+            			//JYC: remove '}' here
             timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);            }
 
         }
