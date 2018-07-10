@@ -65,7 +65,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
 
     devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
-    timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    timeSpentMakingDevicesToday = vector<int>(NUM_DEVICE_TYPES, 0.0);			//JYC: changed from type double to type int
 
     timeSpentGatheringWithDeviceToday = vector<int>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithDeviceTodayByRes = vector< vector<int> >(NUM_DEVICE_TYPES);

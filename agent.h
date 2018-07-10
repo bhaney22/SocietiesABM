@@ -144,7 +144,7 @@ public:
      * device of the corresponding resource. 
      * size is [glob.NUM_DEVICE_TYPES]
      */
-    vector<double> timeSpentMakingDevicesToday;
+    vector<int> timeSpentMakingDevicesToday;			//JYC: changed from type double to type int
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 

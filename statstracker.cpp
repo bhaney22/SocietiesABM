@@ -227,10 +227,11 @@ ProductionStats::ProductionStats()
             percentResGatheredByDevice.push_back(vector<double>());
             percentResGatheredByDeviceByRes.push_back(vector<vector<double> >());
             resGatheredByDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+            timeSpentGatheringWithDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);		//JYC: Error in line 234 is due to end of storage, so adding storage space
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 percentResGatheredByDeviceByRes[type].push_back(vector<double>());
                 resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
-                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);		//JYC: Error states "END OF STORAGE"
             }
         }
         // only types 4-5 (DEVMACHINE, DEVFACTORY)
@@ -524,7 +525,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
      * -> INDUSTRY, not the last two.  This code does not make that
      * distinction. So be careful when using it in save data.
      */
-    vector<vector<int> > tempTimeSpentGathering, tempTimeSpentMaking;  //*< indexed by agent type, then device type */
+    vector<vector<int> > tempTimeSpentGathering, tempTimeSpentMaking;  	//*< indexed by agent type, then device type */
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         tempTimeSpentGathering.push_back(glob.EMPTY_VECTOR_OF_INTS);
         tempTimeSpentGathering[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
@@ -533,7 +534,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         tempTimeSpentMaking[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
     }
 
-    for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
+    for (int type = 0; type < 4; type++) {		//JYC: changed from glob.NumDeviceTypes() to 4
         int totalTimeWithDevice = 0;
         int totalTimeSpentMakingDevices = 0;
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
@@ -556,11 +557,13 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             // save the device time used to gather each resource
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 int totalTimeWithDeviceByRes = 0;
-                double timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];
-                totalTimeWithDeviceByRes += timeWithDeviceByRes;
-            			//JYC: remove '}' here
-            timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);            }
+                int timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];			//JYC: changed from type double to int
+                //JYC: Error Message for above states "CANNOT ACCESS MEMORY AT ADDRESS 0x0"
 
+                totalTimeWithDeviceByRes += timeWithDeviceByRes;
+            		//JYC: remove '}' here
+            timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
+            }
         }
         // save the time data of the population as a whole.
         timeSpentGatheringWithDevice[type].push_back(totalTimeWithDevice);
