@@ -1206,7 +1206,7 @@ void Utils::saveUseMatrix()
     // BRH temp comment vector<int> timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
 	double num_of_that_device_made;
-    int tempTimeSpentGatheringWithDeviceByRes;
+    vector< vector< vector<int> > > tempTimeSpentGatheringWithDeviceByRes;
    
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
@@ -1263,17 +1263,18 @@ void Utils::saveUseMatrix()
 		file << glob.currentDay+1 << ",";
 		file << "T1_R" << product+1 ;
 // BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
-    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        if (product != resId) {
-            file << ",0";
-        } else {
-                file << ",0"; //BRH for testing only. //Delete this line after the problem is fixed.
-                //BRH temp comment // double sumTimeSpentGatheringWithDeviceByRes = 0.0; 
-               //BRH temp comment // tempTimeSpentGatheringWithDeviceByRes =  timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay]; 
-                // BRH temp comment //       sumTimeSpentGatheringWithDeviceByRes += tempTimeSpentGatheringWithDeviceByRes;
-                //BRH temp comment // file << "," << sumTimeSpentGatheringWithDeviceByRes;
-        }
-    }		
+	    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+	        if (product != resId) {
+	        } else {
+	                //BRH temp comment
+	            int sumTimeSpentGatheringWithDeviceByRes = 0;
+	            int totalTimeSpentGatheringWithDeviceByRes = 0;
+	        		tempTimeSpentGatheringWithDeviceByRes =  glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
+	        		sumTimeSpentGatheringWithDeviceByRes = tempTimeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
+	                totalTimeSpentGatheringWithDeviceByRes += sumTimeSpentGatheringWithDeviceByRes;
+	                file << "," << totalTimeSpentGatheringWithDeviceByRes;
+	        }
+	    }
  
  // Now, fill in 0s across row for T1 industries since T1 devices are not used in making T1 devices.       
  		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";}        
