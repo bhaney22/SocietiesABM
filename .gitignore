@@ -1,4 +1,4 @@
 SLURM_scripts/*.out*
 *.o 
 Unit*.csv
-_Results*
+_Results/
