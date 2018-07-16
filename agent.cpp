@@ -923,14 +923,14 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
  //JYC: Unit Testing 18.07.11
-        if (glob.currentDay == glob.NUM_DAYS){
+        if (glob.currentDay + 1 == glob.NUM_DAYS){
         	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << bestDevice;
         }
     } else {
         resProp[resIndex].timeSpentGatheringWithoutDeviceToday += workTime;
         timeSpentGatheringWithoutDeviceToday += workTime;
  //JYC: Unit Testing 18.07.11
-        if (glob.currentDay == glob.NUM_DAYS){
+        if (glob.currentDay +1 == glob.NUM_DAYS){
         	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
         }
     }
