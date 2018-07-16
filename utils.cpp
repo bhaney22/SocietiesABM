@@ -1265,6 +1265,7 @@ void Utils::saveUseMatrix()
 // BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
 	    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 	        if (product != resId) {
+	        	file << "," << 0;
 	        } else {
 	                //BRH temp comment
 	            int sumTimeSpentGatheringWithDeviceByRes = 0;
