@@ -922,9 +922,17 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
  // BRH 05.26.2018 Added an additional statsTracker that is indexed by resIndex.
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
+ //JYC: Unit Testing 18.07.11
+        if (glob.currentDay = glob.NUM_DAYS){
+        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << bestDevice;
+        }
     } else {
         resProp[resIndex].timeSpentGatheringWithoutDeviceToday += workTime;
         timeSpentGatheringWithoutDeviceToday += workTime;
+ //JYC: Unit Testing 18.07.11
+        if (glob.currentDay = glob.NUM_DAYS){
+        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << bestDevice;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
+        }
     }
 }
 

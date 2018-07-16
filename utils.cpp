@@ -1351,6 +1351,8 @@ void Utils::saveUseMatrix()
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
  
+	//JYC: TODO: Add Labor
+
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
 // types then resources. 

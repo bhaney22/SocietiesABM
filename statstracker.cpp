@@ -534,8 +534,8 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         tempTimeSpentMaking[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
     }
 
-    for (int type = 0; type < 4; type++) {		//JYC: changed from glob.NumDeviceTypes() to 4
-        int totalTimeWithDevice = 0;
+    for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
+    	int totalTimeWithDevice = 0;
         int totalTimeSpentMakingDevices = 0;
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
@@ -554,16 +554,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             tempTimeSpentGathering[glob.agent[aId]->group][type] += timeWithDeviceByAgent;
             tempTimeSpentMaking[glob.agent[aId]->group][type] += timeMakingDevicesByAgent;
 
-            // save the device time used to gather each resource
-            for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-                int totalTimeWithDeviceByRes = 0;
-                int timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];			//JYC: changed from type double to int
-                //JYC: Error Message for above states "CANNOT ACCESS MEMORY AT ADDRESS 0x0"
 
-                totalTimeWithDeviceByRes += timeWithDeviceByRes;
-            		//JYC: remove '}' here
-            timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
-            }
         }
         // save the time data of the population as a whole.
         timeSpentGatheringWithDevice[type].push_back(totalTimeWithDevice);
@@ -575,6 +566,19 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             timeSpentMakingDevicesByGroup[gId][type].push_back(tempTimeSpentMaking[gId][type]);
         }
     }
+    // save the device time used to gather each resource
+    //JYC: Created a separate for-loop from the forloops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()" - 2018.07.11
+    for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+    	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    		    	int totalTimeWithDeviceByRes = 0;
+    		    	int timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];			//JYC: changed from type double to int
+    		    	//JYC: Error Message for above states "CANNOT ACCESS MEMORY AT ADDRESS 0x0"
+    		    	totalTimeWithDeviceByRes += timeWithDeviceByRes;
+    		    	timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
+    		    }
+    	}
+     }
 }
 
 /**
