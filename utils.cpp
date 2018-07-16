@@ -1177,9 +1177,9 @@ void Utils::saveDeviceRecipes()
 			file << glob.currentDay+1 << ",";
 			file << "R" << resId+1 << ",";
   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
-			file <<  ( (double) devicesMadeByRes[type][resId][glob.currentDay]) << ",";
+			file <<  ( (int) devicesMadeByRes[type][resId][glob.currentDay]) << ",";
         }
-   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
+   		for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) {
 			if (glob.discoveredDevices[type][resId]) {
 				file << "[";
 				for (vector<int>::iterator comp = glob.discoveredDevices[type][resId]->components.begin();
@@ -1220,7 +1220,7 @@ void Utils::saveUseMatrix()
 		}
 	for (int type = 0; type < NUM_RESOURCE_GATHERING_DEVICES; type++) { 
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {	
-		file << ",T"  << type+1 << "_R" << resId+1;
+			file << ",T"  << type+1 << "_R" << resId+1;
 		} //End of loop through Resources. Go to next device tier and loop through Rs again.
 	} //End of loop to write T1_R1...T4_Rn header line. This ends header line.
 	file << "\n";
@@ -1262,18 +1262,14 @@ void Utils::saveUseMatrix()
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T1_R" << product+1 ;
-// BRH 05.27.2018 Fill in minutes used by the T1_ device for gathering its R resource, and 0s elsewhere
 	    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 	        if (product != resId) {
-	        	file << "," << 0;
-	        } else {
-	                //BRH temp comment
-	            int sumTimeSpentGatheringWithDeviceByRes = 0;
-	            int totalTimeSpentGatheringWithDeviceByRes = 0;
-	        		tempTimeSpentGatheringWithDeviceByRes =  glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
-	        		sumTimeSpentGatheringWithDeviceByRes = tempTimeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
-	                totalTimeSpentGatheringWithDeviceByRes += sumTimeSpentGatheringWithDeviceByRes;
-	                file << "," << totalTimeSpentGatheringWithDeviceByRes;
+//	        	file << "," << 0;		//JYC: temp comment 2018.07.16
+	        	} else {
+	        		int sumTimeSpentGatheringWithDeviceByRes = 0;
+	        			tempTimeSpentGatheringWithDeviceByRes =  glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
+	        			sumTimeSpentGatheringWithDeviceByRes = tempTimeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
+	        			file << "," << sumTimeSpentGatheringWithDeviceByRes;
 	        }
 	    }
  
