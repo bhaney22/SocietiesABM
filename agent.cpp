@@ -931,7 +931,7 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithoutDeviceToday += workTime;
  //JYC: Unit Testing 18.07.11
         if (glob.currentDay = glob.NUM_DAYS){
-        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << bestDevice;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
+        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
         }
     }
 }

@@ -1350,8 +1350,8 @@ void Utils::saveUseMatrix()
 			} // End of loop over all INDUSTRY industries. 
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
- 
-	//JYC: TODO: Add Labor
+	//JYC: TODO: Add T4 block of code
+	//JYC: TODO: Add Labor row
 
 // BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
 // I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
