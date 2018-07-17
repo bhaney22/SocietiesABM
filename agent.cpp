@@ -1789,7 +1789,8 @@ void Agent::resetTodayStats()
         	}
 		for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
-            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
+            //JYC: 2018.07.17 - temp comment
+//            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
         }
  	}
 	unitsSoldToday = 0;

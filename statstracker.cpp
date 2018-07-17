@@ -526,23 +526,23 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
      * -> INDUSTRY, not the last two.  This code does not make that
      * distinction. So be careful when using it in save data.
      */
-    vector<vector<int> > tempTimeSpentGathering, tempTimeSpentMaking;  	//*< indexed by agent type, then device type */
+    vector<vector<double> > tempTimeSpentGathering, tempTimeSpentMaking;  	//*< indexed by agent type, then device type */
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
-        tempTimeSpentGathering.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        tempTimeSpentGathering[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
+        tempTimeSpentGathering.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        tempTimeSpentGathering[gId] = vector<double>(glob.getNumDeviceTypes(), 0);
 
-        tempTimeSpentMaking.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        tempTimeSpentMaking[gId] = vector<int>(glob.getNumDeviceTypes(), 0);
+        tempTimeSpentMaking.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        tempTimeSpentMaking[gId] = vector<double>(glob.getNumDeviceTypes(), 0);
     }
 
     for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
-    	int totalTimeWithDevice = 0;
-        int totalTimeSpentMakingDevices = 0;
+    	double totalTimeWithDevice = 0;
+        double totalTimeSpentMakingDevices = 0;
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
-            double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];			//JYC: changed from type double to int
-            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];		//JYC: changed from type double to int
+            double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
+            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
             
             // add this agents time spent with the previous agents
             totalTimeWithDevice += timeWithDeviceByAgent;
@@ -568,16 +568,15 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         }
     }
     // save the device time used to gather each resource
-    //JYC: Created a separate for-loop from the for-loops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()" - 2018.07.11
+    //JYC:  2018.07.11 - Created a separate for-loop from the for-loops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()"
     for (int type = 0; type < glob.getNumResGatherDev(); type++) {
-    	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
-    		    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-    		    	int totalTimeWithDeviceByRes = 0;
-    		    	int timeWithDeviceByRes = glob.agent[aId]->timeSpentGatheringWithDeviceTodayByRes[type][resId];			//JYC: changed from type double to int
-    		    	//JYC: Error Message for above states "CANNOT ACCESS MEMORY AT ADDRESS 0x0"
-    		    	totalTimeWithDeviceByRes += timeWithDeviceByRes;
-    		    	timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
-    		    }
+    	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    		double totalTimeWithDeviceByRes = 0;
+    		for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		   	double timeWithDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithDeviceTodayByRes(type,resId);
+    		   	totalTimeWithDeviceByRes += timeWithDeviceByRes;
+    		}
+    	    	timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
     	}
      }
 }
