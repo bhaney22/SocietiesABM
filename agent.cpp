@@ -65,11 +65,12 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
 
     devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
-    timeSpentMakingDevicesToday = vector<int>(NUM_DEVICE_TYPES, 0.0);			//JYC: changed from type double to type int
+    timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);			//JYC: changed from type double to type int
 
-    timeSpentGatheringWithDeviceToday = vector<int>(NUM_DEVICE_TYPES, 0.0);
-    timeSpentGatheringWithDeviceTodayByRes = vector< vector<int> >(NUM_DEVICE_TYPES);
+    timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES);
     timeSpentGatheringWithoutDeviceToday = 0.0;
+    timeSpentGatheringWithoutDeviceTodayByRes = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
     utilityToday = 0.0;
 
@@ -161,7 +162,7 @@ int Agent::getUnitsGatheredWithDevice(int device, int resId) const
 /**
  * \return the time gathering resource with each device separately 
  */
-int Agent::getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const
+double Agent::getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const
 {
     return timeSpentGatheringWithDeviceTodayByRes[device][resId];
 }
@@ -169,9 +170,9 @@ int Agent::getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) cons
 /**
  * \return the time gathering resource by hand
  */
-int Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
+double Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
 {
-    return resProp[resId].timeSpentGatheringWithoutDeviceToday;
+    return timeSpentGatheringWithoutDeviceTodayByRes[resId];
 }
 
 /**
@@ -924,16 +925,18 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
  //JYC: Unit Testing 18.07.11
         if (glob.currentDay + 1 == glob.NUM_DAYS){
-        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << bestDevice;
+        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent " << workTime << ", gathering res " << resIndex << ", with device " << bestDevice;
         }
     } else {
-        resProp[resIndex].timeSpentGatheringWithoutDeviceToday += workTime;
-        timeSpentGatheringWithoutDeviceToday += workTime;
- //JYC: Unit Testing 18.07.11
+//        unitsGatheredWithoutDeviceToday[resIndex]++;		//JYC: tried adding - DELETE
+    	timeSpentGatheringWithoutDeviceToday += workTime;
+    	timeSpentGatheringWithoutDeviceTodayByRes[resIndex];
+ //JYC: Unit Testing 2018.07.11
         if (glob.currentDay +1 == glob.NUM_DAYS){
-        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent," << workTime << ", gathering res " << resIndex << ", with device ," << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
+        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent" << workTime << ", gathering res " << resIndex << ", with device " << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
         }
     }
+
 }
 
 
@@ -1769,37 +1772,30 @@ void Agent::resetDeviceGainAndCostMemory()
  */
 void Agent::resetTodayStats()
 {
-    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+	//Reset
+	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+		resProp[resId].beforeWorkMU = 0;
+		resProp[resId].unitsGatheredEndWork = 0;
         resProp[resId].unitsGatheredToday = 0;
-        resProp[resId].timeSpentGatheringWithoutDeviceToday = 0;    //BRH NEW resProp 05.29.2018
-        for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
-            devicesMadeWithDevDevicesToday[type][resId] = 0;
-        }
-        for (int type = TOOL; type <= INDUSTRY; type++) {
-            unitsGatheredWithDeviceToday[type][resId] = 0;
-            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
-        }
-        for (int type = 0; type < NUM_DEVICE_TYPES; type++) {
-            devProp[type][resId].devicesMadeToday = 0;
-        }
-        resProp[resId].beforeWorkMU = 0;
-        resProp[resId].unitsGatheredEndWork = 0;
         resProp[resId].boughtEndWork = 0;
         resProp[resId].soldEndWork = 0;
         resProp[resId].boughtEndDay = 0;
         resProp[resId].soldEndDay = 0;
-    }
-    unitsSoldToday = 0;
+		for(int type = 0; type < NUM_DEVICE_TYPES; type++){
+			devProp[type][resId].devicesMadeToday = 0;
+		}
+		for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
+            devicesMadeWithDevDevicesToday[type][resId] = 0;
+        	}
+		for (int type = TOOL; type <= INDUSTRY; type++) {
+            unitsGatheredWithDeviceToday[type][resId] = 0;
+            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
+        }
+ 	}
+	unitsSoldToday = 0;
     unitsSoldCrossGroupToday = 0;
     unitsSoldForDevicesToday = 0;
     unitsSoldCrossGroupForDevicesToday = 0;
-    for (int i = 0; i < NUM_DEVICE_TYPES; i++) {   
-        timeSpentGatheringWithDeviceToday[i] = 0;
-    }
-    for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
-        timeSpentMakingDevicesToday[i] = 0;
-    }
-    timeSpentGatheringWithoutDeviceToday = 0;
     utilityToday = 0.0;
 }
 

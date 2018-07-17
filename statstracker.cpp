@@ -164,14 +164,14 @@ ProductionStats::ProductionStats()
 {
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
         resGatheredByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        timeSpentGatheringWithoutDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
     }
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         numAgentsGatheringByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
         resGatheredByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
         resGatheredByResByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithoutDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        timeSpentGatheringWithoutDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             resGatheredByResByAgent[resId].push_back(glob.EMPTY_VECTOR_OF_INTS);
         }
@@ -180,14 +180,14 @@ ProductionStats::ProductionStats()
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         resGatheredByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
         devicesMadeByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentMakingDevicesByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithoutDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_INTS);
+        timeSpentGatheringWithDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentMakingDevicesByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithoutDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         devicesMadeWithDevDeviceByGroup.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
         for (int type = TOOL; type < glob.getNumDeviceTypes(); type++) {
             devicesMadeByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentGatheringWithDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentMakingDevicesByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            timeSpentGatheringWithDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            timeSpentMakingDevicesByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
             devicesMadeWithDevDeviceByGroup[gId].push_back(glob.EMPTY_VECTOR_OF_INTS);
         }
     }
@@ -205,15 +205,15 @@ ProductionStats::ProductionStats()
         devicesMadeWithDevDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
         devicesMadeWithDevDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
 
-        timeSpentMakingDevices.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-        timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_INTS);
-        timeSpentGatheringWithDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
+        timeSpentMakingDevices.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+        timeSpentGatheringWithDeviceByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
         
         // for each agent ID
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-            timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
-            timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
+            timeSpentGatheringWithDeviceByAgent[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+            timeSpentMakingDevicesByAgent[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         }
 
         // for each resource ID
@@ -227,11 +227,11 @@ ProductionStats::ProductionStats()
             percentResGatheredByDevice.push_back(vector<double>());
             percentResGatheredByDeviceByRes.push_back(vector<vector<double> >());
             resGatheredByDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);
-            timeSpentGatheringWithDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_INTS);		//JYC: Error in line 234 is due to end of storage, so adding storage space
+            timeSpentGatheringWithDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);		//JYC: Error in line 234 is due to end of storage, so adding storage space
             for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
                 percentResGatheredByDeviceByRes[type].push_back(vector<double>());
                 resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
-                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);		//JYC: Error states "END OF STORAGE"
+                timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);		//JYC: Error states "END OF STORAGE"
             }
         }
         // only types 4-5 (DEVMACHINE, DEVFACTORY)
@@ -490,22 +490,23 @@ void ProductionStats::calcDevicesMadeWithDevDevicesByRes()
  */
 void ProductionStats::calcTimeSpentGatheringWithoutDevice()
 {
-    int withoutDeviceTotal = 0;
-    vector<int> temp = vector<int>(glob.NUM_AGENT_GROUPS, 0);
+	double timeWithoutDeviceTotal;
+    vector<double> temp = vector<double>(glob.NUM_AGENT_GROUPS, 0);
+    double timeWithoutDeviceResTotal;
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
-        int withoutDeviceEachAgent = glob.agent[aId]->timeSpentGatheringWithoutDeviceToday;
-        withoutDeviceTotal += withoutDeviceEachAgent;
-        timeSpentGatheringWithoutDeviceByAgent[aId].push_back(withoutDeviceEachAgent);
-        temp[glob.agent[aId]->group] += withoutDeviceEachAgent;
+        double timeWithoutDeviceEachAgent = glob.agent[aId]->timeSpentGatheringWithoutDeviceToday;
+        timeWithoutDeviceTotal += timeWithoutDeviceEachAgent;
+        timeSpentGatheringWithoutDeviceByAgent[aId].push_back(timeWithoutDeviceEachAgent);
+        temp[glob.agent[aId]->group] += timeWithoutDeviceEachAgent;
+        timeWithoutDeviceEachAgent = 0;
         for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-            int withoutDeviceResTotal = 0;
-            int timeWithoutDeviceByResEachAgent = glob.agent[aId]->getTimeSpentGatheringWithoutDeviceTodayByRes(resId); //JYC: changed from [resId] to (resId)
-            withoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
-            		//JYC: remove '}' here
-        timeSpentGatheringWithoutDeviceByRes[resId].push_back(withoutDeviceResTotal);		//JYC: added [resId]
-        }   //JYC: add '}' here
+            timeWithoutDeviceResTotal = 0;
+            double timeWithoutDeviceByResEachAgent = glob.agent[aId]->timeSpentGatheringWithoutDeviceTodayByRes[resId]; //JYC: changed from [resId] to (resId)
+            timeWithoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
+            timeSpentGatheringWithoutDeviceByRes[resId].push_back(timeWithoutDeviceResTotal);
+        }
+        timeSpentGatheringWithoutDevice.push_back(timeWithoutDeviceTotal);
     }
-    timeSpentGatheringWithoutDevice.push_back(withoutDeviceTotal);
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         timeSpentGatheringWithoutDeviceByGroup[gId].push_back(temp[gId]);
     }
@@ -540,8 +541,8 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
-            int timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];			//JYC: changed from type double to int
-            int timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];		//JYC: changed from type double to int
+            double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];			//JYC: changed from type double to int
+            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];		//JYC: changed from type double to int
             
             // add this agents time spent with the previous agents
             totalTimeWithDevice += timeWithDeviceByAgent;
@@ -567,7 +568,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
         }
     }
     // save the device time used to gather each resource
-    //JYC: Created a separate for-loop from the forloops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()" - 2018.07.11
+    //JYC: Created a separate for-loop from the for-loops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()" - 2018.07.11
     for (int type = 0; type < glob.getNumResGatherDev(); type++) {
     	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
     		    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {

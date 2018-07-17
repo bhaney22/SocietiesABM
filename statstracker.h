@@ -140,31 +140,31 @@ class ProductionStats
      * Each int is the total time spent by society without a device.
      * indexed by day
      */
-    vector<int> timeSpentGatheringWithoutDevice;
-    vector< vector<int> > timeSpentGatheringWithoutDeviceByAgent;   /**< indexed by agentId, then day */
-    vector< vector<int > > timeSpentGatheringWithoutDeviceByGroup;  /**< indexed by groupId, then day */
-    vector< vector<int> > timeSpentGatheringWithDevice;             /**< indexed by device_name_t (first 4), then day */
+    vector<double> timeSpentGatheringWithoutDevice;
+    vector< vector<double> > timeSpentGatheringWithoutDeviceByAgent;   /**< indexed by agentId, then day */
+    vector< vector<double > > timeSpentGatheringWithoutDeviceByGroup;  /**< indexed by groupId, then day */
+    vector< vector<double> > timeSpentGatheringWithDevice;             /**< indexed by device_name_t (first 4), then day */
     /**
      * Total time this agent spent gathering with a device.
      * indexed by device_name_t (first 4), then agentId, then day.
      */
-    vector< vector< vector<int> > > timeSpentGatheringWithDeviceByAgent;
-    vector< vector< vector<int> > > timeSpentGatheringWithDeviceByGroup;         // *** indexed by device_name_t, then group id, then day
+    vector< vector< vector<double> > > timeSpentGatheringWithDeviceByAgent;
+    vector< vector< vector<double> > > timeSpentGatheringWithDeviceByGroup;         // *** indexed by device_name_t, then group id, then day
     
     //BRH Two new stats for tracking time by resource
-    vector< vector<int> > timeSpentGatheringWithoutDeviceByRes;        //[resId][day]
-    vector< vector< vector<int> > > timeSpentGatheringWithDeviceByRes; //[type][resId][day]
+    vector< vector<double> > timeSpentGatheringWithoutDeviceByRes;        //[resId][day]
+    vector< vector< vector<double> > > timeSpentGatheringWithDeviceByRes; //[type][resId][day]
     /**
      * Time the society spent gathering devices each day.
      * indexed by device_name_t, then day
      */
-    vector< vector<int> > timeSpentMakingDevices;
+    vector< vector<double> > timeSpentMakingDevices;
      /**
       * Time this agent spent gathering this device.
       * indexed by device_name_t, then agentId, then day.
       */
-    vector< vector< vector<int> > > timeSpentMakingDevicesByAgent;
-    vector< vector< vector<int> > > timeSpentMakingDevicesByGroup;      // *** indexed by device_name_t, then group id, then day
+    vector< vector< vector<double> > > timeSpentMakingDevicesByAgent;
+    vector< vector< vector<double> > > timeSpentMakingDevicesByGroup;      // *** indexed by device_name_t, then group id, then day
     /**
      * Resources gathered with device / all resources gathered
      * indexed by device_name_t (first 4), then day.
@@ -200,14 +200,14 @@ public:
     vector< vector<int> > getDevicesMade() { return devicesMade; };
 	vector< vector< vector<int> > > getDevicesMadeByRes() { return devicesMadeByRes; };     /*BRH 10.11.2017 */
     vector< vector< vector<int> > > getDevicesMadeByGroup() { return devicesMadeByGroup; };
-    vector< vector<int> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
-    vector<vector< vector<int> > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByRes; };
-    vector< vector<vector<int> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };
-    vector< int > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
-    vector<vector<int> > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByRes; };
-    vector<vector<int> > getTimeSpentGatheringWithoutDeviceByGroup() { return timeSpentGatheringWithoutDeviceByGroup; };
-    vector< vector<int> > getTimeSpentMakingDevices() { return timeSpentMakingDevices; };
-    vector<vector<vector<int> > > getTimeSpentMakingDevicesByGroup() { return timeSpentMakingDevicesByGroup; };
+    vector< vector<double> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
+    vector<vector< vector<double> > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByRes; };
+    vector< vector<vector<double> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };
+    vector< double > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
+    vector<vector<double> > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByRes; };
+    vector<vector<double> > getTimeSpentGatheringWithoutDeviceByGroup() { return timeSpentGatheringWithoutDeviceByGroup; };
+    vector< vector<double> > getTimeSpentMakingDevices() { return timeSpentMakingDevices; };
+    vector<vector<vector<double> > > getTimeSpentMakingDevicesByGroup() { return timeSpentMakingDevicesByGroup; };
     vector< vector<double> > getPercentResGatheredByDevice() { return percentResGatheredByDevice; };
     vector< vector<int> > getDevicesMadeWithDevDevice() { return devicesMadeWithDevDevice; };
     vector< vector<vector<int> > > getDevicesMadeWithDevDeviceByGroup() { return devicesMadeWithDevDeviceByGroup; };

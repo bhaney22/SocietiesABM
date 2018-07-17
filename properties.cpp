@@ -61,7 +61,8 @@ ResProperties::ResProperties()
     resSetAside = 0;
     unitsGatheredToday = 0;
     unitsGatheredEndWork = 0;
-    timeSpentGatheringWithoutDeviceToday = 0;
+    //JYC: temporary comment		2018.07.16
+//    timeSpentGatheringWithoutDeviceToday = 0;
 
     beforeWorkHeld = 0;
     boughtEndWork = 0;

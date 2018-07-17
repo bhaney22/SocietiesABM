@@ -124,6 +124,15 @@ public:
      * those for the first 4.
      */
     vector<vector<int> > unitsGatheredWithDeviceToday;
+    /**	JYC: added a variable 2018.07.16
+     * Keeps track of the number of units of all resources this agent
+     * has produced.
+     * unitsGatheredWithoutDeviceToday is indexed by resId through resIndex.
+     * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
+     * those for the first 4.
+     */
+    vector<int> unitsGatheredWithoutDeviceToday;
+
     /**
      * unitsExtractedWithDeviceTodayByRes is indexed by TOOL through INDUSTRY.
      * and NUM_RESOURCES
@@ -144,7 +153,7 @@ public:
      * device of the corresponding resource. 
      * size is [glob.NUM_DEVICE_TYPES]
      */
-    vector<int> timeSpentMakingDevicesToday;			//JYC: changed from type double to type int
+    vector<double> timeSpentMakingDevicesToday;			//JYC: changed from type double to type int
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
@@ -154,12 +163,13 @@ public:
      * We'll still make 6 vectors, but will only fill in the 2 vectors inside of
      * those for the first 4.
      */
-    vector<int> timeSpentGatheringWithDeviceToday;
-    vector< vector<int> > timeSpentGatheringWithDeviceTodayByRes; 
+    vector<double> timeSpentGatheringWithDeviceToday;
+    vector< vector<double> > timeSpentGatheringWithDeviceTodayByRes;
     /**
      * The number of minutes used to gather resources without using devices.
      */
-    int timeSpentGatheringWithoutDeviceToday;		//JYC: changed from type double to int
+    double timeSpentGatheringWithoutDeviceToday;
+    vector<double> timeSpentGatheringWithoutDeviceTodayByRes;	//JYC: added a variable   2018.07.16
     /**
      * The sum of the utilities of all units of all resources held by
      * this agent in a given day.
@@ -179,8 +189,8 @@ public:
     int getHeld (int resId) const;
     int getUnitsGatheredToday(int resId) const;
     int getUnitsGatheredWithDevice(int device, int resId) const;
-    int getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
-    int getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
+    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
+    double getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
     int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;

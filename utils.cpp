@@ -966,7 +966,7 @@ void Utils::saveTotalTimeUsage()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* timeSpentGatheringWithDevice per agent */
-    vector< vector<int> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
+    vector< vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
     for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
         file << devicesStr[i] << "_timeGatheringWithDevicePerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -976,7 +976,7 @@ void Utils::saveTotalTimeUsage()
     }
 
     /* timeSpentGatheringWithDevice per group */
-    vector< vector<vector<int> > > timeSpentGatheringWithDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithDeviceByGroup();
+    vector< vector<vector<double> > > timeSpentGatheringWithDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithDeviceByGroup();
     vector<vector<int> > activeGroupAgents = glob.otherStats->getActiveGroupAgents();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
@@ -990,7 +990,7 @@ void Utils::saveTotalTimeUsage()
     file << "\n";       // add an extra line so more readable.
 
     /* timeMakingDevices per agent */
-    vector< vector<int> > timeSpentMakingDevices = glob.productionStats->getTimeSpentMakingDevices();
+    vector< vector<double> > timeSpentMakingDevices = glob.productionStats->getTimeSpentMakingDevices();
     for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << " timeMakingDevicesPerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1000,7 +1000,7 @@ void Utils::saveTotalTimeUsage()
     }
 
     /* timeMakingDevices per group */
-    vector< vector<vector<int> > > timeSpentMakingDevicesByGroup = glob.productionStats->getTimeSpentMakingDevicesByGroup();
+    vector< vector<vector<double> > > timeSpentMakingDevicesByGroup = glob.productionStats->getTimeSpentMakingDevicesByGroup();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 0; i < NUM_DEVICE_TYPES; i++) {
             file << devicesStr[i] << " timeMakingDevicesByGroup " << gId << "_" << glob.SIM_NAME << ",";
@@ -1014,14 +1014,14 @@ void Utils::saveTotalTimeUsage()
 
     /* timeGatheringWithoutDevice per agent */
     file << "timeGatheringWithoutDevicePerActiveAgent_" << glob.SIM_NAME << ",";
-    vector<int> timeSpentGatheringWithoutDevice = glob.productionStats->getTimeSpentGatheringWithoutDevice();
+    vector<double> timeSpentGatheringWithoutDevice = glob.productionStats->getTimeSpentGatheringWithoutDevice();
     for (int i = 0; i < glob.NUM_DAYS; i++) {
         file << ( (double) timeSpentGatheringWithoutDevice[i] / (double) activeAgents[i] ) << ",";
     }
     file << "\n";
 
     /* timeGatheringWithoutDevice per group */
-    vector<vector<int> > timeSpentGatheringWithoutDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithoutDeviceByGroup();
+    vector<vector<double> > timeSpentGatheringWithoutDeviceByGroup = glob.productionStats->getTimeSpentGatheringWithoutDeviceByGroup();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         file << "timeGatheringWithoutDeviceByGroup " << gId << "_" << glob.SIM_NAME << ",";
         for (int i = 0; i < glob.NUM_DAYS; i++) {
@@ -1205,8 +1205,10 @@ void Utils::saveUseMatrix()
     // BRH temp comment vector<vector<int> > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes;  //BRH NEW variable 05.29.2018
     // BRH temp comment vector<int> timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes;   
     int temp_in_device=0;
-	double num_of_that_device_made;
-    vector< vector< vector<int> > > tempTimeSpentGatheringWithDeviceByRes;
+	int num_of_that_device_made;
+    double sumTimeSpentGatheringWithDeviceByRes = 0;
+    double sumTimeSpentGatheringWithoutDeviceByRes = 0;
+    double totalTimeSpentGatheringByRes = 0;
    
     ofstream file;     /* Open up a generic "file" to write to */
     string filePath = glob.SIM_SAVE_FOLDER + "/IOMatrix.csv"; /*concatenate the dir and filename */
@@ -1234,15 +1236,15 @@ void Utils::saveUseMatrix()
 		file << glob.currentDay+1 << ",";
 		file << "R" << product+1;
    		// Fill in 0s across row for all resources.
-        for (int fill=0;fill<(glob.NUM_RESOURCES);fill++) {file<<",0";} 
+        for (int fill=0;fill<(glob.NUM_RESOURCES);fill++) {file<<",0";}
 		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { //Begin loop over all TOOLS.
 				temp_in_device=0;
-				if (glob.discoveredDevices[TOOL][resId]) {	
+				if (glob.discoveredDevices[TOOL][resId]) {
 					for (vector<int>::iterator comp = glob.discoveredDevices[TOOL][resId]->components.begin();
 						comp < glob.discoveredDevices[TOOL][resId]->components.end(); comp++) {
-						if (product==*comp) temp_in_device=1; 
+						if (product==*comp) temp_in_device=1;
 						num_of_that_device_made = (double) devicesMadeByRes[TOOL][resId][glob.currentDay];
-					} // End check to see if this current row's product is in this column's device. 
+					} // End check to see if this current row's product is in this column's device.
 				file << "," << temp_in_device * num_of_that_device_made ;
 				} // End fill cell of discovered device.
 				else file << ",0" ;	// Fill cell of undiscovered device.
@@ -1250,69 +1252,81 @@ void Utils::saveUseMatrix()
  		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T2,T3,T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for R products.
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-/////WRITE ROWS for T1 devices (TOOLS): If used in a T2 (MACHINE) multiply number T2 made * TOOL_LIFETIME
-//// to compute the number of minutes of that tool that was used in a machine rather than extracting. ///
-//// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
-////////////////////////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+///////WRITE ROWS for T1 devices (TOOLS): If used in a T2 (MACHINE) multiply number T2 made * TOOL_LIFETIME
+////// to compute the number of minutes of that tool that was used in a machine rather than extracting. ///
+////// BRH: 05.27.2018 Revised to convert units of a TOOL to minutes of a TOOL for the IOMatrix (and for T3, T4 below)
+//////////////////////////////////////////////////////////////////////////////////////////////////
 	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {   // Begin loop over all T1 products.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T1_R" << product+1 ;
-	    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-	        if (product != resId) {
-//	        	file << "," << 0;		//JYC: temp comment 2018.07.16
-	        	} else {
-	        		int sumTimeSpentGatheringWithDeviceByRes = 0;
-	        			tempTimeSpentGatheringWithDeviceByRes =  glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
-	        			sumTimeSpentGatheringWithDeviceByRes = tempTimeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
-	        			file << "," << sumTimeSpentGatheringWithDeviceByRes;
-	        }
-	    }
- 
- // Now, fill in 0s across row for T1 industries since T1 devices are not used in making T1 devices.       
- 		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";}        
+		for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+			for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+				for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+					if (product != resId) {
+//	       			file << "," << 0;
+						sumTimeSpentGatheringWithoutDeviceByRes = 0;
+			       		sumTimeSpentGatheringWithoutDeviceByRes =  glob.agent[aId] -> getTimeSpentGatheringWithoutDeviceTodayByRes(product);
+			       		totalTimeSpentGatheringByRes += sumTimeSpentGatheringWithoutDeviceByRes;
 
-// Next: loop over all T2 devices and record number of minutes of each T1 device used in making T2 rather than gathering.      
-        for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {   
+					} else {
+						sumTimeSpentGatheringWithDeviceByRes = 0;
+						sumTimeSpentGatheringWithDeviceByRes =  glob.agent[aId] -> getTimeSpentGatheringWithDeviceTodayByRes(type,product);
+						totalTimeSpentGatheringByRes += sumTimeSpentGatheringWithDeviceByRes;
+					}
+//					file << "," << totalTimeSpentGatheringByRes;
+				}
+//				file << "," << totalTimeSpentGatheringByRes;
+	        }
+			file << "," << totalTimeSpentGatheringByRes;
+		}
+//		file << "," << totalTimeSpentGatheringByRes;
+		totalTimeSpentGatheringByRes = 0;
+ // Now, fill in 0s across row for T1 industries since T1 devices are not used in making T1 devices.
+ 		for ( int fill=0;fill<(1*glob.NUM_RESOURCES);fill++) {file << ",0";}
+
+
+//// Next: loop over all T2 devices and record number of minutes of each T1 device used in making T2 rather than gathering.
+        for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
 				temp_in_device=0;
 				if (glob.discoveredDevices[MACHINE][resId]) {
 					for (vector<int>::iterator comp = glob.discoveredDevices[MACHINE][resId]->components.begin();
-						comp < glob.discoveredDevices[MACHINE][resId]->components.end(); comp++) {   
-						if (product==*comp) temp_in_device=1; 
+						comp < glob.discoveredDevices[MACHINE][resId]->components.end(); comp++) {
+						if (product==*comp) temp_in_device=1;
 						num_of_that_device_made = (double) devicesMadeByRes[MACHINE][resId][glob.currentDay];
-					} // End check to see if this current row's product is in this column's device. 
+					} // End check to see if this current row's product is in this column's device.
 				file << "," << temp_in_device * num_of_that_device_made * glob.TOOL_LIFETIME;
 				} // End fill cell of discovered device.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
 			} // End of loop over all MACHINES.
 		for ( int fill=0;fill<((2)*glob.NUM_RESOURCES);fill++) {file<<",0";} 		// Fill in 0s across row for T3 and T4 industries.
 		file << "\n";  //Last thing to do before starting the next product row.
-	} // End of all rows for T1 products.
-
-////////////////////////////////////////////////////////////////////////////////////////////////
-//// WRITE ROWS for T2 (MACHINES) devices : Fill cells with number of minutes of MACHINES
-//// used in making FACTORIES instead of for extraction. 
-////////////////////////////////////////////////////////////////////////////////////////////////
-	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T2 products. 
+	}	// End of all rows for T1 products.
+//
+//////////////////////////////////////////////////////////////////////////////////////////////////
+////// WRITE ROWS for T2 (MACHINES) devices : Fill cells with number of minutes of MACHINES
+////// used in making FACTORIES instead of for extraction.
+//////////////////////////////////////////////////////////////////////////////////////////////////
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T2 products.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T2_R" << product+1 ;
-		
+
 		for ( int fill=0;fill<((3)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		// Fill in 0s across row for R,T1,T2 industries.
-		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
 				temp_in_device=0;
 				if (glob.discoveredDevices[FACTORY][resId]) {
 					for (vector<int>::iterator comp = glob.discoveredDevices[FACTORY][resId]->components.begin();
 						comp < glob.discoveredDevices[FACTORY][resId]->components.end(); comp++) {    /* Loop over all resources, resId*/
-						if (product==*comp) temp_in_device=1; 
+						if (product==*comp) temp_in_device=1;
 						num_of_that_device_made = (double) devicesMadeByRes[FACTORY][resId][glob.currentDay];
-					} // End check to see if this current row's product is in this column's device. 
+					} // End check to see if this current row's product is in this column's device.
 				file << "," << temp_in_device * num_of_that_device_made * glob.MACHINE_LIFETIME ;
 				} 					// Cell of discovered device now filled.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
@@ -1325,63 +1339,64 @@ void Utils::saveUseMatrix()
 //// WRITE PRODUCT ROWS for T3 (MACHINES) : Fill cells with minutes of MACHINES used to make
 //// INDUSTRIES instead of for extraction. ///
 ////////////////////////////////////////////////////////////////////////////////////////////////
-	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T3 products. 
+	for (int product = 0; product < glob.NUM_RESOURCES ; product++) {  // Begin loop over all T3 products.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "T3_R" << product+1 ;
 		// Fill in 0s across row for R,T1,T2,T3 industries.
-		for (int fill=0;fill<((4)*glob.NUM_RESOURCES);fill++) {file << ",0";}   		
-		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {             
+		for (int fill=0;fill<((4)*glob.NUM_RESOURCES);fill++) {file << ",0";}
+		for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
 				temp_in_device=0;
 				if (glob.discoveredDevices[INDUSTRY][resId]) {
-                    // Device discovered. Check recipe for this product.							
+                    // Device discovered. Check recipe for this product.
 					for (vector<int>::iterator comp = glob.discoveredDevices[INDUSTRY][resId]->components.begin();
-						comp < glob.discoveredDevices[INDUSTRY][resId]->components.end(); comp++) {    
-						if (product==*comp) temp_in_device=1; 
+						comp < glob.discoveredDevices[INDUSTRY][resId]->components.end(); comp++) {
+						if (product==*comp) temp_in_device=1;
 						num_of_that_device_made = (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay];
-					} 				// End check to see if this current row's product is in this column's device. 
+					} 				// End check to see if this current row's product is in this column's device.
 				file << "," << temp_in_device * num_of_that_device_made * glob.FACTORY_LIFETIME ;
 				} 					// Cell of discovered device now filled.
 				else file << ",0" ;	// Fill cell with 0 for undiscovered devices.
-			} // End of loop over all INDUSTRY industries. 
+			} // End of loop over all INDUSTRY industries.
 		file << "\n";  //Last thing to do before starting the next product row.
 	} // End of all rows for T3 products.
-	//JYC: TODO: Add T4 block of code
-	//JYC: TODO: Add Labor row
-
-// BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
-// I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
-// types then resources. 
+//	//JYC: TODO: Add T4 block of code
+//	//JYC: TODO: Add Labor row
+//
+//// BRH 05.27.2018 Added the total line as the last row of the IO Matrix.
+//// I hardcoded the device types below because I kept getting a segmentation fault if I tried to loop over
+//// types then resources.
 		file << glob.UniqueKey << ",";
 		file << glob.configName << "," ;
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "Total";
              for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-                    file  << "," << resGatheredByRes[resId][glob.currentDay]; 
-             }     
-             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
-		            file  << "," 
-                        <<  ( (double) devicesMadeByRes[TOOL][resId][glob.currentDay] * glob.TOOL_LIFETIME ); 
+                    file  << "," << resGatheredByRes[resId][glob.currentDay];
+             }
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
+		            file  << ","
+                        <<  ( (int) devicesMadeByRes[TOOL][resId][glob.currentDay] * glob.TOOL_LIFETIME );
             }
-             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
-		            file  << "," 
-                        <<  ( (double) devicesMadeByRes[MACHINE][resId][glob.currentDay] * glob.MACHINE_LIFETIME ); 
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
+		            file  << ","
+                        <<  ( (int) devicesMadeByRes[MACHINE][resId][glob.currentDay] * glob.MACHINE_LIFETIME );
             }
-             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
-		            file  << "," 
-                        <<  ( (double) devicesMadeByRes[FACTORY][resId][glob.currentDay] * glob.FACTORY_LIFETIME ); 
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
+		            file  << ","
+                        <<  ( (int) devicesMadeByRes[FACTORY][resId][glob.currentDay] * glob.FACTORY_LIFETIME );
             }
-             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) { 
-		            file  << "," 
-                        <<  ( (double) devicesMadeByRes[INDUSTRY][resId][glob.currentDay] * glob.INDUSTRY_LIFETIME ); 
+             for (int resId = 0; resId < glob.NUM_RESOURCES ; resId++) {
+		            file  << ","
+                        <<  ( (int) devicesMadeByRes[INDUSTRY][resId][glob.currentDay] * glob.INDUSTRY_LIFETIME );
             }
-    file << "\n";
-    file.close();
-    devicesMadeByRes.clear();
+ 	file << "\n";
+	file.close();
+	devicesMadeByRes.clear();
 }	// END of saveUseMatrix function.
+
 //*******************************************************************
 // BRH 11.11.2017 New saveTradeFlows routine
 //*******************************************************************
