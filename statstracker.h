@@ -196,12 +196,17 @@ public:
     vector< vector < vector<int> > > getResGatheredByResByAgent() { return resGatheredByResByAgent; };
     vector<vector<int> > getResGatheredByRes() { return resGatheredByRes; };
     vector<vector<int> > getResGatheredByGroup() { return resGatheredByGroup; };
-
     vector< vector<int> > getDevicesMade() { return devicesMade; };
-	vector< vector< vector<int> > > getDevicesMadeByRes() { return devicesMadeByRes; };     /*BRH 10.11.2017 */
+	
+/*BRH 10.11.2017 */
+	vector< vector< vector<int> > > getDevicesMadeByRes() { return devicesMadeByRes; };   
+	
     vector< vector< vector<int> > > getDevicesMadeByGroup() { return devicesMadeByGroup; };
     vector< vector<double> > getTimeSpentGatheringWithDevice() { return timeSpentGatheringWithDevice; };
+	
+/*BRH 07.17.2018 */
     vector<vector< vector<double> > > getTimeSpentGatheringWithDeviceByRes() { return timeSpentGatheringWithDeviceByRes; };
+	
     vector< vector<vector<double> > > getTimeSpentGatheringWithDeviceByGroup() { return timeSpentGatheringWithDeviceByGroup; };
     vector< double > getTimeSpentGatheringWithoutDevice() { return timeSpentGatheringWithoutDevice; };
     vector<vector<double> > getTimeSpentGatheringWithoutDeviceByRes() { return timeSpentGatheringWithoutDeviceByRes; };

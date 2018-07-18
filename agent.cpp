@@ -923,17 +923,16 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
  // BRH 05.26.2018 Added an additional statsTracker that is indexed by resIndex.
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
- //JYC: Unit Testing 18.07.11
+ //JYC: Unit Testing 07.11.2018
         if (glob.currentDay + 1 == glob.NUM_DAYS){
-        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent " << workTime << ", gathering res " << resIndex << ", with device " << bestDevice;
+        	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << workTime << ", gathering res " << resIndex +1 << ", with device " << bestDevice +1;
         }
     } else {
-//        unitsGatheredWithoutDeviceToday[resIndex]++;		//JYC: tried adding - DELETE
     	timeSpentGatheringWithoutDeviceToday += workTime;
-    	timeSpentGatheringWithoutDeviceTodayByRes[resIndex];
+    	timeSpentGatheringWithoutDeviceTodayByRes[resIndex] += workTime;
  //JYC: Unit Testing 2018.07.11
         if (glob.currentDay +1 == glob.NUM_DAYS){
-        	LOG(1) << "UnitTest Day " << glob.currentDay << ", Agent " << name << ", spent" << workTime << ", gathering res " << resIndex << ", with device " << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
+        	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent," << workTime << ", gathering res " << resIndex +1 << ", with device " << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
         }
     }
 
