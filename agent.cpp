@@ -65,7 +65,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
 
     devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
-    timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);			//JYC: changed from type double to type int
+    timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES);
@@ -1788,8 +1788,7 @@ void Agent::resetTodayStats()
         	}
 		for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
-            //JYC: 2018.07.17 - temp comment
-//            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
+            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
         }
  	}
 	unitsSoldToday = 0;
