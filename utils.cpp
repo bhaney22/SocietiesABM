@@ -1412,8 +1412,14 @@ void Utils::saveUseMatrix()
 		file << glob.SIM_NAME << "," ;
 		file << glob.currentDay+1 << ",";
 		file << "Labor" ;
-// Fill in 0s across row for R,T1,T2,T3,T4 industries for now.
-		for (int fill=0;fill<((5)*glob.NUM_RESOURCES);fill++) {file << ",0";};
+		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+			double totalTimeGatheringByRes = 0;
+			totalTimeGatheringByRes += timeSpentGatheringWithoutDeviceByRes[resId][glob.currentDay];
+			for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+    		   	totalTimeGatheringByRes += timeSpentGatheringWithDeviceByRes[type][resId][glob.currentDay];
+			}
+		file << "," << totalTimeGatheringByRes;
+		}
 		file << "\n";  //Last thing to do before starting the next row.
 
 // End of Labor row.

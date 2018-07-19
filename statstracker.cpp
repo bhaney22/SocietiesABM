@@ -507,7 +507,6 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
             timeWithoutDeviceResTotal = 0;
             double timeWithoutDeviceByResEachAgent = glob.agent[aId]->timeSpentGatheringWithoutDeviceTodayByRes[resId];
             timeWithoutDeviceResTotal += timeWithoutDeviceByResEachAgent;
-            timeSpentGatheringWithoutDeviceByRes[resId].push_back(timeWithoutDeviceResTotal);
         }
         timeSpentGatheringWithoutDevice.push_back(timeWithoutDeviceTotal);
     }
@@ -571,9 +570,18 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             timeSpentMakingDevicesByGroup[gId][type].push_back(tempTimeSpentMaking[gId][type]);
         }
     }
-    // save the device time used to gather each resource
-    //JYC:  2018.07.11 - Created a separate for-loop from the for-loops above due to "glob.getNumResGatherDev()" instead of "glob.getNumDeviceTypes()"
-    for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+// BRH New 07.17.2018 Save the time used to gather each resource: by hand, and then by each device tier.
+
+    for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    		double totalTimeWithoutDeviceByRes = 0;
+    		for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		   	double timeWithoutDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithoutDeviceTodayByRes(resId);
+    		   	totalTimeWithoutDeviceByRes += timeWithoutDeviceByRes;
+    		}
+    	    	timeSpentGatheringWithoutDeviceByRes[resId].push_back(totalTimeWithoutDeviceByRes);
+	}
+
+	 for (int type = 0; type < glob.getNumResGatherDev(); type++) {
     	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
     		double totalTimeWithDeviceByRes = 0;
     		for (int aId = 0; aId < glob.NUM_AGENTS; aId++){

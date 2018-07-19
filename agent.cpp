@@ -70,12 +70,12 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
     timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES);
     timeSpentGatheringWithoutDeviceToday = 0.0;
-    timeSpentGatheringWithoutDeviceTodayByRes = vector<double>(NUM_DEVICE_TYPES, 0.0);
+    timeSpentGatheringWithoutDeviceTodayByRes = vector<double>(glob.NUM_RESOURCES,0.0);
 
     utilityToday = 0.0;
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
+		for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
             devicesMadeWithDevDevicesToday[type].push_back(0);
         }
         for (int type = TOOL; type <= INDUSTRY; type++) {
@@ -924,16 +924,16 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
  //JYC: Unit Testing 07.11.2018
-        if (glob.currentDay + 1 == glob.NUM_DAYS){
-        	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << workTime << ", gathering res " << resIndex +1 << ", with device " << bestDevice +1;
-        }
-    } else {
+ //       if (glob.currentDay + 1 == glob.NUM_DAYS){
+ //       	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << workTime << ", gathering res " << resIndex +1 << ", with device " << bestDevice +1;
+    }
+    else {
     	timeSpentGatheringWithoutDeviceToday += workTime;
     	timeSpentGatheringWithoutDeviceTodayByRes[resIndex] += workTime;
  //JYC: Unit Testing 2018.07.11
-        if (glob.currentDay +1 == glob.NUM_DAYS){
-        	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent," << workTime << ", gathering res " << resIndex +1 << ", with device " << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
-        }
+ //       if (glob.currentDay +1 == glob.NUM_DAYS){
+ //       	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent," << 
+ //         workTime << ", gathering res " << resIndex +1 << ", with device " << 9;		//JYC: 9 = by hand(no device)	//JYC: Unit Testing 18.07.11
     }
 
 }
@@ -1780,6 +1780,7 @@ void Agent::resetTodayStats()
         resProp[resId].soldEndWork = 0;
         resProp[resId].boughtEndDay = 0;
         resProp[resId].soldEndDay = 0;
+		timeSpentGatheringWithoutDeviceTodayByRes[resId] = 0;
 		for(int type = 0; type < NUM_DEVICE_TYPES; type++){
 			devProp[type][resId].devicesMadeToday = 0;
 		}
