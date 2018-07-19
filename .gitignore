@@ -1,6 +1,7 @@
-SLURM_scripts/*.out*
+societies
 *.o 
 *.csv
+SLURM_scripts/*.out*
 _Results/
 .cproject
 .project
