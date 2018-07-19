@@ -61,9 +61,9 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     unitsSoldForDevicesToday = 0;
     unitsSoldCrossGroupForDevicesToday = 0;
 
-    unitsGatheredWithDeviceToday = vector< vector<double> >(NUM_DEVICE_TYPES);
+    unitsGatheredWithDeviceToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
-    devicesMadeWithDevDevicesToday = vector< vector<double> >(NUM_DEVICE_TYPES);
+    devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
 
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
@@ -138,7 +138,7 @@ void Agent::defineProperties()
  * accessor method
  *  \return the number of units an agent holds of a given resource.
  */
-double Agent::getHeld(int resId) const
+int Agent::getHeld(int resId) const
 {
     return resProp[resId].getHeld();
 }
@@ -146,7 +146,7 @@ double Agent::getHeld(int resId) const
 /**
  * \return the number of units gathered today for resource resId
  */
-double Agent::getUnitsGatheredToday(int resId) const
+int Agent::getUnitsGatheredToday(int resId) const
 {
     return resProp[resId].unitsGatheredToday;
 }
@@ -154,7 +154,7 @@ double Agent::getUnitsGatheredToday(int resId) const
 /**
  * \return the number of units gahtered with device for resource resId
  */
-double Agent::getUnitsGatheredWithDevice(int device, int resId) const
+int Agent::getUnitsGatheredWithDevice(int device, int resId) const
 {
     return unitsGatheredWithDeviceToday[device][resId];
 }
@@ -178,7 +178,7 @@ double Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
 /**
  * \return the number of deviceIndex of deviceType made today.
  */
-double Agent::getDevicesMadeToday(int deviceIndex, int deviceType) const
+int Agent::getDevicesMadeToday(int deviceIndex, int deviceType) const
 {
     return devProp[deviceType][deviceIndex].devicesMadeToday;
 }
@@ -397,7 +397,7 @@ void Agent::deviceUse(device_name_t device, int deviceIndex, double timeChange)
  * required by the given resource bundle
  * \param bundle a vector of resource ids
  */
-bool Agent::resBundleHeldCheck(vector<double> bundle) const
+bool Agent::resBundleHeldCheck(vector<int> bundle) const
 {
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         if (bundle[resId] > resProp[resId].getHeld()) {
@@ -1435,7 +1435,7 @@ void Agent::sellsDevice(int deviceIndex, device_name_t device)
  * \param resourceBundle a vector of number of units of resource given up
  * \return the utility loss of giving up resourceBundle
  */
-double Agent::costOfResourceBundle(vector<double> &resourceBundle) const
+double Agent::costOfResourceBundle(vector<int> &resourceBundle) const
 {
     double cost = 0;
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
@@ -1451,7 +1451,7 @@ double Agent::costOfResourceBundle(vector<double> &resourceBundle) const
  * \param resourceBundle a vector of number of units of resource gained
  * \return the utility gain of getting resourceBundle
  */
-double Agent::gainOfResourceBundle(vector<double> &resourceBundle) const
+double Agent::gainOfResourceBundle(vector<int> &resourceBundle) const
 {
     double gain = 0;
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
@@ -1574,10 +1574,10 @@ MaxInfo Agent::calcMaxDeviceGainAndIndex(device_name_t deviceType)
          * is completely unable to buy any components).
          */
         if (devProp[deviceType][resId].getDeviceExperience() >= 1.0) {
-            pair < double, vector<double> > worstCaseConstruction =
+            pair < double, vector<int> > worstCaseConstruction =
                 consideredDevice[resId]->worstCaseConstruction(*this);
             double necessaryTime = worstCaseConstruction.first;
-            vector<double> necessaryRes = worstCaseConstruction.second;
+            vector<int> necessaryRes = worstCaseConstruction.second;
             if (resBundleHeldCheck(necessaryRes) &&
                 setAsideTime + necessaryTime < glob.DAY_LENGTH &&
                 deviceCurrentlyHeldForResource(resId, deviceType) < glob.DAYS_OF_DEVICE_TO_HOLD * glob.DAY_LENGTH) {
@@ -1758,7 +1758,7 @@ void Agent::resetDeviceGainAndCostMemory()
             thisDevProp.costOfDeviceMemory = 0.0;
             thisDevProp.costOfDeviceMemoryValid = false;
             thisDevProp.worstCaseConstructionMemory =
-                make_pair(0.0, vector<double>());
+                make_pair(0.0, vector<int>());
             thisDevProp.worstCaseConstructionMemoryValid = false;
         }
     }
@@ -1860,7 +1860,7 @@ void Agent::logAgentData()
     LOG(5) << "utilGainThroughDevSoldToday " << utilGainThroughDevSoldToday;
     LOG(5) << " --- resProps --- ";
     LOG(5) << "res     endDayUtil     held idleResource experience resSetAside unitsGath";
-    for (double i = 0; i < glob.NUM_RESOURCES; i++) {
+    for (int i = 0; i < glob.NUM_RESOURCES; i++) {
         char ostr[128];
         sprintf(ostr, "%2d\t%8.4f\t%3d\t%d\t%8.4f\t%4d\t%4d", i,
                 resProp[i].endDayUtilities, resProp[i].getHeld(),
@@ -1870,7 +1870,7 @@ void Agent::logAgentData()
     }
     LOG(5) << " --- devProps --- ";
     LOG(5) << "devExp  devHeld  idleDev devToMake devSetAsi gainOverDevLM Valid? costOfDevMem Valid? devMadeToday devMadeTot";
-    for (double i = 0; i < glob.NUM_RESOURCES; i++) {
+    for (int i = 0; i < glob.NUM_RESOURCES; i++) {
         for (int type = 0; type < NUM_DEVICE_TYPES; type++) {
             LOG(5) << " device " << i << ", type " << type;
             char ostr[128];
