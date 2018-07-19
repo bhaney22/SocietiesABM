@@ -1,4 +1,9 @@
 SLURM_scripts/*.out*
 *.o 
-Unit*.csv
+*.csv
 _Results/
+.cproject
+.project
+.settings
+config.yml
+desktop.ini
