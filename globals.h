@@ -225,7 +225,9 @@ public:
     time_t	startTime, endTime; // *** initialized in startTimer() and endTimer()
 //	this is used throughout the program, primarily in statstracker to serve as a place holder that will get filled eventually.
     vector<int> EMPTY_VECTOR_OF_INTS;
+    vector<double> EMPTY_VECTOR_OF_DOUBLES;
     vector<vector<int> > EMPTY_VECTOR_OF_VECTORS_OF_INTS;
+    vector<vector<double> > EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES;
 
     /*
      * To record day, month, year.
