@@ -14,7 +14,7 @@ using namespace std;
  */
 Device::Device(device_name_t componentType, device_name_t type, device_name_t canMake,
                device_name_t devDevice, device_name_t componentOf,
-               vector<int> &components, int use, double deviceFactor, double lifetime)
+               vector<int> &components, double use, double deviceFactor, double lifetime)
 {
     this->componentType = componentType;
     this->type = type;
@@ -150,7 +150,7 @@ double Device::expectedConstructionTime(Agent &agent)
  * \param an agent
  * \return a pair of (timeNeeded, necessaryRes) where the necessary time and resources to make the device and its components, if the agent is not able to buy any components.
  */
-pair<double, vector<int> > Device::worstCaseConstruction(Agent &agent)
+pair<double, vector<double> > Device::worstCaseConstruction(Agent &agent)
 {
     /*
      * If the memory of this calculation that the agent has is valid, return
@@ -267,10 +267,10 @@ pair<double, vector<int> > Device::worstCaseConstruction(Agent &agent)
          * for each corresponding resId, so the necessary resources for this
          * device is the sum of necessary resources for each tool
          */
-        vector<int> necessaryRes(glob.NUM_RESOURCES, 0);
+        vector<double> necessaryRes(glob.NUM_RESOURCES, 0);
         for (int resIdA = 0; resIdA < glob.NUM_RESOURCES; resIdA++) {
             if (highOrderNeeded[resIdA] > 0) {
-                vector<int> thisToolNeeds = glob.discoveredDevices[TOOL][resIdA]->necessaryResources;
+                vector<double> thisToolNeeds = glob.discoveredDevices[TOOL][resIdA]->necessaryResources;
                 for (int resIdB = 0; resIdB < glob.NUM_RESOURCES; resIdB++) {
                     necessaryRes[resIdB] += highOrderNeeded[resIdA] * thisToolNeeds[resIdB];
                 }
@@ -280,16 +280,16 @@ pair<double, vector<int> > Device::worstCaseConstruction(Agent &agent)
         // Agents remember this calculated list
         agent.devProp[type][use].worstCaseConstructionMemory = make_pair(timeNeeded, necessaryRes);
         agent.devProp[type][use].worstCaseConstructionMemoryValid = true;
-        return pair<double, vector<int> >(timeNeeded, necessaryRes);
+        return pair<double, vector<double> >(timeNeeded, necessaryRes);
     }
 }
 
 /**
  * \return The necessary resources for this device assuming no components are owned by the agent and none of the components can be purchased.
  */
-vector<int> Device::necessaryRes()
+vector<double> Device::necessaryRes()
 {
-    vector<int> necessaryRes(glob.NUM_RESOURCES, 0);
+    vector<double> necessaryRes(glob.NUM_RESOURCES, 0);
     for (int i = 0; i < (int) components.size(); i++) {
         for (int j = 0; j < glob.NUM_RESOURCES; j++) {
             necessaryRes[j] += glob.discoveredDevices[componentType][components[i]]->necessaryResources[j];
@@ -329,7 +329,7 @@ string Device::componentsAsString()
  */
 DevDevice::DevDevice(device_name_t componentType, device_name_t type, device_name_t canMake,
                      device_name_t devDevice, device_name_t componentOf, vector<int> &components,
-                     int use, double deviceFactor, double lifetime) :
+                     double use, double deviceFactor, double lifetime) :
     Device(componentType, type, canMake, devDevice, componentOf, components, use, deviceFactor, lifetime)
 {
     necessaryResources = necessaryRes();	// both inherited from Device.
@@ -411,7 +411,7 @@ double DevDevice::gainOverLifetime(Agent &agent)
 /**
  * DevMachine speeds up the production of tools.
  */
-DevMachine::DevMachine(vector<int> &components, int use) :
+DevMachine::DevMachine(vector<int> &components, double use) :
     DevDevice(TOOL, DEVMACHINE, TOOL, NO_DEVICE, DEVFACTORY, components, use,
               glob.DEV_MACHINE_FACTOR, glob.DEV_MACHINE_LIFETIME)
 {
@@ -423,7 +423,7 @@ DevMachine::DevMachine(vector<int> &components, int use) :
 /**
  * DevFactory speeds up the production of machines.
  */
-DevFactory::DevFactory(vector<int> &components, int use) :
+DevFactory::DevFactory(vector<int> &components, double use) :
     DevDevice(DEVMACHINE, DEVFACTORY, MACHINE, NO_DEVICE, NO_DEVICE, components, use,
               glob.DEV_FACTORY_FACTOR, glob.DEV_FACTORY_LIFETIME)
 {
@@ -433,7 +433,7 @@ DevFactory::DevFactory(vector<int> &components, int use) :
 /**
  * The most basic type of device.
  */
-Tool::Tool(vector<int> &components, int use) :
+Tool::Tool(vector<int> &components, double use) :
     Device(NO_DEVICE, TOOL, NO_DEVICE, DEVMACHINE, MACHINE, components, use,
            glob.TOOL_FACTOR, glob.TOOL_LIFETIME)
 {
@@ -571,9 +571,9 @@ double Tool::gainOverLifetime(Agent &agent)
 /**
  * \return The necessary resources for this tool.
  */
-vector<int> Tool::necessaryRes()
+vector<double> Tool::necessaryRes()
 {
-    vector<int> resourceCount(glob.NUM_RESOURCES, 0);	// initialize to 0 by default.
+    vector<double> resourceCount(glob.NUM_RESOURCES, 0);	// initialize to 0 by default.
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         if (find(components.begin(), components.end(), resId) != components.end()) {
             resourceCount[resId] = 1;
@@ -583,7 +583,7 @@ vector<int> Tool::necessaryRes()
 }
 
 
-Machine::Machine(vector<int> &components, int use) :
+Machine::Machine(vector<int> &components, double use) :
     Device(TOOL, MACHINE, NO_DEVICE, DEVFACTORY, FACTORY, components, use, glob.MACHINE_FACTOR,
            glob.MACHINE_LIFETIME)
 {
@@ -651,7 +651,7 @@ double Machine::gainOverLifetime(Agent &agent)
 }
 
 
-Factory::Factory(vector<int> &components, int use) :
+Factory::Factory(vector<int> &components, double use) :
     Device(MACHINE, FACTORY, NO_DEVICE, NO_DEVICE, INDUSTRY, components, use,
            glob.FACTORY_FACTOR, glob.FACTORY_LIFETIME)
 {
@@ -705,7 +705,7 @@ double Factory::gainOverLifetime(Agent &agent)
 }
 
 
-Industry::Industry(vector<int> &components, int use) :
+Industry::Industry(vector<int> &components, double use) :
     Device(FACTORY, INDUSTRY, NO_DEVICE, NO_DEVICE, NO_DEVICE, components, use,
            glob.INDUSTRY_FACTOR, glob.INDUSTRY_LIFETIME)
 {

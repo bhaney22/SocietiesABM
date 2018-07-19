@@ -255,10 +255,10 @@ void DevicePair::pairDeviceTrade()
  * values the least.
  * \return devBuyerSelling
  */
-vector<int> DevicePair::deviceBuyerAvailableRes()
+vector<double> DevicePair::deviceBuyerAvailableRes()
 {
-    vector< pair <double, int> > deviceBuyerEndDay;
-    pair<double, int> resUtilAndId;
+    vector< pair <double, double> > deviceBuyerEndDay;
+    pair<double, double> resUtilAndId;
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         if (deviceBuyer->resProp[resId].getHeld() > 0) {
             resUtilAndId = make_pair(deviceBuyer->resProp[resId].endDayUtilities, resId);
@@ -266,7 +266,7 @@ vector<int> DevicePair::deviceBuyerAvailableRes()
         }
     }
     sort(deviceBuyerEndDay.begin(), deviceBuyerEndDay.end());
-    vector<int> devBuyerSelling;
+    vector<double> devBuyerSelling;
     int menuSize = min(glob.MENU_SIZE, (int)deviceBuyerEndDay.size());
     for (int i = 0; i < menuSize; i++) {
         devBuyerSelling.push_back(deviceBuyerEndDay[i].second);
@@ -281,14 +281,14 @@ vector<int> DevicePair::deviceBuyerAvailableRes()
  * construction.
  * \return a vector of available devices for selling
  */
-vector<int> DevicePair::deviceSellerAvailableDevices()
+vector<double> DevicePair::deviceSellerAvailableDevices()
 {
-    vector<int> availableDevices;
+    vector<double> availableDevices;
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
         if (deviceSeller->devProp[deviceType][resId].getDeviceExperience() >= 1) {
-            pair< double, vector<int> > necessaryTimeAndRes = glob.discoveredDevices[deviceType][resId]->worstCaseConstruction(*deviceSeller);
+            pair< double, vector<double> > necessaryTimeAndRes = glob.discoveredDevices[deviceType][resId]->worstCaseConstruction(*deviceSeller);
             double necessaryTime = necessaryTimeAndRes.first;
-            vector<int> necessaryRes = necessaryTimeAndRes.second;
+            vector<double> necessaryRes = necessaryTimeAndRes.second;
             if (find(deviceSeller->deviceBoughtThisRound.begin(),
                      deviceSeller->deviceBoughtThisRound.end(),
                      resId) == (deviceSeller->deviceBoughtThisRound).end() &&
@@ -350,12 +350,12 @@ void DevicePair::makePicks ()
  */
 void DevicePair::calcOffers()
 {
-    vector<int> deviceSellerOffers = calcDeviceSellerOffers();
-    vector<int> deviceBuyerOffers = calcDeviceBuyerOffers();
+    vector<double> deviceSellerOffers = calcDeviceSellerOffers();
+    vector<double> deviceBuyerOffers = calcDeviceBuyerOffers();
     
     finalOffer.clear();
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-        int x = (int) round((deviceSellerOffers[resId] * deviceBuyer->devTradePower
+        double x = (int) round((deviceSellerOffers[resId] * deviceBuyer->devTradePower
                             + deviceBuyerOffers[resId] * deviceSeller->devTradePower)
                             / (deviceBuyer->devTradePower + deviceSeller->devTradePower));
         finalOffer.push_back(x);
@@ -376,7 +376,7 @@ void DevicePair::calcOffers()
  * exchange for the device it is selling.
  * \return deviceSellerOffers
  */
-vector<int> DevicePair::calcDeviceSellerOffers()
+vector<double> DevicePair::calcDeviceSellerOffers()
 {
     /*
      * deviceSellerMarginalUtilities will be a list where each element is
@@ -390,7 +390,7 @@ vector<int> DevicePair::calcDeviceSellerOffers()
      * units demanded by the device seller in the resource with the
      * corresponding resId.
      */
-    vector<int> deviceSellerOffers;
+    vector<double> deviceSellerOffers;
     /* The maximum available MU. */
     double deviceSellerMUMax = 0.0;
     /* The id of the resource with the highest available MU. */
@@ -444,7 +444,7 @@ vector<int> DevicePair::calcDeviceSellerOffers()
  * exchange for the device it is buying.
  * \return deviceBuyerOffers
  */
-vector<int> DevicePair::calcDeviceBuyerOffers()
+vector<double> DevicePair::calcDeviceBuyerOffers()
 {
     double max_double = numeric_limits<double>::max();
 
@@ -456,7 +456,7 @@ vector<int> DevicePair::calcDeviceBuyerOffers()
     // deviceBuyerOffers will be a list where each element is the number of
     // units offered by the device seller in the resource with the
     // corresponding resId.
-    vector<int> deviceBuyerOffers;
+    vector<double> deviceBuyerOffers;
     double deviceBuyerMUMin = max_double;
     int deviceBuyerMUMinId = -1;
     double MU = 0.0;

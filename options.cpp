@@ -32,7 +32,7 @@ namespace po = boost::program_options;
 int parse_args(int argc, char **argv)
 {
     vector<int> remAgentArg;
-    vector<int> remResArg;
+    vector<double> remResArg;																														//JC: changed to type double
     vector<string> saveInMiddleArg;
     try {
         /* parse the command line args */
@@ -47,8 +47,11 @@ int parse_args(int argc, char **argv)
             ("graph,g", "allow choice of graphs to generate upon completion")
             ("norun,n", "load and print the current config values, then exit")
             ("agent,a", po::value< vector<int> >(&remAgentArg)->multitoken(), "remove an agent mid-run (first arg: which agent to remove, second arg: which day to remove the agent)")
-            ("resource,r", po::value< vector<int> >(&remResArg)->multitoken(), "remove a resource mid-run (first arg: which resource to remove, second arg: which day to remove the resource, third arg: 1 for removing the holdings of that resource on the given day, 0 for not)")
-            ("middle,m", po::value< vector<string> >(&saveInMiddleArg)->multitoken(), "save the simulation mid-run (first arg: destination folder, second arg: day on which to save)")
+
+            /*Changed to type double*/
+			("resource,r", po::value< vector<double> >(&remResArg)->multitoken(), "remove a resource mid-run (first arg: which resource to remove, second arg: which day to remove the resource, third arg: 1 for removing the holdings of that resource on the given day, 0 for not)")
+
+			("middle,m", po::value< vector<string> >(&saveInMiddleArg)->multitoken(), "save the simulation mid-run (first arg: destination folder, second arg: day on which to save)")
             ("verbose,v", po::value<int>(), "set level of debugging output from 0 to 3.  0 = nothing; 3 = everything")
             ("exchange,e", "store exchange rate data from all trades")
 			 // BRH 3.17.2017: added unique database identifier;
@@ -69,13 +72,13 @@ int parse_args(int argc, char **argv)
             ("DEVICE_TRADE_ROUNDS", po::value<int>(&glob.DEVICE_TRADE_ROUNDS), "number of device trading rounds")
             ("DEVICE_TRADE_ATTEMPTS", po::value<int>(&glob.DEVICE_TRADE_ATTEMPTS), "number of device trading attempts")
             ("MENU_SIZE",       po::value<int>(&glob.MENU_SIZE), "Menu size: fix this!")
-            ("DEVICE_TRADE_MEMORY_LENGTH", po::value<int>(&glob.DEVICE_TRADE_MEMORY_LENGTH), "HELP")
-            ("DEVICE_PRODUCTION_MEMORY_LENGTH", po::value<int>(&glob.DEVICE_PRODUCTION_MEMORY_LENGTH), "HELP")
-	    ("MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION", po::value<int>(&glob.MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION), "HELP")
-	    ("MIN_RES_HELD_FOR_DEVICE_CONSIDERATION", po::value<int>(&glob.MIN_RES_HELD_FOR_DEVICE_CONSIDERATION), "HELP")
+            ("DEVICE_TRADE_MEMORY_LENGTH", po::value<double>(&glob.DEVICE_TRADE_MEMORY_LENGTH), "HELP")															//JC: changed to type double
+            ("DEVICE_PRODUCTION_MEMORY_LENGTH", po::value<double>(&glob.DEVICE_PRODUCTION_MEMORY_LENGTH), "HELP")								//JC: changed to type double
+    	    ("MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION", po::value<double>(&glob.MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION), "HELP")		//JC: changed to type double
+	        ("MIN_RES_HELD_FOR_DEVICE_CONSIDERATION", po::value<double>(&glob.MIN_RES_HELD_FOR_DEVICE_CONSIDERATION), "HELP")
             ("DAILY_EXP_PENALTY", po::value<double>(&glob.DAILY_EXP_PENALTY), "HELP")
             ("PRODUCTION_EPSILON", po::value<double>(&glob.PRODUCTION_EPSILON), "HELP")
-            ("RESOURCES_IN_TOOL",  po::value<int>(&glob.RESOURCES_IN_TOOL), "number of resources needed to make a tool (?)")
+            ("RESOURCES_IN_TOOL",  po::value<double>(&glob.RESOURCES_IN_TOOL), "number of resources needed to make a tool (?)")							//JC: changed to type double
             ("MAX_RES_EXPERIENCE",  po::value<double>(&glob.MAX_RES_EXPERIENCE), "HELP")
             ("INVENTOR_DEVICE_EXPERIENCE",  po::value<double>(&glob.INVENTOR_DEVICE_EXPERIENCE), "HELP")
             ("NUM_DEVICE_COMPONENTS",  po::value<int>(&glob.NUM_DEVICE_COMPONENTS), "HELP")
