@@ -8,3 +8,5 @@ _Results/
 .settings
 config.yml
 desktop.ini
+_TestRuns/
+*.log
