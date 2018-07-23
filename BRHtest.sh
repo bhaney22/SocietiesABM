@@ -4,17 +4,17 @@
 # This will single-thread multiple runs of one configuration of Societies
 # on the supercomputer cluster.
 #
-# NOTE: To multi-thread, run societies in background (I think.) 
+# NOTE: Work with Chris W to figure out how multi-thread societies runs
 
 # Run the following line if format of runlog file changes or to create it anew.
 # echo "StartDate,StartTime,ElapsedMinutes,Config,UniqueKey" > /home/brh22/SocietiesABM/_Results/runlog.csv
 
 # Created by: JYC 07.19.2018 
-# Last revised: BRH 07.21.2018  (note: check out this link for picky rules
-# about math and variables in bash shell scripts:
+# Last revised: BRH 07.21.2018  
+# (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
 
-cd /home/brh22/SocietiesABM/
+cd ~/SocietiesABM/
 
 # Societies command line arguments Naming conventions:
 # 1. -p Name of the configuration (without Configs/ path and without .conf extention) ex. T4_100_100
@@ -33,21 +33,32 @@ StartDay=$(date +%D)
 StartTime=$(date +%T)
 ((totaltime=0))
 
-let run_num=$1
+let run_num=$1	#Number of random runs is passed as a parameter when calling this shell script.
+let seed=50		#Set the random seed for societies' results to always be the same if all parameters are the same
 
-echo ""$run_num" Test Runs Begin: "$StartDay" "$StartTime" " |tee _Results/ITest.log
-echo "Unique Key: "$UniqueKey"  "| tee -a _Results/ITest.log
+#Use this type of loop(s) outside the random loop(s) to step through various configuration parameters discretely.
+roundsteps="1 10"
 
-# The following formatting allows run to be 01,02,...10,11, etc. the leading zero helps to keep things in proper order.
-for run in $(seq -f "%03g" 1 $run_num)
+#Begin run log
+	echo "
+	************************************************
+	Stepping through TRADE_ROUNDS ["$roundsteps"] 
+	Sweeping the following parameters randomly randomly "$run_num" times. 
+	   TRADE_ATTEMPTS								
+	************************************************ 
+	"| tee -a _Results/ITest.log
+
+for rounds in $roundsteps 
 do
-	echo "*****************" | tee -a _Results/ITest.log
-	echo " RUN "$run" OF "$run_num" " | tee -a _Results/ITest.log
-	echo "*****************" | tee -a _Results/ITest.log
-	echo " " | tee -a _Results/ITest.log
-	
-	echo "Config Parameters:" | tee -a _Results/ITest.log
-	
+	echo "TRADE ROUNDS = "$rounds""		| tee -a _Results/ITest.log
+
+# Now run a sweep across the more technical and floating point parameters randomly
+# The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
+# The leading zeroes helps to keep things in proper order.
+for run in $(seq -f "%03g" 1 $1)
+do
+	echo "RUN "$run" OF "$run_num" " 	| tee -a _Results/ITest.log
+
 # Create config file with input parameters. Default values are found in ./Configs/default.aconf
 # To randomize an integer parameter, replace its default value with "$(((RANDOM%50+1)))"
 # To randomize an floating point parameter, replace its default value with "$(((RANDOM%5+1)))'.'$(((RANDOM%99+1)))"
@@ -67,8 +78,8 @@ RESOURCES_IN_TOOL = 3
 NUM_DEVICE_COMPONENTS = 4
 
 MENU_SIZE = 4
-RES_TRADE_ROUNDS = 1
-RES_TRADE_ATTEMPTS = 1
+RES_TRADE_ROUNDS = "$rounds" 
+RES_TRADE_ATTEMPTS = "$(((RANDOM%3+1)))"
 DEVICE_TRADE_ROUNDS = 1
 DEVICE_TRADE_ATTEMPTS = 1
 DEVICE_TRADE_MEMORY_LENGTH = 5
@@ -119,36 +130,35 @@ OTHER_MARKETS = False
 
 " > ./Configs/ITest$run.conf
 	
-	echo " " | tee -a _Results/ITest.log
-	echo "Input Parameters:" | tee -a _Results/ITest.log
-	grep NUM_ ./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep FACTOR ./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep LIFETIME ./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	echo "Selected Config Parameters:" 						| tee -a _Results/ITest.log
+	grep NUM_DAYS  					./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	grep NUM_AGENTS 				./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	grep NUM_RESOURCES 				./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	grep RES_TRADE_ROUNDS 			./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	grep RES_TRADE_ATTEMPTS 		./Configs/ITest$run.conf | tee -a _Results/ITest.log
 	
 	SECONDS=0
 		
-	echo "=== BEGIN SOCIETIES RUN "$run" SCREEN CAPTURE OUTPUT ===" | tee -a _Results/ITest.log
 ### 
-				./societies -v 0 -p ITest$run -s _Results/ITest/Run$run -d B$UniqueKey -t $run | tee -a _Results/ITest.log
+	./societies -S $seed -v 0 -p ITest$run -s _Results/ITest/Run$run -d B$UniqueKey -t $run >> _Results/ITest$run.out
 ###				
-	echo "=== END SOCIETIES "$run" SCREEN CAPTURE OUTPUT ===" | tee -a _Results/ITest.log
-	echo " " | tee -a _Results/ITest.log
 	
 	((duration=$SECONDS))
 	((totaltime=$totaltime+$duration))
 	
-	echo "Run "$run" of "$run_num" COMPLETED in "$duration" seconds" | tee -a _Results/ITest.log
+	echo "This run COMPLETED in "$duration" seconds" | tee -a _Results/ITest.log
 	echo " " | tee -a _Results/ITest.log				
 
 	rm ./Configs/ITest$run.conf
 	
- 	((run++))
-done
+ 	((run++)) 
+done	#sweeping through random parameters
+done  	#looping through stepwise parameters 
 
 EndDay=$(date +%D)
 EndTime=$(date +%T)
 ((totalminutes=$totaltime/60))
 
-echo ''$run_num' Test Runs Completed in '$totaltime' seconds or '$totalminutes' minutes on '$EndDay' '$EndTime' ' | tee -a _Results/ITest.log
+echo 'All TEST runs Completed in '$totaltime' seconds or '$totalminutes' minutes on '$EndDay' '$EndTime' ' | tee -a _Results/ITest.log
 
 
