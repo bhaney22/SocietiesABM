@@ -17,6 +17,9 @@ struct MaxInfo {
 };
 
 class Device;
+/*JYC
+ *
+ */
 
 class Agent
 {
