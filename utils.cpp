@@ -1424,8 +1424,7 @@ void Utils::saveUseMatrix()
 		}
 		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 			double totalLaborTimeByRes = 0;
-			totalLaborTimeByRes += timeSpentGatheringWithoutDeviceByRes[resId][glob.currentDay];
-			for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+			for (int type = TOOL; type <= INDUSTRY; type++) {
     		   	totalLaborTimeByRes += timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
 			}
 		file << "," << totalLaborTimeByRes;

@@ -152,6 +152,8 @@ public:
      * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
     vector<vector<int> > devicesMadeWithDevDevicesToday;
+
+
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
@@ -165,9 +167,9 @@ public:
     /**
      * Each element in this list is the number of minutes used to
      * make new (higher tier) devices with an inferior device by resource
-     * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
+     * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
-    vector<vector<double> > timeSpentMakingDevicesByDeviceByRes;
+    vector<vector<double> > timeSpentMakingDevicesTodayByDeviceByRes;
 
 
     /**
@@ -206,9 +208,9 @@ public:
     int getUnitsGatheredToday(int resId) const;
     int getUnitsGatheredWithDevice(int device, int resId) const;
     double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; //BRH func for new array 05.30.2018
-    double getTimeSpentMakingDevicesByDeviceTodayByRes(int device, int resid) const;	   //JYC: added - 07.24.2018
+    double getTimeSpentMakingDevicesTodayByDeviceByRes(int device, int resid) const;	   //JYC: added - 07.24.2018
     double getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
-    int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
+    int getDevicesMadeToday(int deviceIndex, int deviceType) const;
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;
     void workDay();

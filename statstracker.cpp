@@ -548,18 +548,18 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
             double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
-            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
+            double timeGatheringWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
             
             // add this agents time spent with the previous agents
-            totalTimeSpentGatheringWithDevice += timeWithDeviceByAgent;
+            totalTimeSpentGatheringWithDevice += timeGatheringWithDeviceByAgent;
             totalTimeSpentMakingDevices += timeMakingDevicesByAgent;
 
             // save this individual agent's time data in a vector.
             timeSpentMakingDevicesByAgent[type][aId].push_back(timeMakingDevicesByAgent);
             //JYC: added - 07.24.2018
-            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeWithDeviceByAgent);
+            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeGatheringWithDeviceByAgent);
 
-            tempTimeSpentGathering[glob.agent[aId]->group][type] += timeWithDeviceByAgent;
+            tempTimeSpentGathering[glob.agent[aId]->group][type] += timeGatheringWithDeviceByAgent;
             tempTimeSpentMaking[glob.agent[aId]->group][type] += timeMakingDevicesByAgent;
         }
         // save the time data of the population as a whole.
@@ -599,7 +599,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
     	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
     	double totalTimeSpentMakingDevicesByDeviceByRes = 0;
     	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
-    		double timeMakingEachDeviceByRes = glob.agent[aId] -> getTimeSpentMakingDevicesByDeviceTodayByRes(type, resId);
+    		double timeMakingEachDeviceByRes = glob.agent[aId] -> getTimeSpentMakingDevicesTodayByDeviceByRes(type,resId);
     		totalTimeSpentMakingDevicesByDeviceByRes += timeMakingEachDeviceByRes;
     	}
     	timeSpentMakingDevicesByDeviceByRes[type][resId].push_back(totalTimeSpentMakingDevicesByDeviceByRes);
