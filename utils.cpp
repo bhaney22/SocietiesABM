@@ -966,9 +966,10 @@ void Utils::saveTotalTimeUsage()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* timeSpentGatheringWithDevice per agent */
-    vector< vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
+    vector<vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
     for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
         file << devicesStr[i] << "_timeGatheringWithDevicePerActiveAgent_" << glob.SIM_NAME << ",";
+        file << devicesStr[i] << "_timeSpentMakingDevicesPerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
             file << ( (double) timeSpentGatheringWithDevice[i][j] / (double) activeAgents[j] ) << ",";
         }
@@ -1203,6 +1204,7 @@ void Utils::saveUseMatrix()
     vector< vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     vector< vector< vector<double> > > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
     vector< vector<double> > timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes();   
+    vector< vector<vector<double> > > timeSpentMakingDevicesByDeviceByRes = glob.productionStats->getTimeSpentMakingDevicesByDeviceByRes();
     int temp_in_device=0;
 	double num_of_that_device_made;
    
@@ -1261,7 +1263,7 @@ void Utils::saveUseMatrix()
 // Loop over all resources and fill in minutes T1 device was used to gather its resource, and zeros elsewhere.		
 		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 		if (product != resId) {
-	        	file << "," << 0;	
+	        	file << "," << 0;
 	        	} else {
 				file << "," << timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
 	        }
@@ -1393,7 +1395,7 @@ void Utils::saveUseMatrix()
 // and zeros elsewhere.		
 		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 		if (product != resId) {
-	        	file << "," << 0;	
+	        	file << "," << 0;
 	        	} else {
 				file << "," << timeSpentGatheringWithDeviceByRes[INDUSTRY][resId][glob.currentDay];
 	        }
@@ -1419,6 +1421,14 @@ void Utils::saveUseMatrix()
     		   	totalTimeGatheringByRes += timeSpentGatheringWithDeviceByRes[type][resId][glob.currentDay];
 			}
 		file << "," << totalTimeGatheringByRes;
+		}
+		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+			double totalLaborTimeByRes = 0;
+			totalLaborTimeByRes += timeSpentGatheringWithoutDeviceByRes[resId][glob.currentDay];
+			for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+    		   	totalLaborTimeByRes += timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
+			}
+		file << "," << totalLaborTimeByRes;
 		}
 		file << "\n";  //Last thing to do before starting the next row.
 

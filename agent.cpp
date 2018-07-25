@@ -61,14 +61,18 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
     unitsSoldForDevicesToday = 0;
     unitsSoldCrossGroupForDevicesToday = 0;
 
-    unitsGatheredWithDeviceToday = vector< vector<int> >(NUM_DEVICE_TYPES);
+    unitsGatheredWithDeviceToday = vector<vector<int> >(NUM_DEVICE_TYPES);
 
-    devicesMadeWithDevDevicesToday = vector< vector<int> >(NUM_DEVICE_TYPES);
+    devicesMadeWithDevDevicesToday = vector<vector<int> >(NUM_DEVICE_TYPES);
 
     timeSpentMakingDevicesToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
 
+    //JYC added - 07.24.2018
+    timeSpentMakingDevicesByDeviceByRes = vector<vector<double> >(NUM_DEVICE_TYPES);
+
+
     timeSpentGatheringWithDeviceToday = vector<double>(NUM_DEVICE_TYPES, 0.0);
-    timeSpentGatheringWithDeviceTodayByRes = vector< vector<double> >(NUM_DEVICE_TYPES);
+    timeSpentGatheringWithDeviceTodayByRes = vector<vector<double> >(NUM_DEVICE_TYPES);
     timeSpentGatheringWithoutDeviceToday = 0.0;
     timeSpentGatheringWithoutDeviceTodayByRes = vector<double>(glob.NUM_RESOURCES,0.0);
 
@@ -81,6 +85,7 @@ void Agent::initializeAll(int number, vector< vector<double> > agentValues)
         for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type].push_back(0);
             timeSpentGatheringWithDeviceTodayByRes[type].push_back(0);
+            timeSpentMakingDevicesByDeviceByRes[type].push_back(0);
         }
     }
 }
@@ -152,7 +157,7 @@ int Agent::getUnitsGatheredToday(int resId) const
 }
 
 /**
- * \return the number of units gahtered with device for resource resId
+ * \return the number of units gathered with device for resource resId
  */
 int Agent::getUnitsGatheredWithDevice(int device, int resId) const
 {
@@ -174,6 +179,15 @@ double Agent::getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const
 {
     return timeSpentGatheringWithoutDeviceTodayByRes[resId];
 }
+
+/**
+ * \return the time spent making each device
+ */ //JYC: added - 07.24.2018
+double Agent::getTimeSpentMakingDevicesByDeviceTodayByRes(int device, int resId) const
+{
+    return timeSpentMakingDevicesByDeviceByRes[device][resId];
+}
+
 
 /**
  * \return the number of deviceIndex of deviceType made today.
@@ -922,6 +936,7 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
  // BRH 05.26.2018 Added an additional statsTracker that is indexed by resIndex.
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
+        timeSpentMakingDevicesByDeviceByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
  //JYC: Unit Testing 07.11.2018
  //       if (glob.currentDay + 1 == glob.NUM_DAYS){
@@ -1790,6 +1805,7 @@ void Agent::resetTodayStats()
 		for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
             timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
+            timeSpentMakingDevicesByDeviceByRes[type][resId] = 0;	  //JYC: added 07.24.2018
         }
  	}
 	unitsSoldToday = 0;

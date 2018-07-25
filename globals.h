@@ -67,10 +67,10 @@ public:
      * Each group of agents has its own memoMU.
      */
     vector< map<pair<int,int>,double> > memoMUs;
+
     /**
      * Values for command-line options.
      */
-
 	string configName;          	// *** initialized in parse_args() This just has the name of the config (ex. test1)
 	string configFilename;          // *** initialized in parse_args() This has the path and extenstion of the config, ex. Configs/test1.conf
     string configAgentFilename;     // *** initialized in parse_args()
@@ -103,11 +103,11 @@ public:
     /**
      * These values are read from the config file.
      */
-    int START_DAY;                      // *** initialized in parse_args()
-    int DAY_LENGTH;                     // *** initialized in parse_args()
-    int NUM_DAYS;                       // *** initialized in parse_args()
-    int NUM_AGENTS;                     // *** initialized in parse_args()
-    int NUM_RESOURCES;                  // *** initialized in parse_args()
+    int START_DAY;                   // *** initialized in parse_args()
+    int DAY_LENGTH;                  // *** initialized in parse_args()
+    int NUM_DAYS;                    // *** initialized in parse_args()
+    int NUM_AGENTS;                  // *** initialized in parse_args()
+    int NUM_RESOURCES;               // *** initialized in parse_args()
 
     /**
      * The number of groups/types of agents.
@@ -162,30 +162,30 @@ public:
     bool TOOLS_ONLY;                    // *** initialized in parse_args()
 
     /**
-     * Advanced options, settable via command line or via GUI.
+     * Advanced options, set table via command line or via GUI.
      */
-    bool REMOVE_RES;            // *** initialized in constructor and setAdvancedOptions()
-    int RES_TO_REMOVE;          // *** initialized in setAdvancedOptions()
-    int REMOVE_RES_DAY;         // *** initialized in setAdvancedOptions()
-    bool ELIMINATE_RESERVES;    // *** initialized in setAdvancedOptions()
-    bool REMOVE_AGENT;          // *** initialized in constructor and setAdvancedOptions()
-    int AGENT_TO_REMOVE;        // *** initialized in setAdvancedOptions()
-    int REMOVE_AGENT_DAY;       // *** initialized in setAdvancedOptions()
-    bool END_SAVE;              // *** initialized in constructor and setAdvancedOptions()
-    string SAVE_FOLDER;         // *** initialized in setAdvancedOptions()
-    bool SAVE_DAY_STATUS;           // *** initialized in constructor
-    string DAY_STATUS_SAVE_FOLDER;  // *** initialized in setAdvancedOptions()
-    int DAY_FOR_SAVE;               // *** initialized in setAdvancedOptions()
-    string DAY_STATUS_LOAD_FOLDER;  // *** initialized in initGlobalStructures()
-    string SIM_NAME;            // *** initialized in constructor and setAdvancedOptions() and reinitialize()
-    string SIM_SAVE_FOLDER;     // *** initialized in setAdvancedOptions() and reinitialize()
-    bool SAVE_TRADES;           // *** initialized in setAdvancedOptions()
-    bool PARALLEL_TRADES;       // *** initialized in constructor
+    bool   REMOVE_RES;             // *** initialized in constructor and setAdvancedOptions()
+    int    RES_TO_REMOVE;          // *** initialized in setAdvancedOptions()
+    int    REMOVE_RES_DAY;         // *** initialized in setAdvancedOptions()
+    bool   ELIMINATE_RESERVES;     // *** initialized in setAdvancedOptions()
+    bool   REMOVE_AGENT;           // *** initialized in constructor and setAdvancedOptions()
+    int    AGENT_TO_REMOVE;        // *** initialized in setAdvancedOptions()
+    int    REMOVE_AGENT_DAY;       // *** initialized in setAdvancedOptions()
+    bool   END_SAVE;               // *** initialized in constructor and setAdvancedOptions()
+    string SAVE_FOLDER;            // *** initialized in setAdvancedOptions()
+    bool   SAVE_DAY_STATUS;        // *** initialized in constructor
+    string DAY_STATUS_SAVE_FOLDER; // *** initialized in setAdvancedOptions()
+    int    DAY_FOR_SAVE;           // *** initialized in setAdvancedOptions()
+    string DAY_STATUS_LOAD_FOLDER; // *** initialized in initGlobalStructures()
+    string SIM_NAME;               // *** initialized in constructor and setAdvancedOptions() and reinitialize()
+    string SIM_SAVE_FOLDER;        // *** initialized in setAdvancedOptions() and reinitialize()
+    bool   SAVE_TRADES;            // *** initialized in setAdvancedOptions()
+    bool   PARALLEL_TRADES;        // *** initialized in constructor
 
     /* "Global" constants that are data structures and computed
        at start-up time. */
-    vector<ResValues> RES_VALUES;   // *** initialized in initGlobalStructures()
-    vector<int> RES_DECAY_SLOWNESS; // *** initialized in initGlobalStructures()
+    vector<ResValues> RES_VALUES;           // *** initialized in initGlobalStructures()
+    vector<int> 	  RES_DECAY_SLOWNESS;   // *** initialized in initGlobalStructures()
 
     // indexed by device_name_t
     vector<double> EXPERIENCE_FOR_MAKING;   // *** initialized in initGlobalStructures()
@@ -196,7 +196,6 @@ public:
      * Indexed by agent type; initialized in initializeAgents()
      */
     vector<int> NUM_AGENTS_IN_GROUP;
-
     /**
      * Number of active agents in each agent group.
      * Indexed by agent group; initialized in initializeAgents()
@@ -216,17 +215,16 @@ public:
     vector<Agent *> agent;  // *** initialized in initializeAgents()
 
     // *** initialized in initGlobalStructures()
-    vector< vector<Device *> > discoveredDevices;  // indexed by device_name_t and then deviceIdx.
-
-    vector<Resource> res;       // *** initialized in initGlobalStructures()
+    vector<vector<Device *> > discoveredDevices;  // indexed by device_name_t and then deviceIdx.
+    vector<Resource> res;                         // *** initialized in initGlobalStructures()
 
     // Note: global updatedAgents in config.py not used anywhere...
 
     time_t	startTime, endTime; // *** initialized in startTimer() and endTimer()
 //	this is used throughout the program, primarily in statstracker to serve as a place holder that will get filled eventually.
-    vector<int> EMPTY_VECTOR_OF_INTS;
-    vector<double> EMPTY_VECTOR_OF_DOUBLES;
-    vector<vector<int> > EMPTY_VECTOR_OF_VECTORS_OF_INTS;
+    vector<int> 			EMPTY_VECTOR_OF_INTS;
+    vector<double> 			EMPTY_VECTOR_OF_DOUBLES;
+    vector<vector<int> > 	EMPTY_VECTOR_OF_VECTORS_OF_INTS;
     vector<vector<double> > EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES;
 
     /*
