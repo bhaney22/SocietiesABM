@@ -37,7 +37,7 @@ let run_num=$1	#Number of random runs is passed as a parameter when calling this
 let seed=50		#Set the random seed for societies' results to always be the same if all parameters are the same
 
 #Use this type of loop(s) outside the random loop(s) to step through various configuration parameters discretely.
-roundsteps="1 10"
+roundsteps="1 2 5"
 
 #Begin run log
 	echo "
@@ -66,20 +66,20 @@ echo "
 START_DAY = 0
 DAY_LENGTH = 600
 
-NUM_DAYS = 100
-NUM_AGENTS = 8
+NUM_DAYS = 300 
+NUM_AGENTS = 8 
 
 TRADE_EXISTS = True
 DEVICES_EXIST = True
 TOOLS_ONLY = False
 
-NUM_RESOURCES = 4
+NUM_RESOURCES = 4 
 RESOURCES_IN_TOOL = 3
 NUM_DEVICE_COMPONENTS = 4
 
 MENU_SIZE = 4
 RES_TRADE_ROUNDS = "$rounds" 
-RES_TRADE_ATTEMPTS = "$(((RANDOM%3+1)))"
+RES_TRADE_ATTEMPTS = "$run"
 DEVICE_TRADE_ROUNDS = 1
 DEVICE_TRADE_ATTEMPTS = 1
 DEVICE_TRADE_MEMORY_LENGTH = 5
@@ -127,20 +127,20 @@ DEV_FACTORY_LIFETIME = 0
 MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION = 5
 
 OTHER_MARKETS = False 
+" > Configs/ITest.conf
 
-" > ./Configs/ITest$run.conf
 	
 	echo "Selected Config Parameters:" 						| tee -a _Results/ITest.log
-	grep NUM_DAYS  					./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep NUM_AGENTS 				./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep NUM_RESOURCES 				./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep RES_TRADE_ROUNDS 			./Configs/ITest$run.conf | tee -a _Results/ITest.log
-	grep RES_TRADE_ATTEMPTS 		./Configs/ITest$run.conf | tee -a _Results/ITest.log
+	grep NUM_DAYS  					./Configs/ITest.conf | tee -a _Results/ITest.log
+	grep NUM_AGENTS 				./Configs/ITest.conf | tee -a _Results/ITest.log
+	grep NUM_RESOURCES 				./Configs/ITest.conf | tee -a _Results/ITest.log
+	grep RES_TRADE_ROUNDS 			./Configs/ITest.conf | tee -a _Results/ITest.log
+	grep RES_TRADE_ATTEMPTS 		./Configs/ITest.conf | tee -a _Results/ITest.log
 	
 	SECONDS=0
 		
 ### 
-	./societies -S $seed -v 0 -p ITest$run -s _Results/ITest/Run$run -d B$UniqueKey -t $run >> _Results/ITest$run.out
+	./societies -S $seed -v 1 -p ITest -s _Results/ITest/Rounds_$rounds -d B$UniqueKey -t $run >> _Results/ITest.out
 ###				
 	
 	((duration=$SECONDS))
@@ -149,7 +149,8 @@ OTHER_MARKETS = False
 	echo "This run COMPLETED in "$duration" seconds" | tee -a _Results/ITest.log
 	echo " " | tee -a _Results/ITest.log				
 
-	rm ./Configs/ITest$run.conf
+	rm ./Configs/ITest.conf
+
 	
  	((run++)) 
 done	#sweeping through random parameters
