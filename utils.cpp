@@ -1422,12 +1422,10 @@ void Utils::saveUseMatrix()
 			}
 		file << "," << totalTimeGatheringByRes;
 		}
-		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-			double totalLaborTimeByRes = 0;
-			for (int type = TOOL; type <= INDUSTRY; type++) {
-    		   	totalLaborTimeByRes += timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
+		for (int type = TOOL; type <= INDUSTRY; type++) {
+			for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    		   	file << "," << timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
 			}
-		file << "," << totalLaborTimeByRes;
 		}
 		file << "\n";  //Last thing to do before starting the next row.
 

@@ -11,22 +11,22 @@
 # BRH 3.20.2017
 
 cat ./IOtest/*/*/IOMatrix.csv | head -n 1 > temp1
-cat ./IOtest/*/*/IOMatrix.csv  | grep -v UniqueKey >> temp2
+cat ./IOtest/*/*/IOMatrix.csv  | grep -v UniqueKey > temp2
 cat temp1  temp2 > ./IOtest/IOMatrixAll.csv
 rm temp1 temp2
 
 cat ./IOtest/*/*/DeviceRecipes.csv | head -n 1 > temp1
-cat ./IOtest/*/*/DeviceRecipes.csv  | grep -v UniqueKey >> temp2
+cat ./IOtest/*/*/DeviceRecipes.csv  | grep -v UniqueKey > temp2
 cat temp1  temp2 > ./IOtest/DeviceRecipes.csv
 rm temp1 temp2
 
 cat ./IOtest/*/*/long_output.csv | head -n 1 > temp1
-cat ./IOtest/*/*/long_output.csv | grep -v UniqueKey >> temp2
+cat ./IOtest/*/*/long_output.csv | grep -v UniqueKey > temp2
 cat temp1  temp2 > ./IOtest/long_output_all.csv
 rm temp1 temp2
 
 cat ./IOtest/*/*/trades.csv | head -n 1 > temp1
-cat ./IOtest/*/*/trades.csv | grep -v UniqueKey >> temp2
+cat ./IOtest/*/*/trades.csv | grep -v UniqueKey > temp2
 cat temp1  temp2 > ./IOtest/trades_all.csv
 rm temp1 temp2
 
