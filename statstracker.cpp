@@ -596,7 +596,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
 
 	 //JYC: added - 07.24.2018
 	 for (int type = 0; type < glob.getNumResGatherDev(); type++) {
-    	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
     	double totalTimeSpentMakingDevicesByDeviceByRes = 0;
     	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
     		double timeMakingEachDeviceByRes = glob.agent[aId] -> getTimeSpentMakingDevicesTodayByDeviceByRes(type,resId);

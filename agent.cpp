@@ -938,9 +938,6 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
         timeSpentGatheringWithDeviceToday[bestDevice] += workTime;
  // BRH 05.26.2018 Added an additional statsTracker that is indexed by resIndex.
         timeSpentGatheringWithDeviceTodayByRes[bestDevice][resIndex] += workTime;
-        //JYC: added - 07.24.2018
-        timeSpentMakingDevicesToday[bestDevice] += workTime;
-        timeSpentMakingDevicesTodayByDeviceByRes[bestDevice][resIndex] += workTime;
         devProp[bestDevice][resIndex].deviceMinutesUsedTotal += workTime;
  //JYC: Unit Testing 07.11.2018
  //       if (glob.currentDay + 1 == glob.NUM_DAYS){
@@ -973,7 +970,9 @@ void Agent::deviceStatsUpdate(int deviceIndex, device_name_t device,
 {
     devProp[device][deviceIndex].devicesMadeTotal++;
     devProp[device][deviceIndex].devicesMadeToday++;
+    //JYC: added - 07.24.2018
     timeSpentMakingDevicesToday[device] += timeUse;
+    timeSpentMakingDevicesTodayByDeviceByRes[device][deviceIndex] += timeUse;
     LOG(4) << "devicesMadeTotal for " << device_names[device] << " devIdx " << deviceIndex
            << " is now " << devProp[device][deviceIndex].devicesMadeTotal
            << ". MadeToday is " << devProp[device][deviceIndex].devicesMadeToday;
@@ -1809,8 +1808,9 @@ void Agent::resetTodayStats()
         	}
 		for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
-            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;  //BRH NEW array 05.29.2018
-            timeSpentMakingDevicesTodayByDeviceByRes[type][resId] = 0;	  //JYC: added 07.24.2018
+            timeSpentGatheringWithDeviceTodayByRes[type][resId] = 0;   //BRH NEW array 05.29.2018
+            timeSpentMakingDevicesToday[type] = 0;					   //JYC: added 07.24.2018
+            timeSpentMakingDevicesTodayByDeviceByRes[type][resId] = 0; //JYC: added 07.24.2018
         }
  	}
 	unitsSoldToday = 0;

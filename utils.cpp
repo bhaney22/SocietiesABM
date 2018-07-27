@@ -1424,7 +1424,7 @@ void Utils::saveUseMatrix()
 		}
 		for (int type = TOOL; type <= INDUSTRY; type++) {
 			for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-    		   	file << "," << timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
+				file << "," << timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
 			}
 		}
 		file << "\n";  //Last thing to do before starting the next row.
