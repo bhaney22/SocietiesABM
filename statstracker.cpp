@@ -594,7 +594,7 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
     	}
      }
 
-	 //JYC: added
+	 //JYC: added - 07.24.2018
 	 for (int type = 0; type < glob.getNumResGatherDev(); type++) {
     	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
     	double totalTimeSpentMakingDevicesByDeviceByRes = 0;
