@@ -526,6 +526,7 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
  * Amount of time each agent spends making devices
  * Amount of time the population spends making devices
  */
+//JYC: 07.31.2018
 void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesByAgent()
 {
     /* NOTE: python code only computes timeSpentGathering* for TOOL

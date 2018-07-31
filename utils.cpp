@@ -1198,7 +1198,7 @@ void Utils::saveDeviceRecipes()
 }
 
 // BRH: 10.12.2017 New routine to save Use Matrix
-
+//JYC: 07.31.2018
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector< vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
