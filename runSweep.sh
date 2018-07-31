@@ -1,5 +1,11 @@
 #!/bin/bash
 
+############################################################################
+# This script takes two commandline arguments:
+# 1. Number of days (default = 100)
+# 1. Number of random runs (default = 5) 
+#
+
 # This will single-thread multiple runs of one configuration of Societies
 # on the supercomputer cluster.
 #
@@ -34,7 +40,7 @@ list_of_values2="5"
 # Option 1
 ##############################################################################################################
 # The number of random runs can be passed as the first arg of the command line, otherwise only 2 are run.
-num_random_runs=${1:-002}   
+num_random_runs=${2:-005}   
 seed=" "
 
 #############################################################################################################
@@ -93,7 +99,7 @@ TRADE_EXISTS = True
 DEVICES_EXIST = True
 TOOLS_ONLY = False
 
-NUM_DAYS = 100
+NUM_DAYS = "${1:-100}  "
 NUM_AGENTS = 8
 NUM_RESOURCES = 4
 RESOURCES_IN_TOOL = "$resources_in_tool"
