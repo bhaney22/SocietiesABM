@@ -930,6 +930,8 @@ void Agent::work(int resIndex, device_name_t bestDevice)
  * \param bestDevice device type
  * \param workTime the amount of time the agent used to extract a resource
  */
+
+//JYC: 07.31.2018
 void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workTime)
 {
     resProp[resIndex].unitsGatheredToday++;
