@@ -18,11 +18,11 @@ cd ~/SocietiesABM/
 #    a. replace the first parameter default value with "$i"
 #    b. replace the second parameter default value with "$j"
 #############################################################################
-parm_name1=DEV_TRADE_ROUNDS
-list_of_values1="01 02"
+parm_name1=TRADE_ROUNDS
+list_of_values1="05"
 
-parm_name2=DEV_TRADE_ATTEMPTS
-list_of_values2="01"
+parm_name2=TRADE_ATTEMPTS
+list_of_values2="5"
 
 #############################################################################################################
 # Control amount of random variation by uncommenting the appropriate option:
@@ -100,8 +100,8 @@ RESOURCES_IN_TOOL = "$resources_in_tool"
 NUM_DEVICE_COMPONENTS = "$num_device_components"
 
 MENU_SIZE = 4
-RES_TRADE_ROUNDS = 1
-RES_TRADE_ATTEMPTS = 1
+RES_TRADE_ROUNDS = "$i"
+RES_TRADE_ATTEMPTS = "$j"
 DEVICE_TRADE_ROUNDS = "$i" 
 DEVICE_TRADE_ATTEMPTS = "$j"
 DEVICE_TRADE_MEMORY_LENGTH = 5
