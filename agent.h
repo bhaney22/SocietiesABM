@@ -158,7 +158,7 @@ public:
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
      * size is [glob.NUM_DEVICE_TYPES]
-     * JYC "same thing as timeSpentMakingDevicesTodayByDeviceByRes - 07.24.2018
+     * JYC "same thing as timeSpentMakingDevicesTodayByDevice - 07.24.2018
      */
     vector<double> timeSpentMakingDevicesToday;
 

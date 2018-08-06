@@ -969,7 +969,6 @@ void Utils::saveTotalTimeUsage()
     vector<vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
     for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
         file << devicesStr[i] << "_timeGatheringWithDevicePerActiveAgent_" << glob.SIM_NAME << ",";
-        file << devicesStr[i] << "_timeSpentMakingDevicesPerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
             file << ( (double) timeSpentGatheringWithDevice[i][j] / (double) activeAgents[j] ) << ",";
         }
@@ -1083,8 +1082,8 @@ void Utils::saveDevDevice()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* devices made with devDevice by total agents */
-    vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
-    vector< vector<int> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();
+    vector<vector<int> > devicesMade = glob.productionStats->getDevicesMade();
+    vector<vector<int> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();
     for (int i = 4; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << "Use_" << glob.SIM_NAME  << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1103,7 +1102,7 @@ void Utils::saveDevDevice()
     }
 
     /* devices made with devDevice by each group */
-    vector< vector< vector <int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
+    vector<vector<vector<int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
     vector<vector<vector<int> > > devicesMadeWithDevDeviceByGroup = glob.productionStats->getDevicesMadeWithDevDeviceByGroup();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 4; i < NUM_DEVICE_TYPES; i++) {

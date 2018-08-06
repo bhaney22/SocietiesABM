@@ -970,11 +970,13 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
 void Agent::deviceStatsUpdate(int deviceIndex, device_name_t device,
                               device_name_t bestDevDevice, double timeUse)
 {
-    devProp[device][deviceIndex].devicesMadeTotal++;
+
+	devProp[device][deviceIndex].devicesMadeTotal++;
     devProp[device][deviceIndex].devicesMadeToday++;
-    //JYC: added - 07.24.2018
+    //JYC: added - 07.31.2018
     timeSpentMakingDevicesToday[device] += timeUse;
     timeSpentMakingDevicesTodayByDeviceByRes[device][deviceIndex] += timeUse;
+
     LOG(4) << "devicesMadeTotal for " << device_names[device] << " devIdx " << deviceIndex
            << " is now " << devProp[device][deviceIndex].devicesMadeTotal
            << ". MadeToday is " << devProp[device][deviceIndex].devicesMadeToday;
@@ -1807,6 +1809,7 @@ void Agent::resetTodayStats()
 		}
 		for (int type = DEVMACHINE; type <= DEVFACTORY; type++) {
             devicesMadeWithDevDevicesToday[type][resId] = 0;
+            timeSpentMakingDevicesToday[type] = 0;					   //JYC: added 07.31.2018
         	}
 		for (int type = TOOL; type <= INDUSTRY; type++) {
             unitsGatheredWithDeviceToday[type][resId] = 0;
