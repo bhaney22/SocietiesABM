@@ -61,7 +61,6 @@ ResProperties::ResProperties()
     resSetAside = 0;
     unitsGatheredToday = 0;
     unitsGatheredEndWork = 0;
-    timeSpentGatheringWithoutDeviceToday = 0;
 
     beforeWorkHeld = 0;
     boughtEndWork = 0;

@@ -45,7 +45,6 @@ public:
      * Keeps track of the resources gathered on the current day
      */
     int unitsGatheredToday;
-    double timeSpentGatheringWithoutDeviceToday; //BRH NEW 05.29.2018
 
     double beforeWorkMU;        // *** the marginal utility after the first resource trade and before work
     int beforeWorkHeld;         // *** the number of units held of this resource before work

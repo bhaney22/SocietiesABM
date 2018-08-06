@@ -208,6 +208,8 @@ ProductionStats::ProductionStats()
 
         timeSpentMakingDevices.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
         timeSpentMakingDevicesByAgent.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
+        //JYC: added - 07.24.2018
+        timeSpentMakingDevicesByDeviceByRes.push_back(glob.EMPTY_VECTOR_OF_VECTORS_OF_DOUBLES);
 //BRH 2018.07.17 -- eventually we may want to add an array to collect time spent making devices BY RES //
 
         timeSpentGatheringWithDevice.push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
@@ -236,6 +238,7 @@ ProductionStats::ProductionStats()
                 percentResGatheredByDeviceByRes[type].push_back(vector<double>());
                 resGatheredByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_INTS);
                 timeSpentGatheringWithDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
+                timeSpentMakingDevicesByDeviceByRes[type].push_back(glob.EMPTY_VECTOR_OF_DOUBLES);
             }
         }
         // only types 4-5 (DEVMACHINE, DEVFACTORY)
@@ -523,6 +526,7 @@ void ProductionStats::calcTimeSpentGatheringWithoutDevice()
  * Amount of time each agent spends making devices
  * Amount of time the population spends making devices
  */
+//JYC: 07.31.2018
 void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesByAgent()
 {
     /* NOTE: python code only computes timeSpentGathering* for TOOL
@@ -539,29 +543,28 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
     }
 
     for (int type = 0; type < glob.getNumDeviceTypes(); type++) {
-    	double totalTimeWithDevice = 0;
+    	double totalTimeSpentGatheringWithDevice = 0;
         double totalTimeSpentMakingDevices = 0;
         for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
             // Grab the amount of time this agent spent gathering
             // with/making devices for this type. 
             double timeMakingDevicesByAgent = glob.agent[aId]->timeSpentMakingDevicesToday[type];
-            double timeWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
+            double timeGatheringWithDeviceByAgent = glob.agent[aId]->timeSpentGatheringWithDeviceToday[type];
             
             // add this agents time spent with the previous agents
-            totalTimeWithDevice += timeWithDeviceByAgent;
+            totalTimeSpentGatheringWithDevice += timeGatheringWithDeviceByAgent;
             totalTimeSpentMakingDevices += timeMakingDevicesByAgent;
 
             // save this individual agent's time data in a vector.
             timeSpentMakingDevicesByAgent[type][aId].push_back(timeMakingDevicesByAgent);
-            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeWithDeviceByAgent);
+            //JYC: added - 07.24.2018
+            timeSpentGatheringWithDeviceByAgent[type][aId].push_back(timeGatheringWithDeviceByAgent);
 
-            tempTimeSpentGathering[glob.agent[aId]->group][type] += timeWithDeviceByAgent;
+            tempTimeSpentGathering[glob.agent[aId]->group][type] += timeGatheringWithDeviceByAgent;
             tempTimeSpentMaking[glob.agent[aId]->group][type] += timeMakingDevicesByAgent;
-
-
         }
         // save the time data of the population as a whole.
-        timeSpentGatheringWithDevice[type].push_back(totalTimeWithDevice);
+        timeSpentGatheringWithDevice[type].push_back(totalTimeSpentGatheringWithDevice);
         timeSpentMakingDevices[type].push_back(totalTimeSpentMakingDevices);
     }
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
@@ -573,24 +576,37 @@ void ProductionStats::calcTimeSpentGatheringWithDeviceAndTimeSpentMakingDevicesB
 // BRH New 07.17.2018 Save the time used to gather each resource: by hand, and then by each device tier.
 
     for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-    		double totalTimeWithoutDeviceByRes = 0;
-    		for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
-    		   	double timeWithoutDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithoutDeviceTodayByRes(resId);
-    		   	totalTimeWithoutDeviceByRes += timeWithoutDeviceByRes;
-    		}
-    	    	timeSpentGatheringWithoutDeviceByRes[resId].push_back(totalTimeWithoutDeviceByRes);
+    	double totalTimeWithoutDeviceByRes = 0;
+    	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		double timeWithoutDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithoutDeviceTodayByRes(resId);
+    		totalTimeWithoutDeviceByRes += timeWithoutDeviceByRes;
+    	}
+    	timeSpentGatheringWithoutDeviceByRes[resId].push_back(totalTimeWithoutDeviceByRes);
 	}
 
 	 for (int type = 0; type < glob.getNumResGatherDev(); type++) {
     	for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
-    		double totalTimeWithDeviceByRes = 0;
-    		for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
-    		   	double timeWithDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithDeviceTodayByRes(type,resId);
-    		   	totalTimeWithDeviceByRes += timeWithDeviceByRes;
-    		}
-    	    	timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
+    	double totalTimeWithDeviceByRes = 0;
+    	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		double timeWithDeviceByRes = glob.agent[aId] -> getTimeSpentGatheringWithDeviceTodayByRes(type,resId);
+    		totalTimeWithDeviceByRes += timeWithDeviceByRes;
+    	}
+    	timeSpentGatheringWithDeviceByRes[type][resId].push_back(totalTimeWithDeviceByRes);
     	}
      }
+
+	 //JYC: added - 07.24.2018
+	 for (int type = 0; type < glob.getNumResGatherDev(); type++) {
+		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+    	double totalTimeSpentMakingDevicesByDeviceByRes = 0;
+    	for (int aId = 0; aId < glob.NUM_AGENTS; aId++){
+    		double timeMakingEachDeviceByRes = glob.agent[aId] -> getTimeSpentMakingDevicesTodayByDeviceByRes(type,resId);
+    		totalTimeSpentMakingDevicesByDeviceByRes += timeMakingEachDeviceByRes;
+    	}
+    	timeSpentMakingDevicesByDeviceByRes[type][resId].push_back(totalTimeSpentMakingDevicesByDeviceByRes);
+    	}
+     }
+
 }
 
 /**

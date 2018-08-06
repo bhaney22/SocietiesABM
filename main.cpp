@@ -43,8 +43,7 @@ void runSimulation()
 }
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     glob = Globals();
     /* check if parse_args run correctly. */
     int result = parse_args(argc, argv);

@@ -966,7 +966,7 @@ void Utils::saveTotalTimeUsage()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* timeSpentGatheringWithDevice per agent */
-    vector< vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
+    vector<vector<double> > timeSpentGatheringWithDevice = glob.productionStats->getTimeSpentGatheringWithDevice();
     for (int i = 0; i < NUM_DEVICE_TYPES - 2; i++) {
         file << devicesStr[i] << "_timeGatheringWithDevicePerActiveAgent_" << glob.SIM_NAME << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1082,8 +1082,8 @@ void Utils::saveDevDevice()
     string devicesStr[] = { "TOOL", "MACHINE", "FACTORY", "INDUSTRY", "DEVMACHINE", "DEVFACTORY" };
 
     /* devices made with devDevice by total agents */
-    vector< vector<int> > devicesMade = glob.productionStats->getDevicesMade();
-    vector< vector<int> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();
+    vector<vector<int> > devicesMade = glob.productionStats->getDevicesMade();
+    vector<vector<int> > devicesMadeWithDevDevice = glob.productionStats->getDevicesMadeWithDevDevice();
     for (int i = 4; i < NUM_DEVICE_TYPES; i++) {
         file << devicesStr[i] << "Use_" << glob.SIM_NAME  << ",";
         for (int j = 0; j < glob.NUM_DAYS; j++) {
@@ -1102,7 +1102,7 @@ void Utils::saveDevDevice()
     }
 
     /* devices made with devDevice by each group */
-    vector< vector< vector <int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
+    vector<vector<vector<int> > > devicesMadeByGroup = glob.productionStats->getDevicesMadeByGroup();
     vector<vector<vector<int> > > devicesMadeWithDevDeviceByGroup = glob.productionStats->getDevicesMadeWithDevDeviceByGroup();
     for (int gId = 0; gId < glob.NUM_AGENT_GROUPS; gId++) {
         for (int i = 4; i < NUM_DEVICE_TYPES; i++) {
@@ -1197,12 +1197,13 @@ void Utils::saveDeviceRecipes()
 }
 
 // BRH: 10.12.2017 New routine to save Use Matrix
-
+//JYC: 07.31.2018
 void Utils::saveUseMatrix()
 {	vector< vector< vector<int> > > devicesMadeByRes = glob.productionStats->getDevicesMadeByRes();
     vector< vector<int> > resGatheredByRes = glob.productionStats->getResGatheredByRes();
     vector< vector< vector<double> > > timeSpentGatheringWithDeviceByRes = glob.productionStats->getTimeSpentGatheringWithDeviceByRes();
     vector< vector<double> > timeSpentGatheringWithoutDeviceByRes = glob.productionStats->getTimeSpentGatheringWithoutDeviceByRes();   
+    vector< vector<vector<double> > > timeSpentMakingDevicesByDeviceByRes = glob.productionStats->getTimeSpentMakingDevicesByDeviceByRes();
     int temp_in_device=0;
 	double num_of_that_device_made;
    
@@ -1261,7 +1262,7 @@ void Utils::saveUseMatrix()
 // Loop over all resources and fill in minutes T1 device was used to gather its resource, and zeros elsewhere.		
 		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 		if (product != resId) {
-	        	file << "," << 0;	
+	        	file << "," << 0;
 	        	} else {
 				file << "," << timeSpentGatheringWithDeviceByRes[TOOL][resId][glob.currentDay];
 	        }
@@ -1393,7 +1394,7 @@ void Utils::saveUseMatrix()
 // and zeros elsewhere.		
 		for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
 		if (product != resId) {
-	        	file << "," << 0;	
+	        	file << "," << 0;
 	        	} else {
 				file << "," << timeSpentGatheringWithDeviceByRes[INDUSTRY][resId][glob.currentDay];
 	        }
@@ -1419,6 +1420,11 @@ void Utils::saveUseMatrix()
     		   	totalTimeGatheringByRes += timeSpentGatheringWithDeviceByRes[type][resId][glob.currentDay];
 			}
 		file << "," << totalTimeGatheringByRes;
+		}
+		for (int type = TOOL; type <= INDUSTRY; type++) {
+			for (int resId = 0; resId < glob.NUM_RESOURCES; resId++) {
+				file << "," << timeSpentMakingDevicesByDeviceByRes[type][resId][glob.currentDay];
+			}
 		}
 		file << "\n";  //Last thing to do before starting the next row.
 

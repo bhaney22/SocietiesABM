@@ -18,6 +18,7 @@ struct MaxInfo {
 
 class Device;
 
+
 class Agent
 {
 private:
@@ -31,9 +32,12 @@ public:
      * The inner vector's values are:
      *    steepness, scaling, minResEff, maxResEff, maxResExp, minDevEff, maxDevEff, maxDevExp, lifetime
      */
-    vector< vector<double> > personalValues;
+    vector<vector<double> > personalValues;
     vector<ResProperties> resProp;              //!< will be size glob.NUM_RESOURCES
-    vector< vector<DevProperties> > devProp;    //!< indexed by device type, then resId
+    vector<vector<DevProperties> > devProp;    //!< indexed by device type, then resId
+
+
+
     bool inSimulation;              //!< a boolean to indicate whether the agent is in simulation
     int name;                       //!< the name / number of agent
 
@@ -83,7 +87,7 @@ public:
      * recent device trade surpluses with each other agent.
      * indexed by [glob.NUM_DEVICE_TYPES][glob.NUM_AGENTS][glob.DEVICE_TRADE_MEMORY_LENGTH]
      */   
-    vector< vector< vector<double> > > agentDeviceTradeMemory;
+    vector<vector<vector<double> > > agentDeviceTradeMemory;
     /**
      * Occasionally, agents will continually trade a device back and
      * forth for the same price in an infinite loop, this is a list of
@@ -138,7 +142,7 @@ public:
      * and NUM_RESOURCES
      * sizes of the vectors are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
-    vector< vector<int> > unitsExtractedWithDeviceTodayByRes;
+    vector<vector<int> > unitsExtractedWithDeviceTodayByRes;
     /**
      * Each element in these lists is the number of devices made of the
      * corresponding resource.
@@ -147,13 +151,27 @@ public:
      * the 2 vectors inside of those for DEVMACHINE and DEVFACTORY.
      * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
      */
-    vector< vector<int> > devicesMadeWithDevDevicesToday;
+    vector<vector<int> > devicesMadeWithDevDevicesToday;
+
+
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
      * size is [glob.NUM_DEVICE_TYPES]
+     * JYC "same thing as timeSpentMakingDevicesTodayByDevice - 07.24.2018
      */
-    vector<double> timeSpentMakingDevicesToday;			//JYC: changed from type double to type int
+    vector<double> timeSpentMakingDevicesToday;
+
+
+    //JYC: added - 07.24.2018
+    /**
+     * Each element in this list is the number of minutes used to
+     * make new (higher tier) devices with an inferior device by resource
+     * sizes are: [glob.NUM_DEVICE_TYPES][glob.NUM_RESOURCES]
+     */
+    vector<vector<double> > timeSpentMakingDevicesTodayByDeviceByRes;
+
+
     /**
      * Each element in this list is the number of minutes used of the
      * device of the corresponding resource. 
@@ -164,7 +182,7 @@ public:
      * those for the first 4.
      */
     vector<double> timeSpentGatheringWithDeviceToday;
-    vector< vector<double> > timeSpentGatheringWithDeviceTodayByRes;
+    vector<vector<double> > timeSpentGatheringWithDeviceTodayByRes;
     /**
      * The number of minutes used to gather resources without using devices.
      */
@@ -181,7 +199,7 @@ public:
      */
     double utilGainThroughDevSoldToday;
 
-    Agent(int number, vector< vector<double> > agentValues);
+    Agent(int number, vector<vector<double> > agentValues);
     double utilCalc(int resIndex) const;
     double tempUtilCalc(int resIndex, int change) const;
     int resHeld(int resIndex) const; 
@@ -189,9 +207,10 @@ public:
     int getHeld (int resId) const;
     int getUnitsGatheredToday(int resId) const;
     int getUnitsGatheredWithDevice(int device, int resId) const;
-    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; // BRH func for new array 05.30.2018
+    double getTimeSpentGatheringWithDeviceTodayByRes(int device, int resId) const; //BRH func for new array 05.30.2018
+    double getTimeSpentMakingDevicesTodayByDeviceByRes(int device, int resid) const;	   //JYC: added - 07.24.2018
     double getTimeSpentGatheringWithoutDeviceTodayByRes(int resId) const;
-    int getDevicesMadeToday(int deviceIndex, int deviceType) const;  
+    int getDevicesMadeToday(int deviceIndex, int deviceType) const;
     device_name_t bestDevice(int resIndex) const;
     device_name_t bestDevDevice(device_name_t device, int deviceIndex) const;
     void workDay();
