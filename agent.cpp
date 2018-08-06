@@ -970,21 +970,21 @@ void Agent::workStatsUpdate(int resIndex, device_name_t bestDevice, double workT
 void Agent::deviceStatsUpdate(int deviceIndex, device_name_t device,
                               device_name_t bestDevDevice, double timeUse)
 {
-    if (bestDevDevice != NO_DEVICE) {
-        devicesMadeWithDevDevicesToday[bestDevDevice][deviceIndex]++;
-        devProp[bestDevDevice][deviceIndex].deviceMinutesUsedTotal += timeUse;
-        //JYC: added - 07.31.2018
-        timeSpentMakingDevicesTodayByDeviceByRes[device][deviceIndex] += timeUse;
-    }
+
 	devProp[device][deviceIndex].devicesMadeTotal++;
     devProp[device][deviceIndex].devicesMadeToday++;
-    //JYC: added - 07.24.2018
+    //JYC: added - 07.31.2018
     timeSpentMakingDevicesToday[device] += timeUse;
+    timeSpentMakingDevicesTodayByDeviceByRes[device][deviceIndex] += timeUse;
 
     LOG(4) << "devicesMadeTotal for " << device_names[device] << " devIdx " << deviceIndex
            << " is now " << devProp[device][deviceIndex].devicesMadeTotal
            << ". MadeToday is " << devProp[device][deviceIndex].devicesMadeToday;
 
+    if (bestDevDevice != NO_DEVICE) {
+        devicesMadeWithDevDevicesToday[bestDevDevice][deviceIndex]++;
+        devProp[bestDevDevice][deviceIndex].deviceMinutesUsedTotal += timeUse;
+    }
 }
 
 
