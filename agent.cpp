@@ -980,10 +980,20 @@ void Agent::deviceStatsUpdate(int deviceIndex, device_name_t device,
     LOG(4) << "devicesMadeTotal for " << device_names[device] << " devIdx " << deviceIndex
            << " is now " << devProp[device][deviceIndex].devicesMadeTotal
            << ". MadeToday is " << devProp[device][deviceIndex].devicesMadeToday;
-
+    //JYC: added - 08.07.2018
+//JYC: Unit Testing - 08.07.2018
+    	if (glob.currentDay + 1 == glob.NUM_DAYS){
+    		LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << timeUse << ", gathering res " << deviceIndex +1 << ", with device " << bestDevice +1;
+    	}
     if (bestDevDevice != NO_DEVICE) {
         devicesMadeWithDevDevicesToday[bestDevDevice][deviceIndex]++;
         devProp[bestDevDevice][deviceIndex].deviceMinutesUsedTotal += timeUse;
+    	//JYC: added - 08.07.2018
+//JYC: Unit Testing - 08.07.2018
+        if (glob.currentDay +1 == glob.NUM_DAYS){
+        	LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent," <<
+        	   timeUse << ", gathering res " << deviceIndex +1 << ", with device " << bestDevDevice;
+        }
     }
 }
 
