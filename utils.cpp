@@ -41,7 +41,7 @@ void Utils::printStartConditions()
  */
 void Utils::agentsWork()
 {
-    LOG(2) << "Entering agents work phase";
+    LOG(3) << "Entering agents work phase";						//JYC: changed from log 2 to log 3 - 08.7.2018
     BOOST_FOREACH(Agent *agent, glob.agent) {
         if (agent->inSimulation) {
             agent->workDay();
@@ -55,10 +55,10 @@ void Utils::agentsWork()
 void Utils::agentsTrade()
 {
     if (glob.TRADE_EXISTS) {
-        LOG(2) << "Entering agents trade phase";
+        LOG(3) << "Entering agents trade phase";				//JYC: changed from log 2 to log 3 - 08.7.2018
         glob.resourceMarket->tradeResources();
     } else {
-        LOG(2) << "Skipping disabled agents trade phase";
+        LOG(3) << "Skipping disabled agents trade phase";		//JYC: changed from log 2 to log 3 - 08.7.2018
     }
 }
 
@@ -76,10 +76,10 @@ static int my_random_int_from_0(int upper)
 void Utils::agentsInvent()
 {
     if (! glob.DEVICES_EXIST) {
-        LOG(2) << "Skipping agents invent phase, DEVICES_EXIST being disabled";
+        LOG(3) << "Skipping agents invent phase, DEVICES_EXIST being disabled";	//JYC: changed from log 2 to log 3 - 08.7.2018
         return;
     }
-    LOG(2) << "Entering agents invent phase";
+    LOG(3) << "Entering agents invent phase";									//JYC: changed from log 2 to log 3 - 08.7.2018
     vector<Agent *> inventors;
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
         inventors.push_back(glob.agent[aId]);
@@ -103,7 +103,7 @@ void Utils::agentsInvent()
  */
 void Utils::endDay()
 {
-    LOG(2) << "Entering end day checks phase";
+    LOG(3) << "Entering end day checks phase";									//JYC: changed from log 2 to log 3 - 08.7.2018
     for (int aId = 0; aId < glob.NUM_AGENTS; aId++) {
         if (glob.agent[aId]->inSimulation) {
             glob.agent[aId]->endDayChecks();
@@ -121,7 +121,7 @@ void Utils::endDay()
  */
 void Utils::endDayDecay()
 {
-    LOG(2) << "Entering day decay phase";
+    LOG(3) << "Entering day decay phase";								//JYC: changed from log 2 to log 3 - 08.7.2018
     BOOST_FOREACH(Agent *agent, glob.agent) {
         if (agent->inSimulation) {
             agent->decay();
@@ -142,7 +142,7 @@ void Utils::agentsTradeDevices()
 {
     /* Shouldn't trade when TRADE_EXISTS is turned off. */
     if (glob.TRADE_EXISTS) {
-        LOG(2) << "Entering trade devices phase";
+        LOG(3) << "Entering trade devices phase";						//JYC: changed from log 2 to log 3 - 08.7.2018
         BOOST_FOREACH(Agent *agent, glob.agent) {
             if (agent->overtime < glob.DAY_LENGTH) {
                 agent->utilGainThroughDevSoldToday = 0.0;
@@ -166,7 +166,7 @@ void Utils::agentsTradeDevices()
             glob.resourceMarket->tradeResources();
         }
     } else {
-        LOG(2) << "Skipping disabled agents trade phase";
+        LOG(3) << "Skipping disabled agents trade phase";				//JYC: changed from log 2 to log 3 - 08.7.2018
     }
 }
 
@@ -175,7 +175,7 @@ void Utils::agentsTradeDevices()
  */
 void Utils::agentsProduceDevices()
 {
-    LOG(2) << "Entering produce devices phase";
+    LOG(3) << "Entering produce devices phase";							//JYC: changed from log 2 to log 3 - 08.7.2018
     if (! glob.DEVICES_EXIST) {
         return;
     }
@@ -218,7 +218,7 @@ void Utils::printSumUtilAndRes()
  */
 void Utils::dayAnalysis(int dayNumber)
 {
-    LOG(2) << "Entering day analysis phase";
+    LOG(3) << "Entering day analysis phase";						//JYC: changed from log 2 to log 3 - 08.7.2018
     BOOST_FOREACH(Agent *agent, glob.agent) {
         agent->calcUtilityToday();
     }
@@ -239,7 +239,7 @@ void Utils::dayAnalysis(int dayNumber)
  */
 void Utils::removeOrSave(int dayNumber)
 {
-    LOG(2) << "Entering remove or save phase";
+    LOG(3) << "Entering remove or save phase";						//JYC: changed from log 2 to log 3 - 08.7.2018
     if (glob.SAVE_DAY_STATUS) {
         if (dayNumber == glob.DAY_FOR_SAVE) {
             saveDayStatus(dayNumber);
