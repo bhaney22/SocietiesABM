@@ -561,7 +561,7 @@ void Agent::toolInvention()
              * so they cannot build this tool
              */
             if (glob.discoveredDevices[TOOL][toolUse] != NULL) {
-                LOG(4) << "Creating new " << device_names[TOOL]
+                LOG(3) << "Creating new " << device_names[TOOL]
                        << " to replace existing tool "
                        << toolUse << " for which agentsKnown is 0.\n";
                 delete glob.discoveredDevices[TOOL][toolUse];
@@ -577,7 +577,7 @@ void Agent::toolInvention()
              */
             devProp[TOOL][toolUse].setDeviceExperience(glob.INVENTOR_DEVICE_EXPERIENCE);
             devProp[TOOL][toolUse].idleDevice = false;
-            LOG(3) << "Tool for " << toolUse << " has been invented";
+            LOG(3) << "Tool for gathering resource " << toolUse << " has been invented";
         }
     }
     else if (! glob.TOOLS_ONLY) {

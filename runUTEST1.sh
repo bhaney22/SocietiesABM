@@ -4,7 +4,7 @@
 # Last revised: BRH 08.06.2018  
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
-cd ~/SocietiesABM/
+cd ~/git/SocietiesABM/
 
 ############################################################################
 # OPTIONAL commandline arguments.
@@ -163,7 +163,7 @@ DEV_MACHINE_FACTOR = .1
 DEV_MACHINE_LIFETIME = 1
 DEV_FACTORY_FACTOR = .1
 DEV_FACTORY_LIFETIME = 1
-MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION = 10000
+MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION = 9000000
 
 OTHER_MARKETS = False 
 " > Configs/"$config".conf
@@ -192,7 +192,7 @@ do
 SECONDS=0 
  
 # The & before the re-direction (">>") will send error messages to the stdout file as well.
-./societies -v 3 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run" "$seed" 1>> _Results/"$sim_name"_run.log 
+./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run" "$seed" 1>> _Results/"$sim_name"_run.log 
 
 # Stop the clock after societies finishes
 ((duration=$SECONDS))
@@ -231,7 +231,7 @@ echo "
 # FYI: the grep -v command strips out all of the header rows (starts with UniqueKey)
 #      from the individual long_output files. BRH 3.20.2017
 #########################################################################################
-cd ~/SocietiesABM/_Results/
+cd ~/git/SocietiesABM/_Results/
 cat ./$sim_name/*/*/IOMatrix.csv | head -n 1 > temp1
 cat ./$sim_name/*/*/IOMatrix.csv  | grep -v UniqueKey >> temp2
 cat temp1  temp2 > ./$sim_name/IOMatrixAll.csv
@@ -282,10 +282,10 @@ DEVICE_PROBABILITY_FACTOR,TOOL_FACTOR,TOOL_LIFETIME,MACHINE_FACTOR,MACHINE_LIFET
 INDUSTRY_FACTOR,INDUSTRY_LIFETIME,DEV_MACHINE_FACTOR,DEV_MACHINE_LIFETIME,DEV_FACTORY_FACTOR,DEV_FACTORY_LIFETIME, \
 DAYS_OF_DEVICE_TO_HOLD,REMOVE_RES,RES_TO_REMOVE,REMOVE_RES_DAY,ELIMINATE_RESERVES,REMOVE_AGENT,AGENT_TO_REMOVE, \
 REMOVE_AGENT_DAY,END_SAVE,SAVE_FOLDER,SAVE_DAY_STATUS,DAY_STATUS_SAVE_FOLDER,DAY_FOR_SAVE,DAY_STATUS_LOAD_FOLDER, \
-SIM_NAME,SIM_SAVE_FOLDER,SAVE_TRADES,PARALLEL_TRADES" > ~/SocietiesABM/_Results/ukey_header.csv
+SIM_NAME,SIM_SAVE_FOLDER,SAVE_TRADES,PARALLEL_TRADES" > ~/git/SocietiesABM/_Results/ukey_header.csv
 
 grep $sim_name\/ UniqueKeyFile.csv > temp2
-cat ~/SocietiesABM/_Results/ukey_header.csv temp2 > ./$sim_name/UniqueKeyFile.csv
+cat ~/git/SocietiesABM/_Results/ukey_header.csv temp2 > ./$sim_name/UniqueKeyFile.csv
 rm temp2
 
 mv $sim_name.log ./$sim_name/$sim_name.log
