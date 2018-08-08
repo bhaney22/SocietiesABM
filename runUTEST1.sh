@@ -1,4 +1,3 @@
-#!/bin/bash
 # This will single-thread multiple runs of randomized configuration files of Societies
 # on the supercomputer cluster.
 #
@@ -19,7 +18,7 @@ num_days=${3:-100}
 
 trade=${4:-True}
 devices=${5:-True}
-tools_only=${4:-False}
+tools_only=${6:-False}
 
 num_agents=${7:-8} 
 let num_resources=${8:-4}    #"let" is used so that math can be performed with the variable later
@@ -49,23 +48,14 @@ let num_device_components=$resources_in_tool+1   # The default is for device com
 #############################################################################################################
 # 		Option 2
 #############################################################################################################
-seed="-S 50"	#Set the random seed so that societies' results will be the same if all parameters are the same
-
-#############################################################################################################
-# 		Option 2
-#############################################################################################################
-#seed="-S 50"	#Set the random seed so that societies' results will be the same if all parameters are the same
-
+seed=" -S 50"	#Set the random seed so that societies' results will be the same if all parameters are the same
 
 
 #################################################################################################################
-# BEGIN SPECIFIC CODE FOR INTEGRATION TEST.
-# ITEST_trade:
-# 	This Integration test randomizes the integer parameter values related to trade. The following comments
-#	show the original (default) values and the range of values from which a random number is chosen in each run.
-# 	The actual changes are in the config file below.
+# BEGIN SPECIFIC CODE FOR USER TEST.
+# UTEST_1:
 #################################################################################################################
-sim_name=ITEST_trade
+sim_name=UTEST_1
 
 #Begin run log
 StartDay=$(date +%D)
@@ -75,9 +65,6 @@ echo "
 *****************************************************************************
 * "$sim_name" BEGINS: "$StartDay" "$StartTime".
 *
-*        #Randomized Config Files = "$num_random_conf_files"
-*        #Random Runs = "$num_random_runs"
-*
 *        NUM_DAYS = "$num_days"
 *        NUM_AGENTS = "$num_agents"
 *        NUM_RESOURCES = "$num_resources"
@@ -86,15 +73,6 @@ echo "
 *        TRADE = "$trade"
 *        DEVICES = "$devices"
 *
-*Randomized values of Input Parameters: (the default value is the first value, 
-*the range of the random draw is in parentheses with the max first)
-*MENU_SIZE = 4  (((RANDOM%10+1)))
-*RES_TRADE_ROUNDS = 12  (((RANDOM%5+1)))
-*RES_TRADE_ATTEMPTS = 8  (((RANDOM%5+1)))
-*DEVICE_TRADE_ROUNDS = 12  (((RANDOM%5+1)))
-*DEVICE_TRADE_ATTEMPTS = 4  (((RANDOM%5+1)))
-*DEVICE_TRADE_MEMORY_LENGTH = 5  (((RANDOM%5+1)))
-*DEVICE_PRODUCTION_MEMORY_LENGTH = 5  (((RANDOM%5+1)))
 *
 *****************************************************************************
 "| tee _Results/"$sim_name".log
@@ -191,13 +169,8 @@ OTHER_MARKETS = False
 " > Configs/"$config".conf
 
 ######################################################################################
-# Print the randomized parameter values to the screen and the log first, then
-# save the entire configuration to the log file.
+# Save the entire configuration to the log file.
 ######################################################################################
-grep MENU Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ROUNDS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ATTEMPTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep MEMORY Configs/"$config".conf |tee -a _Results/"$sim_name".log
 cat Configs/"$config".conf | tee -a _Results/"$sim_name".log
 
 # Begin random runs using the same configuration file.
@@ -219,7 +192,7 @@ do
 SECONDS=0 
  
 # The & before the re-direction (">>") will send error messages to the stdout file as well.
-./societies -v 0 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run" "$seed" 1>> _Results/"$sim_name"_run.log 
+./societies -v 3 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run" "$seed" 1>> _Results/"$sim_name"_run.log 
 
 # Stop the clock after societies finishes
 ((duration=$SECONDS))
@@ -321,5 +294,6 @@ mv "$sim_name"_runtime.csv  ./$sim_name/"$sim_name"_runtime.csv
 
 savedate=$(date +%d%m%Y%H%M%S)
 mv $sim_name $sim_name.$savedate
+
 
 
