@@ -983,7 +983,7 @@ void Agent::deviceStatsUpdate(int deviceIndex, device_name_t device,
     //JYC: added - 08.07.2018
 //JYC: Unit Testing - 08.07.2018
     	if (glob.currentDay + 1 == glob.NUM_DAYS){
-    		LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << timeUse << ", gathering res " << deviceIndex +1 << ", with device " << bestDevice +1;
+    		LOG(1) << "Day " << glob.currentDay +1 << ", Agent, " << name << ", spent, " << timeUse << ", gathering res " << deviceIndex +1 << ", with device " << device +1;
     	}
     if (bestDevDevice != NO_DEVICE) {
         devicesMadeWithDevDevicesToday[bestDevDevice][deviceIndex]++;
