@@ -1,4 +1,18 @@
 #!/bin/bash
+# # # # # # # # # # # # # # # #
+
+# Set number of of nodes - max is 20!
+#SBATCH -N 1
+# Set number of cpus-per-task - max is 16!
+#SBATCH -c 1
+# Set job name
+#SBATCH -J concat
+# Set max execution time, ex:  minutes  minutes:seconds  hours:minutes:seconds 
+#SBATCH -t 1:00:00
+#Set working directory
+#SBATCH -D /home/brh22/SocietiesABM/_Slurm.out
+
+##################################################################
 # This will concatentate all of the output from one ITEST simulation
 # RUN ONLY AFTER all jobs have completed.
 # Last revised: BRH 08.08.2018  
@@ -7,14 +21,18 @@
 # 1. sim_name (example, ITEST_trade)
 sim_name=$1
 
+howmany() { echo $#; } # quick little function to count jobs in the joblist
+joblist=$(cat ~/SocietiesABM/_Results/"$sim_name".jobs)
+jobruns=$(grep "J" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv | wc -l)
+numjobsstarted=$(howmany $joblist)
+	
 cd ~/SocietiesABM/
 
 EndDay=$(date +%D)
 EndTime=$(date +%T)
-echo "
-
-*****************************************************************************
-* "$sim_name"  CONCATENATED at "$EndDay" "$EndTime" 
+echo "***********************************************************************
+* "$sim_name"  "$numjobsstarted" Jobs Started 
+*              "$jobruns" Jobs Finished 
 *****************************************************************************
 " | tee -a _Results/"$sim_name".log
 
@@ -82,13 +100,46 @@ grep $sim_name\/ UniqueKeyFile.csv > temp2
 cat ~/SocietiesABM/_Results/ukey_header.csv temp2 > ./$sim_name/UniqueKeyFile.csv
 rm temp2
 
-mv $sim_name.log ./$sim_name/$sim_name.log
+
+###############################################################################################
+# Copy and rename the slurm out files
+###############################################################################################
+
+for j in $joblist
+do
+	# Only move out logs if the job finished and is in the runtime file.
+	w=$(grep "$j" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv | wc -l)
+	if [[ $w > 0 ]]; then
+		echo $(grep "$j" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv) > tempgrep
+		sed -i 's/,/ /g' tempgrep
+		jobinfo=$(cat tempgrep)
+		set -- $jobinfo
+		mv ~/SocietiesABM/_Slurm.out/slurm-"$j".out ~/SocietiesABM/_Results/"$sim_name"/"$3"_run"$4"_"$j".out	
+		# Only move error logs if they are present and not empty because Societies ended with an error; 
+		# Otherwise delete the empty error log from the Slurm.out directory.
+		if [[   -s ~/SocietiesABM/_Slurm.out/slurm-"$j".err  ]]; then
+				mv ~/SocietiesABM/_Slurm.out/slurm-"$j".err ~/SocietiesABM/_Results/"$sim_name"/"$3"_run"$4"_"$j".err
+		else  	rm ~/SocietiesABM/_Slurm.out/slurm-"$j".err
+		fi
+	# If a job was in the job list but not in the runtime.csv file, then it ended because it was cancelled because of over time limit (or something
+	# other than a Societies error). Save the output and error logs to look at later.
+	else 
+			mv ~/SocietiesABM/_Slurm.out/slurm-"$j".out ~/SocietiesABM/_Results/"$sim_name"/NotFinished_"$j".out
+			mv ~/SocietiesABM/_Slurm.out/slurm-"$j".err ~/SocietiesABM/_Results/"$sim_name"/NotFinished_"$j".err
+	fi
+done
+rm tempgrep
+
+echo "
+Error Logs:" 			| tee -a $sim_name.log 
+ls -la  ~/SocietiesABM/_Results/$sim_name/*.err  		| tee -a $sim_name.log
+tail -n +1  ~/SocietiesABM/_Results/$sim_name/*.err  	| tee -a $sim_name.log 
+
+mv $sim_name.log  ./$sim_name/$sim_name.log
+mv $sim_name.jobs ./$sim_name/$sim_name.jobs
 mv "$sim_name"_runtime.csv  ./$sim_name/"$sim_name"_runtime.csv
 
 savedate=$(date +%d%m%Y%H%M%S)
 mv $sim_name $sim_name.$savedate
 
-mv ~/SocietiesABM/Slurm.out/* $sim_name.$savedate/
-
-
-
+exit

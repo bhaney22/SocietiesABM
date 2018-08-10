@@ -5,8 +5,10 @@
 # Last revised: BRH 08.08.2018  
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
-cd ~/SocietiesABM/
+#
+sim_name=ITEST_trade
 
+cd ~/SocietiesABM/
 ############################################################################
 # OPTIONAL commandline arguments.
 # 
@@ -80,8 +82,6 @@ seed=""
 #	show the original (default) values and the range of values from which a random number is chosen in each run.
 # 	The actual changes are in the config file below.
 #################################################################################################################
-sim_name=ITEST_trade
-
 #Begin run log
 StartDay=$(date +%D)
 StartTime=$(date +%T)
@@ -102,18 +102,18 @@ echo "
 *
 *Randomized values of Input Parameters: (the default value is the first value, 
 *the range of the random draw is in parentheses with the max first)
-*MENU_SIZE = 4  (((RANDOM%10+1)))
-*RES_TRADE_ROUNDS = 12  (((RANDOM%5+1)))
-*RES_TRADE_ATTEMPTS = 8  (((RANDOM%5+1)))
-*DEVICE_TRADE_ROUNDS = 12  (((RANDOM%5+1)))
-*DEVICE_TRADE_ATTEMPTS = 4  (((RANDOM%5+1)))
-*DEVICE_TRADE_MEMORY_LENGTH = 5  (((RANDOM%5+1)))
-*DEVICE_PRODUCTION_MEMORY_LENGTH = 5  (((RANDOM%5+1)))
+MENU_SIZE =  (((RANDOM%10+0)))
+RES_TRADE_ROUNDS = (((RANDOM%10+0)))
+RES_TRADE_ATTEMPTS = (((RANDOM%10+0)))
+DEVICE_TRADE_ROUNDS =  ((RANDOM%10+0)))
+DEVICE_TRADE_ATTEMPTS = (((RANDOM%10+0)))
+DEVICE_TRADE_MEMORY_LENGTH = (((RANDOM%10+0)))
+DEVICE_PRODUCTION_MEMORY_LENGTH = (((RANDOM%10+0)))
 *
 *****************************************************************************
 "| tee _Results/"$sim_name".log
 
-echo "UniqueKey,Config,Run,Seconds,Minutes" > _Results/"$sim_name"_runtime.csv
+echo "jobID,UniqueKey,Config,Run,StartDay,StartTime,EndTime,RunTimeInSeconds,RunTimeInMinutes" > _Results/"$sim_name"_runtime.csv
 
 ####################################################################################
 # Begin LOOP 1: create a randomized configuration file.
@@ -148,13 +148,13 @@ NUM_RESOURCES = "$num_resources"
 RESOURCES_IN_TOOL = "$resources_in_tool"
 NUM_DEVICE_COMPONENTS = "$num_device_components"
 
-MENU_SIZE =  "$(((RANDOM%100+1)))"
-RES_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-RES_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_MEMORY_LENGTH = "$(((RANDOM%100+1)))"
-DEVICE_PRODUCTION_MEMORY_LENGTH = "$(((RANDOM%100+1)))"
+MENU_SIZE =  "$(((RANDOM%10+0)))"
+RES_TRADE_ROUNDS = "$(((RANDOM%10+0)))"
+RES_TRADE_ATTEMPTS = "$(((RANDOM%10+0)))"
+DEVICE_TRADE_ROUNDS = "$(((RANDOM%10+0)))"
+DEVICE_TRADE_ATTEMPTS = "$(((RANDOM%10+0)))"
+DEVICE_TRADE_MEMORY_LENGTH = "$(((RANDOM%10+0)))"
+DEVICE_PRODUCTION_MEMORY_LENGTH = "$(((RANDOM%10+0)))"
 
 NUM_AGENT_GROUPS = 1
 MIN_RES_UTIL = 1.0
@@ -203,8 +203,12 @@ OTHER_MARKETS = False
 # save the entire configuration to the log file.
 ######################################################################################
 echo "
-CONFIG = "$config"  Unique Key = "$UniqueKey" 
-Randomized Parameters:" | tee -a _Results/"$sim_name".log
+CONFIG = "$config"  Unique Key = "$UniqueKey"" | tee -a _Results/"$sim_name".log
+grep NUM_AGENTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
+grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
+grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
+echo "
+Randomized Parameters:" | tee -a _Results/"$sim_name".log 
 grep MENU Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep ROUNDS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep ATTEMPTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
@@ -233,7 +237,10 @@ do
 # 4. RUN 
 # 5. SIMNAME 
 # 6. SEED
-sbatch runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+
+# create some time between each submission for smooth fileI-O
+sleep 1
+sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
 
 done    #Done with loop over one run of one randomly generated configuration
 done    #Done with all runs of one randomly generated configuration
