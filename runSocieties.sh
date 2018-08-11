@@ -8,15 +8,13 @@
 # Set max execution time, ex:  minutes  minutes:seconds  hours:minutes:seconds 
 # If one run of societies takes longer than say, 1 hour (1:00:00), something may be up, so cancel it.
 # This can be adjusted if needed. -- BRH 08.09.2018
-#SBATCH --time 1:00:00
+#SBATCH --time 8:00:00
 #Set working directory
 #SBATCH -D /home/brh22/SocietiesABM/_Slurm.out
 # Pad the job names with leading zeroes to make them sort well. 
 # And, separate the error files from the out files.
 #SBATCH --output=slurm-J%7j.out
 #SBATCH  --error=slurm-J%7j.err
-# Don't echo the job submitted message.
-#SBATCH --quiet
 
 # This will allow multiple runs of Societies to run at the same time.
 # on the supercomputer cluster.
@@ -29,6 +27,7 @@ cd ~/SocietiesABM/
 
 # NOTE: the number of digits in the following statement must match the number in the above SBATCH commands for naming .out and .err files.
 jid=`printf "%07d" $SLURM_JOB_ID`
+
 echo "J"$jid"" >> _Results/"$5".jobs
 
 # Start the clock for this run of societies.

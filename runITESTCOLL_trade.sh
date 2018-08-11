@@ -6,7 +6,7 @@
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
 #
-sim_name=ITEST_trade
+sim_name=ITESTCOLL_trade
 
 cd ~/SocietiesABM/
 ############################################################################
@@ -88,6 +88,7 @@ StartTime=$(date +%T)
 echo "
 *****************************************************************************
 * "$sim_name" STARTED: "$StartDay" "$StartTime".
+*		 COLLAPSE DAY: 600 and DO NOT REMOVE ALL HOLDINGS ON THAT DAY
 *
 *        #Randomized Config Files = "$num_random_conf_files"
 *        #Random Runs = "$num_random_runs"
@@ -240,7 +241,8 @@ do
 
 # create some time between each submission for smooth fileI-O
 sleep 1
-sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+# For COLLAPSE scenarios, include the -r parameter, with three arguments: 1) # of resource to remove, 2) day to remove 3) 1=remove holdings/0=don't
+sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -r 4 600 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
 
 done    #Done with loop over one run of one randomly generated configuration
 done    #Done with all runs of one randomly generated configuration

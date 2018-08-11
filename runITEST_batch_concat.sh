@@ -142,4 +142,13 @@ mv "$sim_name"_runtime.csv  ./$sim_name/"$sim_name"_runtime.csv
 savedate=$(date +%d%m%Y%H%M%S)
 mv $sim_name $sim_name.$savedate
 
+cd ~/SocietiesABM/_Results/$sim_name.$savedate
+mkdir _Outfiles
+mkdir _Configfiles
+mkdir _Errfiles
+mkdir _Runs
+mv *.out ./_Outfiles
+mv *.err ./_Errfiles
+mv ../../Configs/"$sim_name"_* ./_Configfiles
+mv "$sim_name"_* ./_Runs
 exit

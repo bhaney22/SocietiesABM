@@ -15,12 +15,12 @@
 
 cd ~/SocietiesABM/
 
-./runITEST_trade.sh 100 30 1500 True True False 24 8 
+./runITESTCOLL_trade.sh 100 30 1500 True True False 24 8
 
-#./runITEST_experience.sh 300 100
-#./runITEST_devices.sh 300 100
-#./runITEST_effort.sh 300 100
-#./runITEST_epsilons.sh 300 100
+#./runITESTCOLL_experience.sh 300 100
+#./runITESTCOLL_devices.sh 300 100
+#./runITESTCOLL_effort.sh 300 100
+#./runITESTCOLL_epsilons.sh 300 100
 
 #
 # Use dependency so that the concat job won't run until all of the 
@@ -28,7 +28,7 @@ cd ~/SocietiesABM/
 #
 for itest in trade # experience devices effort epsilons
 do
-	sbatch  --dependency=singleton --job-name=ITEST_$itest ./runITEST_batch_concat.sh ITEST_$itest
+	sbatch  --dependency=singleton --job-name=ITESTCOLL_$itest ./runITEST_batch_concat.sh ITESTCOLL_$itest
 done
 
 exit
