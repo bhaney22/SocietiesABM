@@ -23,9 +23,9 @@ for runtype in COLLNOCOLL # runs exact same config with and without collapse
 do
 	for numagents in 8 12 24 48
 	do
-		for numresources in 8 12
+		for numresources in 8 12      # SEE NOTE BELOW
 		do
-			for numresintool in 3 6
+			for numresintool in 3 6  
 				do
 					./run$runtype.sh 001 10 1200 True True False $numagents $numresources $numresintool
 				done
@@ -36,3 +36,8 @@ do
 done
 
 exit
+
+# Note that if one (or more) of the number of resources is less than 6, then the number of resources in a tool is set to 3 no matter
+# what parameter value for numresintool is passed.
+# THUS
+# There will be unexpected errors unless the numresintool only has one option and that option must be "3".
