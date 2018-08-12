@@ -6,7 +6,9 @@
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
 #
-sim_name=ITEST_trade
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# vvvvvvvvv make sure that the names of the ITESTs you are running is correct below! vvvvvvvvvvvvvvvv
+sim_name=STEP
 
 cd ~/SocietiesABM/
 ############################################################################
@@ -100,10 +102,6 @@ echo "
 *        TRADE = "$trade"
 *        DEVICES = "$devices"
 *
-*Randomized values of Input Parameters: (the default value is the first value, 
-*the range of the random draw is in parentheses with the max first)
-DEVICE_TRADE_MEMORY_LENGTH = (((RANDOM%10+1)))
-DEVICE_PRODUCTION_MEMORY_LENGTH = (((RANDOM%10+1)))
 *
 *****************************************************************************
 "| tee _Results/"$sim_name".log
@@ -143,13 +141,13 @@ NUM_RESOURCES = "$num_resources"
 RESOURCES_IN_TOOL = "$resources_in_tool"
 NUM_DEVICE_COMPONENTS = "$num_device_components"
 
-MENU_SIZE =  "$(((RANDOM%10+1)))"
-RES_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-RES_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_MEMORY_LENGTH = "$(((RANDOM%10+1)))"
-DEVICE_PRODUCTION_MEMORY_LENGTH = "$(((RANDOM%10+1)))"
+MENU_SIZE =  4
+RES_TRADE_ROUNDS = 4
+RES_TRADE_ATTEMPTS = 2
+DEVICE_TRADE_ROUNDS = 4
+DEVICE_TRADE_ATTEMPTS = 2
+DEVICE_TRADE_MEMORY_LENGTH = 5
+DEVICE_PRODUCTION_MEMORY_LENGTH = 5
 
 NUM_AGENT_GROUPS = 1
 MIN_RES_UTIL = 1.0
@@ -204,9 +202,6 @@ grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 echo "
 Randomized Parameters:" | tee -a _Results/"$sim_name".log 
-grep MENU Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ROUNDS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ATTEMPTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep MEMORY Configs/"$config".conf |tee -a _Results/"$sim_name".log
 #cat Configs/"$config".conf | tee -a _Results/"$sim_name".log
 

@@ -15,20 +15,17 @@
 
 cd ~/SocietiesABM/
 
-./runITEST_trade.sh 100 30 1500 True True False 24 8 
-
-#./runITEST_experience.sh 300 100
-#./runITEST_devices.sh 300 100
-#./runITEST_effort.sh 300 100
-#./runITEST_epsilons.sh 300 100
 
 #
 # Use dependency so that the concat job won't run until all of the 
 # jobs for that ITEST_xxxx have finished.
 #
-for itest in trade # experience devices effort epsilons
+for runtype in COLLNOCOLL # experience devices effort epsilons trade
 do
-	sbatch  --dependency=singleton --job-name=ITEST_$itest ./runITEST_batch_concat.sh ITEST_$itest
+	./run$runtype.sh 100 10 1000 True True False 24 8
+	
+	sbatch  --dependency=singleton --job-name=$runtype ./runBatch_concat.sh $runtype
+	
 done
 
 exit

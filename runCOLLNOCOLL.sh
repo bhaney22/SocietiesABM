@@ -6,7 +6,10 @@
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
 #
-sim_name=ITEST_trade
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# vvvvvvvvv make sure that the names of the ITESTs you are running is correct below! vvvvvvvvvvvvvvvv
+ # COLLNOCOLL runs exact same config with and without collapse
+sim_name=COLLNOCOLL
 
 cd ~/SocietiesABM/
 ############################################################################
@@ -100,10 +103,6 @@ echo "
 *        TRADE = "$trade"
 *        DEVICES = "$devices"
 *
-*Randomized values of Input Parameters: (the default value is the first value, 
-*the range of the random draw is in parentheses with the max first)
-DEVICE_TRADE_MEMORY_LENGTH = (((RANDOM%10+1)))
-DEVICE_PRODUCTION_MEMORY_LENGTH = (((RANDOM%10+1)))
 *
 *****************************************************************************
 "| tee _Results/"$sim_name".log
@@ -122,12 +121,7 @@ do
 # Default values are found in ./Configs/default.conf
 # Name the config file based on run number
 #################################################################################
-config="$sim_name"_"$X"
-
-#################################################################################
-# Create a UniqueKey to save the parameters for each unique config of parameters
-#################################################################################
-UniqueKey=$(date +%d%m%Y%H%M%S%N)
+config="$sim_name"_"$num_agents"_"$num_resources"_"$resources_in_tool"_"$X"
 
 echo "
 START_DAY = 0
@@ -143,13 +137,13 @@ NUM_RESOURCES = "$num_resources"
 RESOURCES_IN_TOOL = "$resources_in_tool"
 NUM_DEVICE_COMPONENTS = "$num_device_components"
 
-MENU_SIZE =  "$(((RANDOM%10+1)))"
-RES_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-RES_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ROUNDS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_ATTEMPTS = "$(((RANDOM%10+1)))"
-DEVICE_TRADE_MEMORY_LENGTH = "$(((RANDOM%10+1)))"
-DEVICE_PRODUCTION_MEMORY_LENGTH = "$(((RANDOM%10+1)))"
+MENU_SIZE =  4
+RES_TRADE_ROUNDS = 4
+RES_TRADE_ATTEMPTS = 2
+DEVICE_TRADE_ROUNDS = 4
+DEVICE_TRADE_ATTEMPTS = 2
+DEVICE_TRADE_MEMORY_LENGTH = 5
+DEVICE_PRODUCTION_MEMORY_LENGTH = 5
 
 NUM_AGENT_GROUPS = 1
 MIN_RES_UTIL = 1.0
@@ -198,22 +192,25 @@ OTHER_MARKETS = False
 # save the entire configuration to the log file.
 ######################################################################################
 echo "
-CONFIG = "$config"  Unique Key = "$UniqueKey"" | tee -a _Results/"$sim_name".log
+COLLNOCOLL: Runs the Collapse and NO Collapse Scenario for each config.
+CONFIG = "$config"  " | tee -a _Results/"$sim_name".log
+grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep NUM_AGENTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-echo "
-Randomized Parameters:" | tee -a _Results/"$sim_name".log 
-grep MENU Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ROUNDS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep ATTEMPTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
-grep MEMORY Configs/"$config".conf |tee -a _Results/"$sim_name".log
+grep RESOURCES_IN_TOOL Configs/"$config".conf |tee -a _Results/"$sim_name".log
 #cat Configs/"$config".conf | tee -a _Results/"$sim_name".log
 
 # Begin random runs using the same configuration file.
 # The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
+#################################################################################
+# Create a UniqueKey to save the parameters for each unique config of parameters
+#################################################################################
+UniqueKey=$(date +%d%m%Y%H%M%S%N)
 for run in $(seq -f "%03g" 1 $num_random_runs)
-do
+#########################################################################
+# Run the "No Collapse" Scenarios for this configuration. Generate a new UniqueKey.
+##########################################################################
+do 
 ### SOCIETIES COMMAND-LINE ARGUMENTS:
 # 1. -p Name of the configuration (without Configs/ path and without .conf extention)
 #
@@ -233,10 +230,20 @@ do
 # 5. SIMNAME 
 # 6. SEED
 
-# create some time between each submission for smooth fileI-O
-sleep 1
-sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+	sleep 2   # Use "sleep" to create some time between each submission for smooth fileI-O
+	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+done    #Done with No Collapse scenario of one run of one randomly generated configuration
 
-done    #Done with loop over one run of one randomly generated configuration
-done    #Done with all runs of one randomly generated configuration
+
+#########################################################################
+# Now, run the Collapse Scenarios for this configuration. Generate a new UniqueKey.
+##########################################################################
+UniqueKey=$(date +%d%m%Y%H%M%S%N)
+for run in $(seq -f "%03g" 1 $num_random_runs)
+do
+	sleep 2
+	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -r 4 600 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+done    #Done with Collapse scenario of one run of one randomly generated configuration
+
+done    #Done with all runs of one configuration
 

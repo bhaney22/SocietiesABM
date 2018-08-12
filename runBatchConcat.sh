@@ -2,7 +2,7 @@
 # # # # # # # # # # # # # # # #
 
 # Set number of of nodes - max is 20!
-#SBATCH -N 1F
+#SBATCH -N 1
 # Set number of cpus-per-task - max is 16!
 #SBATCH -c 1
 # Set job name
@@ -13,12 +13,12 @@
 #SBATCH -D /home/brh22/SocietiesABM/_Slurm.out
 
 ##################################################################
-# This will concatentate all of the output from one ITEST simulation
+# This will concatentate all of the output from one batch run
 # RUN ONLY AFTER all jobs have completed.
 # Last revised: BRH 08.08.2018  
 ##################################################################
 # One required passed parameter:
-# 1. sim_name (example, ITEST_trade)
+# 1. sim_name 
 sim_name=$1
 
 howmany() { echo $#; } # quick little function to count jobs in the joblist
@@ -26,7 +26,15 @@ joblist=$(cat ~/SocietiesABM/_Results/"$sim_name".jobs)
 jobruns=$(grep "J" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv | wc -l)
 numjobsstarted=$(howmany $joblist)
 	
-cd ~/SocietiesABM/
+cd ~/SocietiesABM
+##################################################################
+# The following script adds the Header to the UniqueKey File
+# and removes duplicates. The file is later copied to the
+# sim_name save folder to ensure all the UniqueKey data is
+# saved along with the runs 
+##################################################################
+./runAddHdrToUkeyFile.sh
+
 
 EndDay=$(date +%D)
 EndTime=$(date +%T)
@@ -78,28 +86,10 @@ column -s , -t < ./$sim_name/unitsGathered_all.csv | tee -a $sim_name.log
 
 ################################################################################################
 #
-# Save all of the relevant UniqueKey entries with the output.
+# Save the UniqueKey file data with the output.
 #
 ################################################################################################
-# Create the file to record all of the configuration parameters in a database.
-# This only needs to be run if this file has been deleted or to start a fresh file.
-################################################################################################
-echo "UniqueKey,ConfigName,Group_Num,NUM_AGENTS,NUM_RESOURCES,NUM_AGENT_GROUPS,TRADE_EXISTS,DEVICES_EXIST,TOOLS_ONLY, \
-NUM_DAYS,START_DAY,DAY_LENGTH,RES_TRADE_ROUNDS,RES_TRADE_ATTEMPTS,DEVICE_TRADE_ROUNDS,DEVICE_TRADE_ATTEMPTS, \
-MENU_SIZE,DEVICE_TRADE_MEMORY_LENGTH,DEVICE_PRODUCTION_MEMORY_LENGTH,MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION, \
-MIN_RES_HELD_FOR_DEVICE_CONSIDERATION,DAILY_EXP_PENALTY,PRODUCTION_EPSILON,RESOURCES_IN_TOOL,MAX_RES_EXPERIENCE, \
-INVENTOR_DEVICE_EXPERIENCE,NUM_DEVICE_COMPONENTS,MAX_DEVICE_EXPERIENCE,DAILY_DEVICE_DECAY,MIN_HELD_DEVICE_EXPERIENCE, \
-MAX_RES_EFFORT,MIN_RES_EFFORT,MAX_DEVICE_EFFORT,MIN_DEVICE_EFFORT,MIN_RES_UTIL,TRADE_EPSILON,TOOL_PROBABILITY_FACTOR, \
-DEVICE_PROBABILITY_FACTOR,TOOL_FACTOR,TOOL_LIFETIME,MACHINE_FACTOR,MACHINE_LIFETIME,FACTORY_FACTOR,FACTORY_LIFETIME, \
-INDUSTRY_FACTOR,INDUSTRY_LIFETIME,DEV_MACHINE_FACTOR,DEV_MACHINE_LIFETIME,DEV_FACTORY_FACTOR,DEV_FACTORY_LIFETIME, \
-DAYS_OF_DEVICE_TO_HOLD,REMOVE_RES,RES_TO_REMOVE,REMOVE_RES_DAY,ELIMINATE_RESERVES,REMOVE_AGENT,AGENT_TO_REMOVE, \
-REMOVE_AGENT_DAY,END_SAVE,SAVE_FOLDER,SAVE_DAY_STATUS,DAY_STATUS_SAVE_FOLDER,DAY_FOR_SAVE,DAY_STATUS_LOAD_FOLDER, \
-SIM_NAME,SIM_SAVE_FOLDER,SAVE_TRADES,PARALLEL_TRADES" > ~/SocietiesABM/_Results/ukey_header.csv
-
-grep $sim_name\/ UniqueKeyFile.csv > temp2
-cat ~/SocietiesABM/_Results/ukey_header.csv temp2 > ./$sim_name/UniqueKeyFile.csv
-rm temp2
-
+cp ~/SocietiesABM/_Results/UniqueKeyFileAndHeader.csv> ./$sim_name/UniqueKeyFile.csv
 
 ###############################################################################################
 # Copy and rename the slurm out files

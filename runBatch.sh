@@ -15,15 +15,23 @@
 
 cd ~/SocietiesABM/
 
-
 #
 # Use dependency so that the concat job won't run until all of the 
 # jobs for that ITEST_xxxx have finished.
 #
-for itest in memory # experience devices effort epsilons trade
+for runtype in COLLNOCOLL # runs exact same config with and without collapse
 do
-	./runITESTCOLL_$itest.sh 100 30 1000 True True False 24 8
-	sbatch  --dependency=singleton --job-name=ITESTCOLL_$itest ./runITEST_batch_concat.sh ITESTCOLL_$itest
+	for numagents in 12 24 48
+	do
+		for numresources in 8 16 32
+		do
+			for numresintool in 2 3 4 5 6 7
+				do
+					./run$runtype.sh 001 10 1200 True True False $numagents $numresources $numresintool
+				done
+		done
+	done
+	sbatch  --dependency=singleton --job-name=$runtype ./runBatchConcat.sh $runtype
 	
 done
 
