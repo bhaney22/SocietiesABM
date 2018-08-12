@@ -6,9 +6,13 @@
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
 #
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# vvvvvvvvv make sure that the names of the ITESTs you are running is correct below! vvvvvvvvvvvvvvvv
- # COLLNOCOLL runs exact same config with and without collapse
+# TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# 1. make sure that the sim_name is correct below! 
+# 2. make sure that the created name of the configfile contains all of the variables being swept so that it
+#    does not get overwritten
+# 3. if any parameters are randomized rather than discretely stepped over, change that when building the config
+#    and add it to the comment that is echoed to the log after the config is built.
+# COLLNOCOLL runs exact same config with and without collapse
 sim_name=COLLNOCOLL
 
 cd ~/SocietiesABM/
@@ -110,16 +114,18 @@ echo "
 echo "jobID,UniqueKey,Config,Run,StartDay,StartTime,EndTime,RunTimeInSeconds,RunTimeInMinutes" > _Results/"$sim_name"_runtime.csv
 
 ####################################################################################
-# Begin LOOP 1: create a randomized configuration file.
+# Begin LOOP 1: BUILD THE CONFIG FILE (optionally - loop over some randomized parameters within it)
+#
 # The formatting of the iterator as %03g gives it leading zeros: 001,002, etc.
 
 for X in $(seq -f "%03g" 1 $num_random_conf_files)
 do
 
 #################################################################################
-# Create config file with input parameters. 
+# BUILD config file with input parameters. 
 # Default values are found in ./Configs/default.conf
-# Name the config file based on run number
+# Include all variables being swept in the config!! Any and all random aspects of the config
+# will be captured automatically in the "_X" suffix.
 #################################################################################
 config="$sim_name"_"$num_agents"_"$num_resources"_"$resources_in_tool"_"$X"
 
@@ -198,7 +204,8 @@ grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep NUM_AGENTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep RESOURCES_IN_TOOL Configs/"$config".conf |tee -a _Results/"$sim_name".log
-#cat Configs/"$config".conf | tee -a _Results/"$sim_name".log
+#Add any randomized parameters here.
+
 
 # Begin random runs using the same configuration file.
 # The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
