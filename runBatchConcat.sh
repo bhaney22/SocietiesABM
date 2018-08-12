@@ -29,18 +29,41 @@ numjobsstarted=$(howmany $joblist)
 cd ~/SocietiesABM
 ##################################################################
 # The following script adds the Header to the UniqueKey File
-# and removes duplicates. The file is later copied to the
+# and removes duplicates. The file is then copied to the
 # sim_name save folder to ensure all the UniqueKey data is
 # saved along with the runs 
 ##################################################################
-./runAddHdrToUkeyFile.sh
+echo "UniqueKey,ConfigName,Group_Num,NUM_AGENTS,NUM_RESOURCES,NUM_AGENT_GROUPS,TRADE_EXISTS,DEVICES_EXIST,TOOLS_ONLY, \
+NUM_DAYS,START_DAY,DAY_LENGTH,RES_TRADE_ROUNDS,RES_TRADE_ATTEMPTS,DEVICE_TRADE_ROUNDS,DEVICE_TRADE_ATTEMPTS, \
+MENU_SIZE,DEVICE_TRADE_MEMORY_LENGTH,DEVICE_PRODUCTION_MEMORY_LENGTH,MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION, \
+MIN_RES_HELD_FOR_DEVICE_CONSIDERATION,DAILY_EXP_PENALTY,PRODUCTION_EPSILON,RESOURCES_IN_TOOL,MAX_RES_EXPERIENCE, \
+INVENTOR_DEVICE_EXPERIENCE,NUM_DEVICE_COMPONENTS,MAX_DEVICE_EXPERIENCE,DAILY_DEVICE_DECAY,MIN_HELD_DEVICE_EXPERIENCE, \
+MAX_RES_EFFORT,MIN_RES_EFFORT,MAX_DEVICE_EFFORT,MIN_DEVICE_EFFORT,MIN_RES_UTIL,TRADE_EPSILON,TOOL_PROBABILITY_FACTOR, \
+DEVICE_PROBABILITY_FACTOR,TOOL_FACTOR,TOOL_LIFETIME,MACHINE_FACTOR,MACHINE_LIFETIME,FACTORY_FACTOR,FACTORY_LIFETIME, \
+INDUSTRY_FACTOR,INDUSTRY_LIFETIME,DEV_MACHINE_FACTOR,DEV_MACHINE_LIFETIME,DEV_FACTORY_FACTOR,DEV_FACTORY_LIFETIME, \
+DAYS_OF_DEVICE_TO_HOLD,REMOVE_RES,RES_TO_REMOVE,REMOVE_RES_DAY,ELIMINATE_RESERVES,REMOVE_AGENT,AGENT_TO_REMOVE, \
+REMOVE_AGENT_DAY,END_SAVE,SAVE_FOLDER,SAVE_DAY_STATUS,DAY_STATUS_SAVE_FOLDER,DAY_FOR_SAVE,DAY_STATUS_LOAD_FOLDER, \
+RUN_NUM,RUN_SAVE_FOLDER,SAVE_TRADES,PARALLEL_TRADES" > temp1
 
+## the sort statement gets rid of any duplicates
+cat ~/SocietiesABM/_Results/UniqueKeyFile.csv | sort -t, -u -k1,1 > temp2
+cat temp1 temp2 > ~/SocietiesABM/_Results/$sim_name/UniqueKeyFile.csv
+rm  temp1 temp2
 
-EndDay=$(date +%D)
-EndTime=$(date +%T)
+##################################################################
+# Add the Header to the runtime File and copy it to the sim_name folder
+# and removes duplicates. The file is later copied to the
+##################################################################
+echo "jobID,UniqueKey,Config,Run,StartDay,StartTime,EndTime,RunTimeInSeconds,RunTimeInMinutes" > temp1
+cat temp1 ~/SocietiesABM/_Results/"$sim_name"_runtime.csv > ~/SocietiesABM/_Results/"$sim_name"/"$sim_name".runtime.csv
+rm temp1
+rm ~/SocietiesABM/_Results/"$sim_name"_runtime.csv
+
 echo "***********************************************************************
-* "$sim_name"  "$numjobsstarted" Jobs Started 
-*              "$jobruns" Jobs Finished 
+* Begin Concatenate All Results Process
+* "$sim_name" 
+*     Jobs Started:  "$numjobsstarted" 
+*     Jobs Finished: "$jobruns" 
 *****************************************************************************
 " | tee -a _Results/"$sim_name".log
 
@@ -72,25 +95,6 @@ cat ./$sim_name/*/*/unitsGathered.csv | grep -v UniqueKey >> temp2
 cat temp1  temp2 > ./$sim_name/unitsGathered_all.csv
 rm  temp1 temp2
 
-# Print out runtimes.
-echo "
-Runtime statistics:
-" | tee -a $sim_name.log
-column -s , -t < "$sim_name"_runtime.csv | tee -a $sim_name.log 
-
-# Print out a summary of resources gathered.
-echo "
-Units Gathered in all runs:
-" | tee -a $sim_name.log
-column -s , -t < ./$sim_name/unitsGathered_all.csv | tee -a $sim_name.log 
-
-################################################################################################
-#
-# Save the UniqueKey file data with the output.
-#
-################################################################################################
-cp ~/SocietiesABM/_Results/UniqueKeyFileAndHeader.csv> ./$sim_name/UniqueKeyFile.csv
-
 ###############################################################################################
 # Copy and rename the slurm out files
 ###############################################################################################
@@ -98,9 +102,9 @@ cp ~/SocietiesABM/_Results/UniqueKeyFileAndHeader.csv> ./$sim_name/UniqueKeyFile
 for j in $joblist
 do
 	# Only move out logs if the job finished and is in the runtime file.
-	w=$(grep "$j" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv | wc -l)
+	w=$(grep "$j" ~/SocietiesABM/_Results/"$sim_name"/"$sim_name".runtime.csv | wc -l)
 	if [[ $w > 0 ]]; then
-		echo $(grep "$j" ~/SocietiesABM/_Results/"$sim_name"_runtime.csv) > tempgrep
+		echo $(grep "$j" ~/SocietiesABM/_Results/"$sim_name"/"$sim_name".runtime.csv ) > tempgrep
 		sed -i 's/,/ /g' tempgrep
 		jobinfo=$(cat tempgrep)
 		set -- $jobinfo
@@ -127,7 +131,6 @@ tail -n +1  ~/SocietiesABM/_Results/$sim_name/*.err  	| tee -a $sim_name.log
 
 mv $sim_name.log  ./$sim_name/$sim_name.log
 mv $sim_name.jobs ./$sim_name/$sim_name.jobs
-mv "$sim_name"_runtime.csv  ./$sim_name/"$sim_name"_runtime.csv
 
 savedate=$(date +%d%m%Y%H%M%S)
 mv $sim_name $sim_name.$savedate

@@ -99,19 +99,8 @@ echo "
 *        #Randomized Config Files = "$num_random_conf_files"
 *        #Random Runs = "$num_random_runs"
 *
-*        NUM_DAYS = "$num_days"
-*        NUM_AGENTS = "$num_agents"
-*        NUM_RESOURCES = "$num_resources"
-*        RESOURCES_IN_TOOL = "$resources_in_tool"
-*        TOOLS_ONLY = "$tools_only"
-*        TRADE = "$trade"
-*        DEVICES = "$devices"
-*
-*
 *****************************************************************************
-"| tee _Results/"$sim_name".log
-
-echo "jobID,UniqueKey,Config,Run,StartDay,StartTime,EndTime,RunTimeInSeconds,RunTimeInMinutes" > _Results/"$sim_name"_runtime.csv
+"| tee -a _Results/"$sim_name".log
 
 ####################################################################################
 # Begin LOOP 1: BUILD THE CONFIG FILE (optionally - loop over some randomized parameters within it)
@@ -206,9 +195,13 @@ grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep RESOURCES_IN_TOOL Configs/"$config".conf |tee -a _Results/"$sim_name".log
 #Add any randomized parameters here.
 
-
+#################################################################################
 # Begin random runs using the same configuration file.
 # The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
+# 1. First run the no collapse runds of the config file
+# 2. Then run the collapse runs of the config files
+#################################################################################
+
 #################################################################################
 # Create a UniqueKey to save the parameters for each unique config of parameters
 #################################################################################
@@ -237,8 +230,8 @@ do
 # 5. SIMNAME 
 # 6. SEED
 
-	sleep 2   # Use "sleep" to create some time between each submission for smooth fileI-O
-	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+	sleep 1   # Use "sleep" to create some time between each submission for smooth fileI-O
+	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config"_NoColl -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
 done    #Done with No Collapse scenario of one run of one randomly generated configuration
 
 
@@ -248,8 +241,8 @@ done    #Done with No Collapse scenario of one run of one randomly generated con
 UniqueKey=$(date +%d%m%Y%H%M%S%N)
 for run in $(seq -f "%03g" 1 $num_random_runs)
 do
-	sleep 2
-	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -r 4 600 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
+	sleep 1
+	sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -r 4 600 1 -p "$config" -s _Results/"$sim_name"/"$config"_Coll -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
 done    #Done with Collapse scenario of one run of one randomly generated configuration
 
 done    #Done with all runs of one configuration
