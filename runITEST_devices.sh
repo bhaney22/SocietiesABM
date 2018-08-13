@@ -1,45 +1,79 @@
 #!/bin/bash
-
-############################################################################
-# This script takes two commandline arguments:
-# 1. Number of days (default = 100)
-# 2. Number of random runs (default = 5) 
-#
-
-# This will single-thread multiple runs of one configuration of Societies
+# This will MULTI-thread multiple runs of randomized configuration files of Societies
 # on the supercomputer cluster.
 #
-# Last revised: BRH 07.27.2018  
+# Last revised: BRH 08.08.2018  
 # (note: check out this link for picky rules about math and variables in bash shell scripts:
 # http://faculty.salina.k-state.edu/tim/unix_sg/bash/math.html)
+#
+sim_name=ITEST_devices
 
 cd ~/SocietiesABM/
+############################################################################
+# OPTIONAL commandline arguments.
+# 
+# The number before the colon is the order of the passed parameter on the command line.
+# The number after the colon and the "-" is the default if no parameters are passed.
+#
+#########################################################################################################
+# Run this script with "help" as the first parameter to get list of parameters and default values.
+#
+if [ "$1" == "help" ]; then
+echo "
+Order of Optional Passed Parameters and default value:
+1. num_random_conf_files=001
+2. num_random_runs=${2:-002} 
+3. num_days=${3:-100}
 
-#############################################################################################################
-# Control amount of random variation by uncommenting the appropriate option:
-# Option 1: The same configuration will have random results. 
-# Option 2: No variation - used for testing. (comment out Option 1 and uncomment out Option 2)
-#############################################################################################################
+4. trade=${4:-True}
+5. devices=${5:-True}
+6. tools_only=${6:-False}
 
-#############################################################################################################
-# Option 1
-##############################################################################################################
-# The number of random runs can be passed as the first arg of the command line, otherwise only 2 are run.
-num_random_runs=${2:-005}   
-seed=" "
+7. num_agents=${7:-8} 
+8. num_resources=${8:-4} 
+9. resources_in_tool=${9:-5}  or 1 less than #RES if #RES<6 
+"
+exit
+fi
+#########################################################################################################
 
-#############################################################################################################
-# Option 2
-#############################################################################################################
-#num_random_runs=001
-#seed="-S 50"	#Set the random seed so that societies' results will be the same if all parameters are the same
+num_random_conf_files=${1:-001} 
+num_random_runs=${2:-002} 
+num_days=${3:-100}
 
-#############################################################################
-# Adjust the number of resources used in a tool, if needed. 
-# If RESOURCES_IN_TOOL is one of the sweep variables, use runSweepResTool.sh.
-#############################################################################
-let resources_in_tool=3                          # default value = 5 (or 1 less than NUM_RESOURCES if NUM_RESOURCES < 6 
+trade=${4:-True}
+devices=${5:-True}
+tools_only=${6:-False}
+
+num_agents=${7:-8} 
+let num_resources=${8:-4}    #"let" is used so that math can be performed with the variable later
+
+# if NUM_RESOURCES < 6 then resources_in_tool is 1 less than NUM_RESOURCES
+# otherwise, it can be passed as a parameter with the default = 5 
+if [ $num_resources -lt 6 ]; then
+		let resources_in_tool=$num_resources-1
+else 	let resources_in_tool=${9:-5}
+fi
+
 let num_device_components=$resources_in_tool+1   # The default is for device components to be 1 more than tool components
+#
+############################################################################
+
+#############################################################################################################
+# Control amount of random variation within one config file by uncommenting the appropriate option:
+# Option 1: The same configuration will have random results. 
+# Option 2: No variation - used for testing. (comment out Option 1 and uncomment out Option 2, if needed)
+#############################################################################################################
+
+#############################################################################################################
+# 		Option 1
+############################################################################################################## 
+seed=""
+
+#############################################################################################################
+# 		Option 2
+#############################################################################################################
+#seed=50	#Set the random seed so that societies' results will be the same if all parameters are the same
 
 #################################################################################################################
 # BEGIN SPECIFIC CODE FOR INTEGRATION TEST.
@@ -48,43 +82,47 @@ let num_device_components=$resources_in_tool+1   # The default is for device com
 #	show the original (default) values and the range of values from which a random number is chosen in each run.
 # 	The actual changes are in the config file below.
 #################################################################################################################
-sim_name=ITEST_devices
-
-#TOOL_FACTOR = 3.0   "$(((RANDOM%5+1)))'.'$(((RANDOM%99+1)))"
-#MACHINE_FACTOR = 9.0   "$(((RANDOM%18+10)))'.'$(((RANDOM%99+1)))"
-#FACTORY_FACTOR = 27.0   "$(((RANDOM%55+30)))'.'$(((RANDOM%99+1)))"
-#INDUSTRY_FACTOR = 81.0   "$(((RANDOM%200+70)))'.'$(((RANDOM%99+1)))"
-#TOOL_LIFETIME = 150.0   "$(((RANDOM%180+120)))'.'$(((RANDOM%99+1)))"
-#MACHINE_LIFETIME = 300.0   "$(((RANDOM%400+250)))'.'$(((RANDOM%99+1)))"
-#FACTORY_LIFETIME = 600.0   "$(((RANDOM%800+550)))'.'$(((RANDOM%99+1)))"
-#INDUSTRY_LIFETIME = "1200.0   $(((RANDOM%1500+1100)))'.'$(((RANDOM%99+1)))"
-
-
 #Begin run log
 StartDay=$(date +%D)
 StartTime=$(date +%T)
-((totaltime=0))
 echo "
 *****************************************************************************
-* "$sim_name" 
-*        For #Random Runs = "$num_random_runs"
+* "$sim_name" STARTED: "$StartDay" "$StartTime".
 *
-* BEGAN at "$StartDay" "$StartTime".
+*        #Randomized Config Files = "$num_random_conf_files"
+*        #Random Runs = "$num_random_runs"
+*
+*        NUM_DAYS = "$num_days"
+*        NUM_AGENTS = "$num_agents"
+*        NUM_RESOURCES = "$num_resources"
+*        RESOURCES_IN_TOOL = "$resources_in_tool"
+*        TOOLS_ONLY = "$tools_only"
+*        TRADE = "$trade"
+*        DEVICES = "$devices"
+*
+*Randomized values of Input Parameters: (the default value is the first value, 
+*the range of the random draw is in parentheses with the max first)
+DEVICE_TRADE_MEMORY_LENGTH = (((RANDOM%10+1)))
+DEVICE_PRODUCTION_MEMORY_LENGTH = (((RANDOM%10+1)))
+*
 *****************************************************************************
 "| tee _Results/"$sim_name".log
 
-# Begin random runs using the same configuration file.
-# The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
-run_num=$num_random_runs   
-for run in $(seq -f "%03g" 1 $run_num)
+echo "jobID,UniqueKey,Config,Run,StartDay,StartTime,EndTime,RunTimeInSeconds,RunTimeInMinutes" > _Results/"$sim_name"_runtime.csv
+
+####################################################################################
+# Begin LOOP 1: create a randomized configuration file.
+# The formatting of the iterator as %03g gives it leading zeros: 001,002, etc.
+
+for X in $(seq -f "%03g" 1 $num_random_conf_files)
 do
-((configtime=0))
+
 #################################################################################
 # Create config file with input parameters. 
 # Default values are found in ./Configs/default.conf
-# Name the config file based on run_number
+# Name the config file based on run number
 #################################################################################
-config="$sim_name"_"$run"
+config="$sim_name"_"$X"
 
 #################################################################################
 # Create a UniqueKey to save the parameters for each unique config of parameters
@@ -92,23 +130,16 @@ config="$sim_name"_"$run"
 UniqueKey=$(date +%d%m%Y%H%M%S%N)
 
 echo "
-*****************************************************************************
-"CONFIG = "$config"  Unique Key = "$UniqueKey""
-*****************************************************************************
-" | tee -a _Results/"$sim_name".log
-
-
-echo "
 START_DAY = 0
 DAY_LENGTH = 600
 
-TRADE_EXISTS = True
-DEVICES_EXIST = True
-TOOLS_ONLY = False
+TRADE_EXISTS = "$trade"
+DEVICES_EXIST = "$devices"
+TOOLS_ONLY = "$tools_only"
 
-NUM_DAYS = "${1:-100}  "
-NUM_AGENTS = 8
-NUM_RESOURCES = 4
+NUM_DAYS = "$num_days"
+NUM_AGENTS = "$num_agents"
+NUM_RESOURCES = "$num_resources"
 RESOURCES_IN_TOOL = "$resources_in_tool"
 NUM_DEVICE_COMPONENTS = "$num_device_components"
 
@@ -163,13 +194,24 @@ OTHER_MARKETS = False
 " > Configs/"$config".conf
 
 ######################################################################################
-# Print the random parameter values first, then
-# Save the entire configuration to the log file.
+# Print the randomized parameter values to the screen and the log first, then
+# save the entire configuration to the log file.
 ######################################################################################
+echo "
+CONFIG = "$config"  Unique Key = "$UniqueKey"" | tee -a _Results/"$sim_name".log
+grep NUM_AGENTS Configs/"$config".conf |tee -a _Results/"$sim_name".log
+grep NUM_RESOURCES Configs/"$config".conf |tee -a _Results/"$sim_name".log
+grep NUM_DAYS Configs/"$config".conf |tee -a _Results/"$sim_name".log
+echo "
+Randomized Parameters:" | tee -a _Results/"$sim_name".log 
 grep FACTOR Configs/"$config".conf |tee -a _Results/"$sim_name".log
 grep LIFETIME Configs/"$config".conf |tee -a _Results/"$sim_name".log
-cat Configs/"$config".conf >> _Results/"$sim_name".log
+#cat Configs/"$config".conf | tee -a _Results/"$sim_name".log
 
+# Begin random runs using the same configuration file.
+# The formatting of the iterator (run) as %03g gives it leading zeros: 001,002, etc.
+for run in $(seq -f "%03g" 1 $num_random_runs)
+do
 ### SOCIETIES COMMAND-LINE ARGUMENTS:
 # 1. -p Name of the configuration (without Configs/ path and without .conf extention)
 #
@@ -181,101 +223,18 @@ cat Configs/"$config".conf >> _Results/"$sim_name".log
 #       with the config file dimensions (societies v1.5 and higher)
 # 5. -v is the level of log messages to be printed to the log file. 0 is none.
 
-# Start the clock for this run of societies.
-SECONDS=0 
- 
-# The & before the re-direction (">>") will send error messages to the stdout file as well.
-./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t 001 "$seed" 1>> _Results/"$sim_name"_run.log 
+# Pass 6 values to runSocieties.sh. 2-5 are info used in the runtime.csv file.
+# 1. the runSocieties command
+# 2. UKEY 
+# 3. CONF 
+# 4. RUN 
+# 5. SIMNAME 
+# 6. SEED
 
-# Stop the clock after societies finishes
-((duration=$SECONDS))
-((duration_min=$duration/60))
+# create some time between each submission for smooth fileI-O
+sleep 1
+sbatch --job-name=$sim_name runSocieties.sh "./societies -v 1 -p "$config" -s _Results/"$sim_name"/"$config" -d B"$UniqueKey" -t "$run"" "B"$UniqueKey"" ""$config"" ""$run"" ""$sim_name"" ""$seed""	
 
-# Add this run time to the total time of the simulation.
-((totaltime=$totaltime+$duration))
-    	
-echo "$config Duration: $duration seconds ($duration_min minutes)" | tee -a _Results/"$sim_name"_runtime
+done    #Done with loop over one run of one randomly generated configuration
+done    #Done with all runs of one randomly generated configuration
 
-rm ./Configs/"$config".conf 
-rm ./Configs/"$config"_AgentValues.aconf 
-
-done    #Done with loop over one run of a randomly generated configuration
-
-EndDay=$(date +%D)
-EndTime=$(date +%T)
-((totalminutes=$totaltime/60))
-
-echo "
-
-*****************************************************************************
-* "$sim_name":
-*        For #Random Runs = "$num_random_runs"
-*
-* BEGAN at "$StartDay" "$StartTime"
-* ENDED at "$EndDay" "$EndTime" 
-* Total Duration: $totaltime seconds ($totalminutes minutes)
-*
-*****************************************************************************
-Runtime statistics:
-" | tee -a _Results/"$sim_name".log
-
-cat _Results/"$sim_name"_runtime | tee -a _Results/"$sim_name".log
-rm  _Results/"$sim_name"_runtime
-
-
-#########################################################################################
-# Concatenate and save all of the output files.
-#
-# FYI: the head command saves the header row from the first individual long_output file.
-# FYI: the grep -v command strips out all of the header rows (starts with UniqueKey)
-#      from the individual long_output files. BRH 3.20.2017
-#########################################################################################
-cd ~/SocietiesABM/_Results/
-cat ./$sim_name/*/*/IOMatrix.csv | head -n 1 > temp1
-cat ./$sim_name/*/*/IOMatrix.csv  | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./$sim_name/IOMatrixAll.csv
-rm  temp1 temp2
-
-cat ./$sim_name/*/*/DeviceRecipes.csv | head -n 1 > temp1
-cat ./$sim_name/*/*/DeviceRecipes.csv  | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./$sim_name/DeviceRecipes.csv
-rm  temp1 temp2
-
-cat ./$sim_name/*/*/long_output.csv | head -n 1 > temp1
-cat ./$sim_name/*/*/long_output.csv | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./$sim_name/long_output_all.csv
-rm  temp1 temp2
-
-cat ./$sim_name/*/*/unitsGathered.csv | head -n 1 > temp1
-cat ./$sim_name/*/*/unitsGathered.csv | grep -v UniqueKey >> temp2
-cat temp1  temp2 > ./$sim_name/unitsGathered_all.csv
-rm  temp1 temp2
-
-# Print out a summary of resources gathered.
-echo "
-Units Gathered in all runs:
-" | tee -a $sim_name.log
-column -s , -t < ./$sim_name/unitsGathered_all.csv | tee -a $sim_name.log 
-
-#
-# Save all of the relevent UniqueKey entries with the output.
-#
-################################################################################################
-# Create the file to record all of the configuration parameters in a database.
-# This only needs to be run if this file has been deleted or to start a fresh file.
-################################################################################################
-echo "UniqueKey,ConfigName,Group_Num,NUM_AGENTS,NUM_RESOURCES,NUM_AGENT_GROUPS,TRADE_EXISTS,DEVICES_EXIST,TOOLS_ONLY, \
-NUM_DAYS,START_DAY,DAY_LENGTH,RES_TRADE_ROUNDS,RES_TRADE_ATTEMPTS,DEVICE_TRADE_ROUNDS,DEVICE_TRADE_ATTEMPTS, \
-MENU_SIZE,DEVICE_TRADE_MEMORY_LENGTH,DEVICE_PRODUCTION_MEMORY_LENGTH,MIN_DEVICE_FOR_DEV_DEVICE_CONSIDERATION, \
-MIN_RES_HELD_FOR_DEVICE_CONSIDERATION,DAILY_EXP_PENALTY,PRODUCTION_EPSILON,RESOURCES_IN_TOOL,MAX_RES_EXPERIENCE, \
-INVENTOR_DEVICE_EXPERIENCE,NUM_DEVICE_COMPONENTS,MAX_DEVICE_EXPERIENCE,DAILY_DEVICE_DECAY,MIN_HELD_DEVICE_EXPERIENCE, \
-MAX_RES_EFFORT,MIN_RES_EFFORT,MAX_DEVICE_EFFORT,MIN_DEVICE_EFFORT,MIN_RES_UTIL,TRADE_EPSILON,TOOL_PROBABILITY_FACTOR, \
-DEVICE_PROBABILITY_FACTOR,TOOL_FACTOR,TOOL_LIFETIME,MACHINE_FACTOR,MACHINE_LIFETIME,FACTORY_FACTOR,FACTORY_LIFETIME, \
-INDUSTRY_FACTOR,INDUSTRY_LIFETIME,DEV_MACHINE_FACTOR,DEV_MACHINE_LIFETIME,DEV_FACTORY_FACTOR,DEV_FACTORY_LIFETIME, \
-DAYS_OF_DEVICE_TO_HOLD,REMOVE_RES,RES_TO_REMOVE,REMOVE_RES_DAY,ELIMINATE_RESERVES,REMOVE_AGENT,AGENT_TO_REMOVE, \
-REMOVE_AGENT_DAY,END_SAVE,SAVE_FOLDER,SAVE_DAY_STATUS,DAY_STATUS_SAVE_FOLDER,DAY_FOR_SAVE,DAY_STATUS_LOAD_FOLDER, \
-SIM_NAME,SIM_SAVE_FOLDER,SAVE_TRADES,PARALLEL_TRADES" > ~/SocietiesABM/_Results/ukey_header.csv
-
-grep $sim_name\/ UniqueKeyFile.csv > temp2
-cat ~/SocietiesABM/_Results/ukey_header.csv temp2 > ./$sim_name/UniqueKeyFile.csv
-rm temp2
