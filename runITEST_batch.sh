@@ -20,11 +20,11 @@ cd ~/SocietiesABM/
 # Use dependency so that the concat job won't run until all of the 
 # jobs for that ITEST_xxxx have finished.
 #
-for runtype in COLLNOCOLL # experience devices effort epsilons trade
+for runtype in ITEST_trade # experience devices effort epsilons trade
 do
-	./run$runtype.sh 100 10 1000 True True False 24 8
+	./run$runtype.sh 5 2 50 True True False 24 8
 	
-	sbatch  --dependency=singleton --job-name=$runtype ./runBatch_concat.sh $runtype
+	sbatch  --dependency=singleton --job-name=$runtype ./runITEST_batch_concat.sh $runtype
 	
 done
 

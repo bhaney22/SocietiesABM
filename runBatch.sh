@@ -21,13 +21,13 @@ cd ~/SocietiesABM/
 #
 for runtype in COLLNOCOLL # runs exact same config with and without collapse
 do
-	for numagents in 8 12 24 48
+	for numagents in 8 12 16 20 24 48
 	do
-		for numresources in 8 12      # SEE NOTE BELOW
+		for numresources in 4       # SEE NOTE BELOW
 		do
-			for numresintool in 3 6  
+			for numresintool in 3  
 				do
-					./run$runtype.sh 001 10 1200 True True False $numagents $numresources $numresintool
+					./run$runtype.sh 001 30 1200 True True False $numagents $numresources $numresintool
 				done
 		done
 	done

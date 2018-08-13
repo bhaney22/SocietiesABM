@@ -2,7 +2,7 @@
 # # # # # # # # # # # # # # # #
 
 # Set number of of nodes - max is 20!
-#SBATCH -N 1F
+#SBATCH -N 1
 # Set number of cpus-per-task - max is 16!
 #SBATCH -c 1
 # Set job name

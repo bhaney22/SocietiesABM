@@ -135,6 +135,9 @@ mv $sim_name.jobs ./$sim_name/$sim_name.jobs
 savedate=$(date +%d%m%Y%H%M%S)
 mv $sim_name $sim_name.$savedate
 
+#####################################################################################
+# Now organize the timestamped results sub-folders.
+#####################################################################################
 cd ~/SocietiesABM/_Results/$sim_name.$savedate
 mkdir _Outfiles
 mkdir _Configfiles
@@ -144,4 +147,26 @@ mv *.out ./_Outfiles
 mv *.err ./_Errfiles
 mv ../../Configs/"$sim_name"_* ./_Configfiles
 mv "$sim_name"_* ./_Runs
+
+#####################################################################################
+# Now concat all of the simulation runs that have been run and are timestamped 
+# in the _Results directory.
+#####################################################################################
+cd ~/SocietiesABM/_Results
+cat ./"$sim_name".*/long_output_all.csv | head -n 1 > temp1
+cat ./"$sim_name".*/long_output_all.csv | grep -v UniqueKey >> temp2 #get everything BUT the first row
+cat temp1  temp2 > ./"$sim_name"_long_output.csv
+rm  temp1 temp2
+
+cat ./"$sim_name".*/UniqueKeyFile.csv | head -n 1 > temp1
+cat ./"$sim_name".*/UniqueKeyFile.csv | grep -v UniqueKey >> temp2  #get everything BUT the first row
+cat temp1  temp2 > ./"$sim_name"_UniqueKeyFile.csv
+rm  temp1 temp2
+
+cat ./"$sim_name".*/*.runtime.csv | head -n 1 > temp1
+cat ./"$sim_name".*/*.runtime.csv | grep J >> temp2                 #get everything BUT the first row (all jobs begin with "J")
+cat temp1  temp2 > ./"$sim_name"_runtime.csv
+rm  temp1 temp2
+
+
 exit
