@@ -1,8 +1,23 @@
+Project Name
+Societies Agent-based Model
+
+Project Description
 Societies Agent-based Model is an economic harvesting and 
 trade simulation similar to Sugarscape. However, agents in Societies 
-can also invent and trade labor-saving devices. 
+can also invent and trade labor-saving devices.
 
-This repository contains the source code. 
+Codebase Overview
+This repository contains the end-to-end data pipeline used to simulate economic resilience. 
+The project demonstrates a transition from raw data ingestion to a curated Gold-layer dataset, 
+utilizing Python (Pandas/NumPy) for transformation and statistical normalization for responsible data analysis.
+
+Key Features of Codebase
+Automated ETL/ELT: Robust scripts for cleaning and harmonizing simulation output and statistical results.
+Statistical Integrity: Implementation of outlier detection and distribution analysis to ensure reporting accuracy.
+Reproducibility: Modular codebase designed for deployment in Lakehouse environments (Databricks/Snowflake) 
+                 and integration with BI platforms (Power BI/Tableau).
+
+Description of Code Components
 
 The sub-directory, Configs, 
 		contains configuration files that 
@@ -10,9 +25,9 @@ The sub-directory, Configs,
 The sub-directory, SLURM_scripts, 
 		contains scripts for running on a supercomputer cluster.
 
+Automation Scripts and Processes
 To recompile the program after making changes, 
 		type "make societies" at the command prompt.
-
 
 Using SLURM to run on supercomputer:
 1.	To run societies using configuration CCC.conf for RR number of runs, 
