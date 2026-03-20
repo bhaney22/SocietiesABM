@@ -2,9 +2,9 @@ Project Name
 Societies Agent-based Model
 
 Project Description
-Societies Agent-based Model is an economic harvesting and 
-trade simulation similar to Sugarscape. However, agents in Societies 
-can also invent and trade labor-saving devices.
+This is an economic harvesting and trade model where economic agents invent and 
+trade increasingly complex and interdependent labor-saving devices. 
+The results are used to develop models of sustainable economic development.
 
 Codebase Overview
 This repository contains the end-to-end data pipeline used to simulate economic resilience. 
@@ -18,7 +18,6 @@ Reproducibility: Modular codebase designed for deployment in Lakehouse environme
                  and integration with BI platforms (Power BI/Tableau).
 
 Description of Code Components
-
 The sub-directory, Configs, 
 		contains configuration files that 
 		store input parameters used in defining the simulation context. 
